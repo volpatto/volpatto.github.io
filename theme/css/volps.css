@@ -131,6 +131,16 @@ p.standfirst {
     padding-top: 20px;
 }
 
+.rfigure {
+    float: left;
+    max-width: 50%;
+    display: block;
+    padding: 1.2em;
+    padding-top: 10px;
+    //height: auto;
+    //margin: auto;
+}
+
 /*
  * My preference for code blocks is no line wraps and horizontal scrolling.
  */
