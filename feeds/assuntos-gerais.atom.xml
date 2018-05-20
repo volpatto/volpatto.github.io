@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Engimathics</title><link href="http://volpatto.github.io/" rel="alternate"></link><link href="http://volpatto.github.io/feeds/assuntos-gerais.atom.xml" rel="self"></link><id>http://volpatto.github.io/</id><updated>2018-05-20T00:00:00-03:00</updated><entry><title>Um retorno, quem sabe?</title><link href="http://volpatto.github.io/ressureicao.html" rel="alternate"></link><updated>2018-05-20T00:00:00-03:00</updated><author><name>Diego Volpatto</name></author><id>tag:volpatto.github.io,2018-05-20:ressureicao.html</id><summary type="html">&lt;h1&gt;Tudo que vai, volta?&lt;/h1&gt;
+&lt;p&gt;Bom, inevitavelmente e previsivelmente, fiquei sem tempo de manter a atividade aqui. Por sinal, atividade esta muito pontual!
+Infelizmente, tempo é algo que um doutorando frequentemente não dispõe. Afinal, quem faz doutorado SÓ ESTUDA (como dizem por aí). E é exatamente isso mesmo,
+não há tempo para fazer mais nada!&lt;/p&gt;
+&lt;h1&gt;Mas quando seria essa volta?&lt;/h1&gt;
+&lt;p&gt;Em breve, pretendo voltar a postar aqui, mas buscando um novo formato de postagens. A ideia é que sejam coisas independentes e rápidas, viabilizando a minha disponibilidade.
+Assim, não terei desculpas!&lt;/p&gt;
+&lt;h1&gt;E o que eu pretendo falar?&lt;/h1&gt;
+&lt;p&gt;Espero que em breve volte aqui para escrever sobre algumas brincadeirinhas que andei fazendo ultimamente.&lt;/p&gt;
+&lt;p&gt;É isso! Grande abraço a quem possa estar lendo!&lt;/p&gt;</summary></entry><entry><title>Um novo começo, um novo formato...</title><link href="http://volpatto.github.io/newblog.html" rel="alternate"></link><updated>2016-07-11T00:00:00-03:00</updated><author><name>Diego Volpatto</name></author><id>tag:volpatto.github.io,2016-07-11:newblog.html</id><summary type="html">&lt;p&gt;Olá para alguma pessoa louca que esteja lendo esse trem! Tudo bem?&lt;/p&gt;
+&lt;h4&gt;Prazer, me chamo Diego. E what the hell is esse trem?&lt;/h4&gt;
+&lt;p&gt;Bom, vou ser bem direto: Estou adotando um formato novo de blog baseado no HTML5, desenvolvido com a biblioteca pelican (do Python! &amp;lt;3) e hosteado no GitHub! Portanto, agora é totalmente Open Source, sem implicações comerciais nem qualquer coisa do tipo! O meu antigo blog era hosteado pelo Blogger da Google, mas agora passarei para este novo formato!&lt;/p&gt;
+&lt;p&gt;De início, apresentarei aqui uma introdução à linguagem Python pensada para usuários que pretendo utilizá-lo no contexto da Computação Científica. É parte de um material que elaborei para um curso que ministrei durante um Encontro Acadêmico de Modelagem Computacional que ocorreu no LNCC no início de 2016. Espero que façam bom proveito!&lt;/p&gt;
+&lt;p&gt;No futuro, tendo a base em Python bem desenvolvida, publicarei algumas aplicações numéricas, introduzindo assim diversas funcionalidades gratuitas que a linguagem oferece por meio de diversas bibliotecas, principalmente as gráficas! Não, não haverá a necessidade de que crimes sejam cometidos, como a maioria dos usuários de Matlab costumam fazer (crackear é crime).&lt;/p&gt;
+&lt;p&gt;Grande abraço!
+Qualquer sugestão, críticas e xingamentos, mail me!&lt;/p&gt;</summary></entry></feed>
