@@ -1,0 +1,14 @@
+# Dados públicos já conferidos no site; não são extraídos de contatos privados do XML.
+name: Diego Tavares Volpatto
+headline: Pesquisador · Laboratório Nacional de Computação Científica
+email: volpatto@lncc.br
+custom_connections:
+  - placeholder: Currículo Lattes
+    url: http://lattes.cnpq.br/3999178670179183
+    fontawesome_icon: graduation-cap
+  - placeholder: 0000-0002-3107-3259
+    url: https://orcid.org/0000-0002-3107-3259
+    fontawesome_icon: orcid
+  - placeholder: volpatto
+    url: https://github.com/volpatto
+    fontawesome_icon: github

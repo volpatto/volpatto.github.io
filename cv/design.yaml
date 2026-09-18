@@ -1,0 +1,49 @@
+design:
+  theme: classic
+  page:
+    size: a4
+    show_top_note: false
+  entries:
+    allow_page_break: false
+  templates:
+    education_entry:
+      degree_column: null
+      main_column: '**DEGREE_WITH_AREA**
+
+        INSTITUTION
+
+        SUMMARY
+
+        HIGHLIGHTS'
+    experience_entry:
+      main_column: '**POSITION**
+
+        COMPANY
+
+        SUMMARY
+
+        HIGHLIGHTS'
+    normal_entry:
+      main_column: '**NAME**
+
+        SUMMARY
+
+        #text(size:0.95em)[#set/**/text(fill:rgb("666666"));DESCRIPTION]
+
+        HIGHLIGHTS'
+  colors:
+    name: '#22213D'
+    headline: '#47435F'
+    connections: '#51449A'
+    section_titles: '#51449A'
+    links: '#51449A'
+    body: '#23232D'
+    footer: '#666674'
+  typography:
+    alignment: left
+    font_size:
+      body: 10pt
+      name: 26pt
+      section_titles: 12pt
+      connections: 9pt
+      headline: 11pt

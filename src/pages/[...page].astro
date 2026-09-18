@@ -1,0 +1,18 @@
+---
+import AcademicSite from '../components/AcademicSite.astro';
+import AcademicSections from '../components/AcademicSections.astro';
+import { sitePages, type PageId } from '../data/navigation';
+import type { Language } from '../data/profile';
+
+export function getStaticPaths() {
+  return sitePages.filter(page => page.id !== 'home').flatMap(page =>
+    (['pt', 'en'] as const).map(lang => ({
+      params: { page: page.path[lang].replace(/\/$/, '') },
+      props: { page: page.id, lang },
+    }))
+  );
+}
+interface Props { page: PageId; lang: Language; }
+const { page, lang } = Astro.props;
+---
+<AcademicSite lang={lang} page={page}><AcademicSections lang={lang} page={page} /></AcademicSite>
