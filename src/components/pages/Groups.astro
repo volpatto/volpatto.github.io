@@ -1,0 +1,59 @@
+---
+// Conteúdo: conteudo/paginas/grupos.yaml
+import { content, t, type Language } from "../../content";
+import { asset, href } from "../../lib/navigation";
+import Arrow from "../Arrow.astro";
+import Icon from "../Icon.astro";
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+const groups = content.groups;
+---
+
+<section id="groups" class="section container" aria-labelledby="groups-title">
+  <div class="section-heading">
+    <div>
+      <h1 id="groups-title">{t(groups.heading, lang)}</h1>
+    </div>
+  </div>
+  <div class="groups-grid">
+    {groups.items.map((group) => (
+      <article class={`group-card ${group.id}-card`}>
+        <div
+          class:list={[
+            "group-identity",
+            { "ipes-identity": group.id === "ipes" },
+          ]}
+        >
+          <img
+            src={asset(group.logo.file)}
+            width={group.logo.width}
+            height={group.logo.height}
+            loading="lazy"
+            alt={t(group.logo.alt, lang)}
+          />
+        </div>
+        <div class="group-content">
+          <div class="group-label">
+            <span>{group.affiliation}</span>
+            <span class="role-badge">{t(group.role, lang)}</span>
+          </div>
+          <h2>{group.name}</h2>
+          {group.paragraphs.map((paragraph) => (
+            <p>{t(paragraph, lang)}</p>
+          ))}
+          <div class="group-links">
+            {group.links.map((link) => (
+              <a class="text-link" href={href(link.url)}>
+                {link.icon !== "arrow-diagonal" && <Icon name={link.icon} />}
+                {t(link.label, lang)}
+                {link.icon === "arrow-diagonal" && <Arrow diagonal />}
+              </a>
+            ))}
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

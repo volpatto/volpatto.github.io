@@ -3,18 +3,24 @@ name: Publish website to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: github-pages
+  group: github-pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   build:
+    name: Check and build Astro
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -23,24 +29,27 @@ jobs:
       - uses: pnpm/action-setup@v4
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Check types and templates
+      - name: Check editable content, types and templates
         run: pnpm check
       - name: Configure Pages
         id: pages
+        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
       - name: Build static website
         run: pnpm build
         env:
-          SITE_URL: ${{ steps.pages.outputs.origin }}
-          BASE_PATH: ${{ steps.pages.outputs.base_path }}
-      - name: Check generated pages and local links
+          SITE_URL: ${{ steps.pages.outputs.origin || 'https://volpatto.github.io' }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path || '/' }}
+      - name: Test content loading, generated pages and local links
         run: pnpm test
         env:
-          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path || '/' }}
       - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
         with:
           path: dist
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     permissions:

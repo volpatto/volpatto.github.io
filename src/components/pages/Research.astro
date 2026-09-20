@@ -1,0 +1,76 @@
+---
+// Conteúdo: conteudo/paginas/pesquisa.yaml
+import { content, t, type Language } from "../../content";
+import { asset, href } from "../../lib/navigation";
+import Arrow from "../Arrow.astro";
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+const research = content.research;
+---
+
+<section id="research" class="section" aria-labelledby="research-title">
+  <div class="section-heading">
+    <h1 id="research-title">{t(research.heading, lang)}</h1>
+  </div>
+  <div class="research-grid">
+    {research.items.map((item) => (
+      <article class="research-item" id={item.id}>
+        <h2>{t(item.title, lang)}</h2>
+        <p>{t(item.description, lang)}</p>
+        {item.detail && <p>{t(item.detail, lang)}</p>}
+        {item.topics && (
+          <div class="research-topics">
+            {item.topics.map((topic) => (
+              <div>
+                <h3>{t(topic.title, lang)}</h3>
+                <p>{t(topic.description, lang)}</p>
+                <a href={href(topic.reference.url)}>
+                  {t(topic.reference.label, lang)}
+                </a>
+              </div>
+            ))}
+          </div>
+        )}
+        <figure class="research-figure">
+          <a
+            href={asset(item.figure.file)}
+            aria-label={t(research.enlargeLabel, lang) + t(item.title, lang)}
+          >
+            <img
+              src={asset(item.figure.file)}
+              width={item.figure.width}
+              height={item.figure.height}
+              loading="lazy"
+              decoding="async"
+              alt={t(item.figure.alt, lang)}
+            />
+          </a>
+          <figcaption>
+            {t(item.figure.caption, lang)}
+            <span class="figure-links">
+              <a href={href(item.figure.source)}>
+                {t(item.figure.credit, lang)}
+              </a>
+              {item.figure.license && (
+                <a href={href(item.figure.license.url)}>
+                  {item.figure.license.label}
+                </a>
+              )}
+              <a href={asset(item.figure.file)}>
+                {t(research.fullSizeLabel, lang)}
+              </a>
+            </span>
+          </figcaption>
+        </figure>
+        {item.link.url !== item.figure.source && (
+          <a class="text-link" href={href(item.link.url)}>
+            {t(item.link.label, lang)}
+            <Arrow diagonal />
+          </a>
+        )}
+      </article>
+    ))}
+  </div>
+</section>

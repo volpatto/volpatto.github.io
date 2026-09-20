@@ -1,0 +1,289 @@
+# Página: Licenciamento.
+# Edite os campos pt (português) e en (inglês). Guia: conteudo/README.md.
+# Parágrafos com links aceitam Markdown: [texto](https://exemplo.org).
+
+page:
+  id: licensing
+  label:
+    pt: Licenciamento
+    en: Licensing
+  path:
+    pt: licenciamento/
+    en: en/licensing/
+  description:
+    pt: >-
+      Licenças dos textos e do código do site de Diego Volpatto, com créditos e condições dos
+      materiais de outras fontes.
+    en: >-
+      Licenses for the text and code of Diego Volpatto’s website, with credits and terms for
+      materials from other sources.
+heading:
+  pt: Licenciamento e créditos
+  en: Licensing and credits
+introduction:
+  pt: >-
+    Os textos autorais e o código deste site têm licenças distintas. Imagens, logos, documentos para
+    download e materiais de outras fontes seguem as condições identificadas abaixo.
+  en: >-
+    The original text and the code of this website have separate licenses. Images, logos,
+    downloadable documents and material from other sources follow the conditions identified below.
+sections:
+  - headingId: text-license-title
+    heading:
+      pt: Textos autorais — CC BY 4.0
+      en: Original text — CC BY 4.0
+    paragraphs:
+      - text:
+          pt: >-
+            Ressalvados os materiais identificados nesta página, os textos editoriais autorais de
+            Diego Tavares Volpatto estão licenciados sob [Creative Commons Atribuição 4.0
+            Internacional](https://creativecommons.org/licenses/by/4.0/deed.pt-br). Você pode
+            compartilhá-los e adaptá-los, inclusive para fins comerciais, com atribuição adequada,
+            link para a licença e indicação das alterações.
+          en: >-
+            Except for the materials identified on this page, original editorial text by Diego
+            Tavares Volpatto is licensed under [Creative Commons Attribution 4.0
+            International](https://creativecommons.org/licenses/by/4.0/). You may share and adapt
+            them, including commercially, with appropriate attribution, a link to the license and an
+            indication of changes.
+      - text:
+          pt: >-
+            Isso inclui a redação autoral da apresentação, das descrições de pesquisa e das demais
+            seções editoriais nos dois idiomas, inclusive quando esses textos estão incorporados aos
+            arquivos de código. A licença abrange somente os direitos que o autor pode licenciar.
+          en: >-
+            This applies to the original wording of the biography, research descriptions and other
+            editorial sections in both languages, including that text when embedded in source files.
+            It covers only rights that the author is entitled to license.
+      - text:
+          pt: >-
+            Exemplo de atribuição: Diego Tavares Volpatto, [site acadêmico](/), CC BY 4.0. Indique
+            as adaptações, quando houver.
+          en: >-
+            Attribution example: Diego Tavares Volpatto, [academic website](/en/), CC BY 4.0.
+            Indicate any adaptations you make.
+        class: license-attribution
+      - text:
+          pt: "[Texto integral da licença (inglês)](/licenses/CC-BY-4.0.txt)"
+          en: "[Full license text (English)](/licenses/CC-BY-4.0.txt)"
+    credits: []
+  - headingId: code-license-title
+    heading:
+      pt: Código do site — MIT
+      en: Website code — MIT
+    paragraphs:
+      - text:
+          pt: >-
+            A implementação original do site, os estilos, scripts e configurações estão licenciados
+            sob a [licença MIT](/licenses/MIT.txt). O reúso e a modificação são permitidos,
+            inclusive comercialmente, com preservação dos avisos de direitos autorais e de
+            permissão. O software é disponibilizado sem garantias, conforme os termos da licença.
+          en: >-
+            The original website implementation, styles, scripts and configuration are licensed
+            under the [MIT License](/licenses/MIT.txt). Reuse and modification are permitted,
+            including commercially, provided the copyright and permission notices are retained. The
+            software is provided without warranty, as set out in the license.
+      - text:
+          pt: >-
+            Essa licença se refere à implementação do site. Os pacotes científicos apresentados na
+            página Software e as dependências usadas na construção do site mantêm suas próprias
+            licenças.
+          en: >-
+            This license concerns the website implementation. The scientific packages presented on
+            the Software page and the dependencies used to build the site retain their own licenses.
+    credits: []
+  - headingId: excluded-materials-title
+    heading:
+      pt: Materiais com condições próprias
+      en: Materials with separate terms
+    paragraphs:
+      - text:
+          pt: >-
+            Os itens abaixo estão fora das licenças gerais CC BY 4.0 e MIT deste site. Sua inclusão
+            não modifica os direitos de autores, editoras ou instituições, nem concede direitos
+            sobre marcas ou direitos de personalidade.
+          en: >-
+            The following items are outside the general CC BY 4.0 and MIT grants of this website.
+            Their inclusion does not change the rights of their authors, publishers or institutions,
+            and does not grant trademark or personality rights.
+    credits:
+      - title:
+          pt: Logos e símbolos institucionais
+          en: Logos and institutional symbols
+        description:
+          pt: >-
+            LNCC, ThermoPhase, IPES, ALFA, LEF, Unicamp, FEQ/Unicamp, voids, torch-flash, Equinor e
+            PRIO. Identificam as instituições, grupos, projetos e empresas mencionados no site. O
+            reúso está sujeito às condições dos respectivos titulares.
+          en: >-
+            LNCC, ThermoPhase, IPES, ALFA, LEF, Unicamp, FEQ/Unicamp, voids, torch-flash, Equinor
+            and PRIO. They identify the institutions, groups, projects and companies mentioned on
+            the site. Reuse is subject to the respective rights holders’ terms.
+      - title:
+          pt: Foto e documentos para download
+          en: Portrait and downloadable documents
+        description:
+          pt: >-
+            A foto de perfil e o currículo em PDF estão fora da licença geral dos textos editoriais.
+            Esta declaração de licenciamento não concede permissão adicional para reutilizar esses
+            arquivos.
+          en: >-
+            The profile photograph and the PDF CV are outside the general license for editorial
+            text. No additional permission to reuse these files is granted by this licensing notice.
+      - title:
+          pt: Textos de terceiros e referências
+          en: Third-party text and references
+        description:
+          pt: >-
+            Citações, títulos de publicações e outras contribuições de terceiros mantêm sua condição
+            original. Esta declaração não cria restrições sobre fatos, materiais de domínio público
+            ou usos já permitidos pela legislação.
+          en: >-
+            Quoted material, publication titles and other third-party contributions retain their
+            original status. This notice does not create restrictions on facts, public-domain
+            material or uses already permitted by law.
+  - id: research-figures
+    headingId: figure-rights-title
+    heading:
+      pt: Figuras de pesquisa
+      en: Research figures
+    paragraphs: []
+    credits:
+      - title:
+          pt: Escoamento Darcy–Brinkman — voids
+          en: Darcy–Brinkman flow — voids
+        description:
+          pt: >-
+            Figura do caso sintético com cavidade circular da [documentação do
+            voids](https://geomech-project.github.io/voids/verification/vug_2d/). Reproduzida sem
+            alterações na imagem. Permanecem aplicáveis as condições do projeto de origem; as
+            licenças do site não relicenciam essa figura.
+          en: >-
+            Figure from the synthetic circular-cavity example in the [voids
+            documentation](https://geomech-project.github.io/voids/verification/vug_2d/). Reproduced
+            without changes to the image. The source project’s terms remain applicable; the website
+            licenses do not relicense this figure.
+      - title:
+          pt: Equilíbrio de fases — GibbsFlashNN
+          en: Phase equilibria — GibbsFlashNN
+        description:
+          pt: >-
+            Figura do [estudo
+            GibbsFlashNN](https://github.com/ThermoPhase-FCSRG/gibbsflashnn-supporting-material),
+            convertida de PDF para PNG, sem alteração das curvas ou dos dados. Os avisos do projeto
+            distinguem figuras científicas de software; a licença do código não abrange
+            automaticamente essa imagem. Não é concedida uma nova licença aqui.
+          en: >-
+            Figure from the [GibbsFlashNN
+            study](https://github.com/ThermoPhase-FCSRG/gibbsflashnn-supporting-material), converted
+            from PDF to PNG without altering the curves or data. The project’s notices distinguish
+            scientific figures from software; its software license does not automatically cover this
+            image. No new license is granted here.
+      - title:
+          pt: Transporte reativo — Kyas et al. (2022)
+          en: Reactive transport — Kyas et al. (2022)
+        description:
+          pt: >-
+            © Os autores, 2022. Painéis 3(c–d) de [Kyas, Volpatto, Saar e
+            Leal](https://doi.org/10.1007/s10596-021-10126-2), publicados originalmente sob [CC BY
+            4.0](https://creativecommons.org/licenses/by/4.0/). Foram extraídos esses dois painéis e
+            feita a conversão para PNG, preservando os dados visuais. A atribuição para reúso é aos
+            autores do artigo.
+          en: >-
+            © The Author(s), 2022. Panels 3(c–d) from [Kyas, Volpatto, Saar and
+            Leal](https://doi.org/10.1007/s10596-021-10126-2), originally published under [CC BY
+            4.0](https://creativecommons.org/licenses/by/4.0/). Only these two panels were extracted
+            and converted to PNG; the visual data were preserved. Attribution for reuse belongs to
+            the article’s authors.
+      - title:
+          pt: SciML — Souza et al. (2026)
+          en: SciML — Souza et al. (2026)
+        description:
+          pt: >-
+            © Os autores, 2026. Figura 3 de [Modeling flash points of biofuels using
+            thermodynamically consistent neural
+            networks](https://doi.org/10.1016/j.fluid.2026.114673), de Maurício Prado de Omena
+            Souza, Diego Tavares Volpatto, Antonio Marinho Barbosa Neto e Mariana Conceição da
+            Costa, publicado em Fluid Phase Equilibria sob [CC BY
+            4.0](https://creativecommons.org/licenses/by/4.0/). A figura completa foi extraída
+            diretamente do PDF fornecido, sem alterações na imagem. A atribuição para reúso é aos
+            quatro autores.
+          en: >-
+            © The Authors, 2026. Figure 3 from [Modeling flash points of biofuels using
+            thermodynamically consistent neural
+            networks](https://doi.org/10.1016/j.fluid.2026.114673), by Maurício Prado de Omena
+            Souza, Diego Tavares Volpatto, Antonio Marinho Barbosa Neto and Mariana Conceição da
+            Costa, published in Fluid Phase Equilibria under [CC BY
+            4.0](https://creativecommons.org/licenses/by/4.0/). The complete figure was extracted
+            directly from the supplied PDF, without changes to the image. Attribution for reuse
+            belongs to all four authors.
+      - title:
+          pt: Inferência Bayesiana — Volpatto et al.
+          en: Bayesian inference — Volpatto et al.
+        description:
+          pt: >-
+            © Operational Research Society 2021. Painel 3(a) do [artigo do modelo
+            SEIRD](https://doi.org/10.1080/17477778.2021.1977731), extraído e convertido para PNG.
+            Aplicam-se as condições da publicação original; essa imagem não é oferecida sob a
+            licença CC BY do site.
+          en: >-
+            © Operational Research Society 2021. Panel 3(a) from the [SEIRD model
+            article](https://doi.org/10.1080/17477778.2021.1977731), extracted and converted to PNG.
+            The original publication’s terms apply; this image is not offered under the website’s CC
+            BY license.
+  - headingId: font-rights-title
+    heading:
+      pt: Fontes tipográficas e ferramentas
+      en: Fonts and tools
+    paragraphs:
+      - text:
+          pt: >-
+            Manrope e Newsreader são distribuídas sob a SIL Open Font License 1.1, com os avisos
+            originais de autoria: [Manrope](/licenses/Manrope-OFL.txt) e
+            [Newsreader](/licenses/Newsreader-OFL.txt).
+          en: >-
+            Manrope and Newsreader are distributed under the SIL Open Font License 1.1, with their
+            original copyright notices: [Manrope](/licenses/Manrope-OFL.txt) and
+            [Newsreader](/licenses/Newsreader-OFL.txt).
+      - text:
+          pt: >-
+            O site utiliza Astro. O currículo é gerado com lattes2pdf e RenderCV; a configuração do
+            tema adapta o preset Classic exportado pelo lattes2pdf. Os avisos preservados estão
+            disponíveis para [Astro](/licenses/Astro.txt) e
+            [lattes2pdf](/licenses/lattes2pdf-MIT.txt).
+          en: >-
+            The website uses Astro. The CV is generated with lattes2pdf and RenderCV; its theme
+            configuration adapts the Classic preset exported by lattes2pdf. The retained notices are
+            available for [Astro](/licenses/Astro.txt) and
+            [lattes2pdf](/licenses/lattes2pdf-MIT.txt).
+    credits: []
+  - headingId: icon-rights-title
+    heading:
+      pt: Ícones e bandeiras
+      en: Icons and flags
+    paragraphs:
+      - text:
+          pt: >-
+            O ícone do Lattes é do [Academicons](https://github.com/jpswalsh/academicons) (James
+            Walsh e Katja Bercic), [OFL 1.1](/licenses/Academicons-OFL.txt). Os ícones de GitHub,
+            ORCID e LinkedIn são do [Font Awesome Free](https://fontawesome.com/) (Fonticons, Inc.),
+            [CC BY 4.0](/licenses/Font-Awesome.txt). Os desenhos são preservados e exibidos na cor
+            do texto do tema.
+          en: >-
+            The Lattes icon is from [Academicons](https://github.com/jpswalsh/academicons) (James
+            Walsh and Katja Bercic), [OFL 1.1](/licenses/Academicons-OFL.txt). GitHub, ORCID and
+            LinkedIn icons are from [Font Awesome Free](https://fontawesome.com/) (Fonticons, Inc.),
+            [CC BY 4.0](/licenses/Font-Awesome.txt). Their shapes are preserved and displayed in the
+            theme’s text color.
+      - text:
+          pt: >-
+            As bandeiras do Brasil e do Reino Unido são do
+            [flag-icons](https://github.com/lipis/flag-icons) (Panayiotis Lipiridis e
+            colaboradores), [MIT](/licenses/Flag-icons-MIT.txt), reproduzidas sem alterações. Os
+            demais ícones de interface são desenhos originais sob a licença MIT do código do site.
+          en: >-
+            The Brazil and United Kingdom flags are from
+            [flag-icons](https://github.com/lipis/flag-icons) (Panayiotis Lipiridis and
+            contributors), [MIT](/licenses/Flag-icons-MIT.txt), reproduced without changes. General
+            interface icons are original drawings distributed under the website code’s MIT license.
+    credits: []

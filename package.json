@@ -6,22 +6,32 @@
   "type": "module",
   "packageManager": "pnpm@11.19.0",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
     "build": "astro build",
     "preview": "astro preview --host 127.0.0.1",
-    "check": "astro check",
-    "test": "node scripts/check-build.mjs"
+    "check": "pnpm check:content && astro check",
+    "test": "pnpm test:unit && node scripts/check-build.mjs",
+    "check:content": "node scripts/check-content.mjs",
+    "test:unit": "node --test tests/*.test.ts",
+    "verify": "pnpm check && pnpm build && pnpm test",
+    "format": "prettier --write src scripts tests .github package.json astro.config.mjs tsconfig.json"
   },
   "dependencies": {
-    "astro": "7.3.3",
     "@fontsource-variable/manrope": "^5.2.8",
-    "@fontsource-variable/newsreader": "^5.2.8"
+    "@fontsource-variable/newsreader": "^5.2.8",
+    "astro": "7.3.3",
+    "marked": "^17.0.6",
+    "yaml": "2.9.1",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
+    "@types/node": "^24.13.6",
+    "prettier": "^3.9.8",
+    "prettier-plugin-astro": "^1.0.1",
     "typescript": "^5.9.3"
   }
 }

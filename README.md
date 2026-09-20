@@ -1,12 +1,18 @@
 # Diego Volpatto -- site acadêmico
 
-Site pessoal estático em português e inglês, construído com Astro. Apesar de ter sido montado para o Github Pages, fiz pensando em mover facilmente para outros domínios.
+[![Build e publicação](https://github.com/volpatto/volpatto.github.io/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/volpatto/volpatto.github.io/actions/workflows/pages.yml)
+[![Astro](https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=white)](https://astro.build/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js 24](https://img.shields.io/badge/Node.js-24-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![pnpm](https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
+
+Site pessoal estático em português e inglês, construído com Astro e TypeScript, com conteúdo editável em YAML. Apesar de ter sido montado para o Github Pages, fiz pensando em mover facilmente para outros domínios.
 
 Organizado em dez páginas acadêmicas por idioma: apresentação, pesquisa, publicações, software, ensino, orientações, grupos de pesquisa, parcerias e projetos, currículo e contato. Uma página adicional de licenciamento em cada idioma é acessível pelo rodapé. Inclui experiência profissional, práticas de engenharia de software, resumos de ementas e logos dos grupos e instituições. Os modos claro e escuro respeitam a preferência do sistema na primeira visita; o botão no cabeçalho salva a escolha localmente. As fontes e imagens são servidas pelo próprio site. Não há analytics, formulário, banco de dados nem chamadas ao GitHub durante a navegação.
 
 ## Licenciamento
 
-O [escopo das licenças](LICENSE.md) distingue **textos editoriais autorais sob CC BY 4.0** e **código e documentação técnica originais sob MIT**. Textos editoriais dentro de arquivos `.astro` ou `.ts` continuam sujeitos à licença de conteúdo; isso não torna todas as partes desses arquivos intercambiavelmente MIT ou CC BY.
+O [escopo das licenças](LICENSE.md) distingue **textos editoriais autorais sob CC BY 4.0** e **código e documentação técnica originais sob MIT**. Textos editoriais em YAML ou dentro de arquivos `.astro` ou `.ts` continuam sujeitos à licença de conteúdo; isso não torna todas as partes desses arquivos intercambiavelmente MIT ou CC BY.
 
 Logos, foto, figuras científicas, currículo em PDF, fontes e materiais de terceiros estão fora dessas concessões gerais. Os créditos e as condições de cada ativo estão em [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). A figura de Kyas et al. tem sua própria licença CC BY 4.0, com atribuição aos autores originais. Os textos integrais das licenças e avisos distribuídos com o site estão em `public/licenses/`.
 
@@ -24,11 +30,14 @@ pnpm dev
 Acesse `http://127.0.0.1:4321/`.
 
 ```sh
-pnpm check     # Valida os componentes e os tipos
-pnpm build     # Gera o site em dist/
-pnpm test      # Confere o HTML gerado, páginas, links internos, idiomas e arquivos
-pnpm preview  # Serve o resultado estático da última compilação
+pnpm verify         # Valida o conteúdo, confere o código, gera e testa o site
+pnpm check:content  # Confere somente os YAMLs e seus arquivos locais
+pnpm preview        # Abre o resultado estático da última compilação
 ```
+
+Os comandos também podem ser executados separadamente: `pnpm check`,
+`pnpm build` e `pnpm test`, nessa ordem. Os testes usam o suporte a TypeScript do
+Node.js 24; não é preciso compilar os arquivos de teste manualmente.
 
 O site funciona sem JavaScript para leitura, navegação entre páginas, menu móvel, download do CV e orientações expansíveis. O seletor de tema e a adaptação automática do estado do menu usam JavaScript. A mudança de idioma preserva a página atual; a escolha de tema persiste entre páginas. Links antigos como `/#teaching` são encaminhados à página correspondente quando JavaScript está disponível.
 
@@ -36,43 +45,92 @@ O site funciona sem JavaScript para leitura, navegação entre páginas, menu m�
 
 Nota mais para eu mesmo, já que JS não é meu forte.
 
-| Arquivo                                   | Conteúdo                                                        |
-| ----------------------------------------- | --------------------------------------------------------------- |
-| `src/data/profile.ts`                     | Nome, e-mail, perfis acadêmicos e linhas de pesquisa            |
-| `src/data/academic.ts`                    | Publicações, software, disciplinas, alunos, projetos e formação |
-| `src/data/career.ts`                      | Experiência profissional e colaborações acadêmicas              |
-| `src/data/navigation.ts`                  | Rotas, navegação e descrições das páginas                       |
-| `src/components/AcademicSite.astro`       | Layout compartilhado, navegação, idiomas e temas                |
-| `src/components/Icon.astro`              | Ícones de navegação, perfis e ações, acompanhados por texto      |
-| `src/data/brand-icons.ts`                | Desenhos de ícones de marcas, com licenças próprias             |
-| `src/components/AcademicHome.astro`       | Apresentação da página inicial                                  |
-| `src/components/Collaborations.astro`     | Parcerias ALFA, LEF, UDESC e projetos                           |
-| `src/components/Curriculum.astro`         | Currículo e experiência profissional                            |
-| `src/components/AcademicSections.astro`   | Conteúdo das demais páginas e contato                           |
-| `src/styles/global.css`                   | Tipografia, cores, layouts e modo escuro                        |
-| `public/images/`                          | Foto e imagens dos grupos/instituição                           |
-| `public/files/cv-diego-volpatto-2026.pdf` | Currículo acadêmico gerado do XML com lattes2pdf                 |
-| `cv/`                                    | Seleção, tema e cabeçalho público usados na geração do CV       |
-| `THIRD_PARTY_NOTICES.md`                  | Fontes dos materiais, créditos e condições próprias de uso     |
+**Comece pelo [guia de edição em `conteudo/README.md`](conteudo/README.md).**
+Os textos, links, imagens e listas estão em YAML, com um arquivo por página.
+Para acrescentar um artigo, aluno, software ou parceria, copie um registro da
+lista correspondente e edite seus campos; não é preciso alterar os componentes
+nem atualizar contagens nos testes.
 
-As rotas são geradas em `src/pages/[...page].astro`, além das duas páginas iniciais. Os campos com traduções usam `{ pt: '...', en: '...' }`. Ao acrescentar conteúdo, preencha ambos. Os títulos de artigos permanecem no idioma original. Não há importação automática do Lattes: as atualizações são editoriais, para permitir conferência antes de publicar.
+| Arquivo | O que editar |
+| --- | --- |
+| `conteudo/site.yaml` | Nome, e-mail, perfis e textos compartilhados |
+| `conteudo/paginas/sobre.yaml` | Apresentação, foto e formação resumida |
+| `conteudo/paginas/pesquisa.yaml` | Linhas de pesquisa, figuras e fontes |
+| `conteudo/paginas/publicacoes.yaml` | Artigos e DOIs |
+| `conteudo/paginas/software.yaml` | Softwares, práticas, documentação e pacotes |
+| `conteudo/paginas/ensino.yaml` | Disciplinas e materiais |
+| `conteudo/paginas/orientacoes.yaml` | Alunos atuais e orientações concluídas |
+| `conteudo/paginas/grupos.yaml` | Grupos de pesquisa |
+| `conteudo/paginas/parcerias.yaml` | Parcerias acadêmicas, projetos e indústria |
+| `conteudo/paginas/curriculo.yaml` | Experiência, formação e download do CV |
+| `conteudo/paginas/contato.yaml` | Sala e endereço |
+| `conteudo/paginas/licenciamento.yaml` | Créditos e condições dos materiais |
+| `public/images/` | Imagens, logos e bandeiras |
+| `public/files/cv-diego-volpatto-2026.pdf` | PDF do currículo já revisado |
+| `cv/` | Configuração para gerar novamente o PDF |
 
-Ícones e bandeiras são locais, sem bibliotecas carregadas por CDN. Os desenhos acompanham rótulos textuais e são decorativos para leitores de tela. O seletor de idiomas usa as bandeiras do Brasil e do Reino Unido junto de PT e EN, preservando os nomes acessíveis Português e English. Créditos e licenças de Academicons, Font Awesome e flag-icons constam na página de licenciamento e em `THIRD_PARTY_NOTICES.md`.
+Os campos traduzidos têm `pt` e `en`. Não há importação automática do Lattes;
+as atualizações continuam editoriais e devem ser conferidas antes de publicar.
+O guia inclui exemplos de parágrafos, links, publicações e alunos.
 
-O conjunto inicial de artigos e alunos é conferido em `scripts/check-build.mjs`. Ao acrescentar ou remover registros, atualize as contagens esperadas nesse script.
+Para mudanças de estrutura ou aparência, veja o
+[mapa da arquitetura](docs/arquitetura.md). Cada página tem seu próprio componente
+em `src/components/pages/`. Cores, fontes e responsividade continuam em
+`src/styles/global.css`. `src/layouts/AcademicLayout.astro` reúne cabeçalho,
+navegação, rodapé e comportamento de tema/menu.
+
+Ícones e bandeiras são locais. Os desenhos acompanham rótulos textuais e são
+decorativos para leitores de tela. As bandeiras do Brasil e do Reino Unido
+acompanham PT e EN; os nomes acessíveis são Português e English. Os créditos
+continuam na página de licenciamento e em `THIRD_PARTY_NOTICES.md`.
 
 ## Publicar no GitHub Pages
 
-O site está preparado para o repositório `volpatto/volpatto.github.io`, publicado na raiz de `https://volpatto.github.io/`. O workflow `.github/workflows/pages.yml` instala as dependências, executa as verificações, gera os arquivos e publica quando há um push em `main`.
+O destino é o repositório `volpatto/volpatto.github.io`, publicado na raiz de
+`https://volpatto.github.io/`. O workflow [pages.yml](.github/workflows/pages.yml)
+valida o conteúdo, confere os componentes, gera o site com Astro, executa os testes
+e publica em pushes para `main`. Pull requests são conferidos sem publicação.
+A badge abaixo do título acompanha esse workflow na branch `main`.
 
-1. Renomeie o repositório no GitHub para `volpatto.github.io`. Atualize o remoto local com `git remote set-url origin git@github.com:volpatto/volpatto.github.io.git`, revise o conteúdo e envie os arquivos ao repositório.
-2. No GitHub, abra **Settings → Pages → Build and deployment** e escolha **GitHub Actions**.
-3. Execute **Actions → Publish website to GitHub Pages → Run workflow** se o primeiro push tiver ocorrido antes de habilitar Pages.
-4. Aguarde a conclusão da execução. O endereço esperado para esse repositório é `https://volpatto.github.io/`.
+1. No [repositório](https://github.com/volpatto/volpatto.github.io), abra
+   **Settings → Pages → Build and deployment → Source** e selecione **GitHub Actions**.
+2. Envie as alterações revisadas para `main`.
+3. Se necessário, abra **Actions → Publish website to GitHub Pages → Run workflow**.
+4. Aguarde a conclusão. O site estará em `https://volpatto.github.io/` após uma
+   publicação bem-sucedida.
 
-Esse endereço é a configuração de destino; só ficará publicado após o workflow terminar com sucesso. O workflow recebe domínio e subdiretório do próprio GitHub Pages.
+Se o remoto local ainda apontar para o nome antigo, atualize-o:
 
-A configuração local já usa `base: "/"`. O workflow adapta o caminho ao repositório detectado pelo Pages, preservando a possibilidade de hospedar em outro domínio ou subdiretório.
+```sh
+git remote set-url origin git@github.com:volpatto/volpatto.github.io.git
+```
+
+### Erro “Invalid YAML front matter” nos arquivos Astro
+
+Se o log executar `actions/jekyll-build-pages`, o GitHub está usando o build por
+branch com **Jekyll**. O cabeçalho de um arquivo `.astro` contém código e não é
+um cabeçalho YAML de Jekyll. Isso não é um erro dos arquivos em `conteudo/`.
+
+A correção é selecionar **GitHub Actions** em Pages, conforme o passo 1, e executar
+o workflow `Publish website to GitHub Pages`. Ele publica o HTML de `dist/`.
+Não selecione a pasta de código-fonte como site estático nem tente corrigir esse
+erro editando os cabeçalhos Astro. Adicionar `.nojekyll` ao código-fonte, sozinho,
+também não compila o projeto.
+
+Essa configuração fica no GitHub e não é alterada por editar o workflow localmente.
+O procedimento segue a [documentação oficial de configuração da fonte de publicação](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+
+O domínio e o subdiretório usados no deploy vêm do próprio GitHub Pages. A
+configuração local mantém `base: "/"`, com possibilidade de hospedar depois em
+outro domínio ou subdiretório.
+
+### Erro “Resource not accessible by integration” em Configure Pages
+
+O job de build precisa de `pages: read` para consultar a configuração do site.
+Essa permissão está declarada no workflow, junto de `contents: read`.
+As permissões de publicação (`pages: write` e `id-token: write`) ficam no job de
+deploy. Habilitar Pages e escolher **GitHub Actions** continua sendo necessário;
+a permissão de leitura não altera essa configuração.
 
 ## Migrar para o LNCC
 
@@ -116,6 +174,6 @@ python3 -m venv .venv-cv
 
 A primeira geração precisa de acesso à internet para os pacotes Typst. A exportação de entrada permanece fora do repositório. `.cv-build/` recebe o PDF, o YAML editável, o relatório de conversão e as somas de verificação. O cabeçalho usa somente os contatos públicos de `cv/header.yaml`; não se publicam XML, telefone, endereço residencial ou campos pessoais da exportação.
 
-Revise o PDF, incluindo todas as páginas, antes de copiar `.cv-build/revisao.pdf` para `public/files/cv-diego-volpatto-2026.pdf`. Sem `--output`, o script substitui diretamente esse PDF do site. Atualize a data indicada em `Curriculum.astro` quando o registro Lattes mudar. O build do site usa o PDF já revisado e não depende de Python ou de acesso ao Lattes.
+Revise o PDF, incluindo todas as páginas, antes de copiar `.cv-build/revisao.pdf` para `public/files/cv-diego-volpatto-2026.pdf`. Sem `--output`, o script substitui diretamente esse PDF do site. Atualize a data indicada em `conteudo/paginas/curriculo.yaml` quando o registro Lattes mudar. O build do site usa o PDF já revisado e não depende de Python ou de acesso ao Lattes.
 
-As figuras de pesquisa são artefatos existentes, com referências, alterações e condições de uso descritas em `THIRD_PARTY_NOTICES.md`. Ao trocar uma figura, confira também legenda, texto alternativo e dimensões em `src/data/profile.ts`, além dos créditos na página de licenciamento.
+As figuras de pesquisa são artefatos existentes, com referências, alterações e condições de uso descritas em `THIRD_PARTY_NOTICES.md`. Ao trocar uma figura, confira também legenda, texto alternativo e dimensões em `conteudo/paginas/pesquisa.yaml`, além dos créditos na página de licenciamento.

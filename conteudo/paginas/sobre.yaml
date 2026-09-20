@@ -1,0 +1,107 @@
+# Página: Sobre.
+# Edite os campos pt (português) e en (inglês). Guia: conteudo/README.md.
+# Parágrafos com links aceitam Markdown: [texto](https://exemplo.org).
+
+page:
+  id: home
+  label:
+    pt: Sobre
+    en: About
+  path:
+    pt: ""
+    en: en/
+  description:
+    pt: >-
+      Diego Volpatto, pesquisador do LNCC e docente em Modelagem Computacional. Métodos numéricos,
+      termodinâmica e aprendizado de máquina científico.
+    en: >-
+      Diego Volpatto, researcher at LNCC and faculty member in Computational Modeling. Numerical
+      methods, thermodynamics and scientific machine learning.
+affiliation:
+  pt: LNCC · Modelagem computacional
+  en: LNCC · Computational modeling
+name: Diego Volpatto
+introduction:
+  - pt: >-
+      Sou pesquisador adjunto do Laboratório Nacional de Computação Científica (LNCC/MCTI) e docente
+      permanente do Programa de Pós-Graduação em Modelagem Computacional.
+    en: >-
+      I am a researcher at the National Laboratory for Scientific Computing (LNCC/MCTI) and a
+      faculty member of its Graduate Program in Computational Modeling.
+  - pt: >-
+      Trabalho com métodos numéricos para escoamentos em meios porosos, termodinâmica computacional
+      e aprendizado de máquina aplicado a problemas científicos.
+    en: >-
+      I work on numerical methods for porous media flow, computational thermodynamics and machine
+      learning applied to scientific problems.
+  - pt: >-
+      Minha experiência prévia na indústria de software inclui a atuação como desenvolvedor sênior
+      de software científico para aplicações em óleo e gás. Nos projetos de pesquisa, adoto práticas
+      de engenharia de software como testes automatizados, pacotes instaláveis e ambientes
+      documentados para facilitar a reprodutibilidade.
+    en: >-
+      My previous experience in the software industry includes work as a senior developer of
+      scientific software for oil and gas applications. In my research projects, I adopt software
+      engineering practices such as automated testing, installable packages and documented
+      environments to support reproducibility.
+portrait:
+  file: images/diego-volpatto.jpg
+  width: 460
+  height: 460
+  alt:
+    pt: Diego Volpatto
+    en: Diego Volpatto
+  caption:
+    pt: Petrópolis, Brasil
+    en: Petrópolis, Brazil
+profileLinks:
+  - profile: lattes
+    icon: lattes
+    label:
+      pt: Lattes
+      en: Lattes
+  - profile: orcid
+    icon: orcid
+    label:
+      pt: ORCID
+      en: ORCID
+  - profile: github
+    icon: github
+    label:
+      pt: GitHub
+      en: GitHub
+  - profile: linkedin
+    icon: linkedin
+    label:
+      pt: LinkedIn
+      en: LinkedIn
+  - page: contact
+    icon: mail
+    label:
+      pt: Contato
+      en: Contact
+background:
+  heading:
+    pt: Atuação e formação
+    en: Academic background
+  paragraphs:
+    - pt: >-
+        Sou formado em Engenharia Química pela UFRN, com mestrado e doutorado em Modelagem
+        Computacional pelo LNCC. Atuo como pesquisador no LNCC desde 2025.
+      en: >-
+        I hold a degree in Chemical Engineering from UFRN and MSc and DSc degrees in Computational
+        Modeling from LNCC. I have been a researcher at LNCC since 2025.
+    - pt: >-
+        Sou um dos líderes do ThermoPhase (UDESC/LNCC) e membro do IPES. Também mantenho
+        colaborações de pesquisa com a UDESC e a UNICAMP.
+      en: >-
+        I am a co-leader of ThermoPhase (UDESC/LNCC) and a member of IPES. I also collaborate with
+        researchers at UDESC and UNICAMP.
+    - pt: Minha trajetória profissional e formação estão detalhadas na página de [currículo](/curriculo/).
+      en: My professional background and education are detailed in the [CV](/en/cv/) page.
+    - pt: >-
+        As páginas de [pesquisa](/pesquisa/), [publicações](/publicacoes/) e [software](/software/)
+        apresentam mais detalhes sobre meu trabalho.
+      en: >-
+        My [research](/en/research/), [publications](/en/publications/) and
+        [software](/en/software/) pages describe my work in more detail.

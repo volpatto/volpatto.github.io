@@ -1,0 +1,98 @@
+---
+// Conteúdo: conteudo/paginas/software.yaml
+import { content, profile, t, type Language } from "../../content";
+import { asset, href } from "../../lib/navigation";
+import Icon from "../Icon.astro";
+import RichText from "../RichText.astro";
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+const software = content.software;
+---
+
+<section
+  id="software"
+  class="software-section section"
+  aria-labelledby="software-title"
+>
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <h1 id="software-title">{t(software.heading, lang)}</h1>
+      </div>
+      <p class="section-intro">{t(software.introduction, lang)}</p>
+    </div>
+    <div class="software-practices">
+      <h2>{t(software.practices.heading, lang)}</h2>
+      {software.practices.paragraphs.map((paragraph) => (
+        <p>
+          <RichText text={paragraph} lang={lang} />
+        </p>
+      ))}
+      <dl class="practice-list">
+        {software.practices.items.map((item) => (
+          <div>
+            <dt>{t(item.title, lang)}</dt>
+            <dd>{t(item.description, lang)}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+    <div class="software-grid">
+      {software.items.map((item) => (
+        <article class="software-card">
+          <div class="software-title">
+            {item.logo && (
+              <div class="software-logo">
+                <img
+                  src={asset(item.logo.file)}
+                  width={item.logo.width}
+                  height={item.logo.height}
+                  loading="lazy"
+                  alt={"Logo " + item.name}
+                />
+              </div>
+            )}
+            <h2>
+              <a href={href(item.repo)}>{item.name}</a>
+            </h2>
+            <p class="software-meta">{t(item.category, lang)}</p>
+          </div>
+          <div class="software-description">
+            <p>{t(item.description, lang)}</p>
+            <p>{t(item.detail, lang)}</p>
+            <div class="software-links">
+              <a href={href(item.docs)}>
+                <Icon name="book" />
+                {t(software.documentationLabel, lang)}
+              </a>
+              <a href={href(item.repo)} aria-label={"GitHub: " + item.name}>
+                <Icon name="github" />
+                GitHub
+              </a>
+              {item.packages.map((pkg) => (
+                <a
+                  href={href(pkg.url)}
+                  aria-label={pkg.label + ": " + item.name}
+                >
+                  <Icon name="package" />
+                  {pkg.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="software-bottom">
+      <p>
+        <RichText text={software.otherProjects} lang={lang} />
+      </p>
+      <a class="text-link" href={href(profile.github)}>
+        <Icon name="github" />
+        {t(software.githubLabel, lang)}
+      </a>
+    </div>
+  </div>
+</section>

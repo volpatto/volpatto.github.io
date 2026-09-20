@@ -1,0 +1,153 @@
+# Página: Orientações.
+# Edite os campos pt (português) e en (inglês). Guia: conteudo/README.md.
+# Parágrafos com links aceitam Markdown: [texto](https://exemplo.org).
+
+page:
+  id: people
+  label:
+    pt: Orientações
+    en: Supervision
+  path:
+    pt: orientacoes/
+    en: en/supervision/
+  description:
+    pt: Orientações e coorientações de Diego Volpatto no LNCC e em instituições parceiras.
+    en: Students supervised and co-supervised by Diego Volpatto at LNCC and partner institutions.
+heading:
+  pt: Orientações
+  en: Supervision
+introduction:
+  pt: Alunos que oriento ou cooriento no LNCC e em instituições parceiras.
+  en: Students I supervise or co-supervise at LNCC and partner institutions.
+currentHeading:
+  pt: Mestrado em andamento
+  en: Current MSc students
+sourceNote:
+  pt: Lattes · agosto de 2026
+  en: Lattes · August 2026
+sinceLabel:
+  pt: "Desde "
+  en: "Since "
+provisionalLabel:
+  pt: Tema provisório
+  en: Provisional topic
+completedHeading:
+  pt: Orientações concluídas
+  en: Completed supervision
+students:
+  - name: Karen Dayana Arias Sandoval
+    institution: LNCC
+    year: "2025"
+    role:
+      pt: Orientação
+      en: Supervisor
+    topic:
+      pt: Cálculos de equilíbrio termodinâmico em sistemas reativos acelerados por K-NN de Taylor.
+      en: Acceleration of thermodynamic equilibrium calculations in reactive transport via taylor K-NN
+  - name: Breno Vieira Sousa
+    institution: LNCC
+    year: "2025"
+    role:
+      pt: Orientação
+      en: Supervisor
+    topic:
+      pt: Formulações estabilizadas de elementos finitos para transporte de CO₂ em carbodutos.
+      en: Stabilized finite element formulations for CO₂ transport in pipelines.
+    provisional: true
+  - name: Laira Lopes Silva
+    institution: LNCC
+    year: "2025"
+    role:
+      pt: Coorientação
+      en: Co-supervisor
+  - name: Rennan Marques de Souza Damasceno
+    institution: UDESC
+    year: "2026"
+    role:
+      pt: Coorientação
+      en: Co-supervisor
+    topic:
+      pt: Análise de dados para validação automatizada de BSW em poços offshore.
+      en: A data analysis pipeline for automated BSW validation in offshore wells.
+    provisional: true
+  - name: Hanna Heloise Heyde
+    institution: UDESC
+    year: "2026"
+    role:
+      pt: Coorientação
+      en: Co-supervisor
+    topic:
+      pt: Modelagem baseada em SINDy de queda de pressão em poços produtores offshore.
+      en: SINDy-based modeling of pressure drop in offshore production wells.
+    provisional: true
+  - name: Marcel de Araujo
+    institution: UDESC
+    year: "2026"
+    role:
+      pt: Coorientação
+      en: Co-supervisor
+    topic:
+      pt: Modelagem híbrida de escoamento monofásico em poços injetores de petróleo.
+      en: Hybrid modeling of single-phase flow in oilfield injection wells.
+    provisional: true
+alumni:
+  - name: Maurício Prado de Omena Souza
+    institution: UNICAMP
+    year: "2025"
+    role:
+      pt: Coorientação
+      en: Co-supervisor
+    level:
+      pt: Mestrado
+      en: MSc
+    topic:
+      pt: "Flash Point Modeling with Neural Networks: From a Data-Driven Approach to PINNs."
+      en: "Flash Point Modeling with Neural Networks: From a Data-Driven Approach to PINNs."
+  - name: Natália Kauana Gesser Miotto
+    institution: UDESC
+    year: "2024"
+    role:
+      pt: Coorientação
+      en: Co-supervisor
+    level:
+      pt: Mestrado
+      en: MSc
+    topic:
+      pt: Analysis of the impact of impurities in CO2-rich mixtures in CCS/CCUS applications.
+      en: Analysis of the impact of impurities in CO2-rich mixtures in CCS/CCUS applications.
+  - name: Maria Fernanda Marmilli de Alvarenga Campos Franzin
+    institution: UDESC
+    year: "2024"
+    role:
+      pt: Orientação
+      en: Supervisor
+    level:
+      pt: Iniciação científica
+      en: Undergraduate research
+  - name: Leonardo Augusto Lemos
+    institution: UDESC
+    year: "2024"
+    role:
+      pt: Orientação
+      en: Supervisor
+    level:
+      pt: Iniciação científica
+      en: Undergraduate research
+  - name: Giovanna Girotto
+    institution: UDESC
+    year: "2024"
+    role:
+      pt: Orientação
+      en: Supervisor
+    level:
+      pt: Iniciação científica
+      en: Undergraduate research
+  - name: Bernardo Skovronski Woitas
+    institution: UDESC
+    year: "2024"
+    role:
+      pt: Orientação
+      en: Supervisor
+    level:
+      pt: Iniciação científica
+      en: Undergraduate research

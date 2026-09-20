@@ -7,3 +7,4 @@ dist/
 .env.local
 .venv-cv/
 .cv-build/
+.pixi/

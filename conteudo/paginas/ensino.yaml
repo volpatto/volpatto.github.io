@@ -1,0 +1,80 @@
+# Página: Ensino.
+# Edite os campos pt (português) e en (inglês). Guia: conteudo/README.md.
+# Parágrafos com links aceitam Markdown: [texto](https://exemplo.org).
+
+page:
+  id: teaching
+  label:
+    pt: Ensino
+    en: Teaching
+  path:
+    pt: ensino/
+    en: en/teaching/
+  description:
+    pt: Disciplinas de Diego Volpatto no PPG em Modelagem Computacional do LNCC e materiais de ensino.
+    en: Courses taught by Diego Volpatto in LNCC’s Graduate Program in Computational Modeling, and
+      teaching materials.
+heading:
+  pt: Ensino
+  en: Teaching
+introduction:
+  pt: Disciplinas no Programa de Pós-Graduação em Modelagem Computacional do LNCC.
+  en: Courses in the Graduate Program in Computational Modeling at LNCC.
+courses:
+  - code: GA-033
+    description:
+      pt: >-
+        Implementação de elementos finitos: malhas, funções de base, quadratura, montagem de
+        sistemas e condições de contorno. A ementa inclui verificação de implementações, taxas de
+        convergência e aplicações com FEniCS, Firedrake e NGSolve.
+      en: >-
+        Finite element implementation: meshes, basis functions, quadrature, system assembly and
+        boundary conditions. The syllabus includes implementation verification, convergence rates
+        and applications with FEniCS, Firedrake and NGSolve.
+    title:
+      pt: "Método de Elementos Finitos: Implementação Computacional"
+      en: "Finite Element Method: Computational Implementation"
+    metadata:
+      pt: LNCC · Pós-graduação · 36 h/a · 3 créditos
+      en: LNCC · Graduate course · 36 hours · 3 credits
+  - code: GA-020
+    description:
+      pt: >-
+        Métodos para equações diferenciais ordinárias, diferenças finitas e elementos finitos.
+        Abrange discretizações variacionais e a aproximação de problemas elípticos e parabólicos.
+      en: >-
+        Methods for ordinary differential equations, finite differences and finite elements. Covers
+        variational discretizations and the approximation of elliptic and parabolic problems.
+    title:
+      pt: Solução Numérica de Equações Diferenciais
+      en: Numerical Solution of Differential Equations
+    metadata:
+      pt: LNCC · Pós-graduação · 36 h/a · 3 créditos
+      en: LNCC · Graduate course · 36 hours · 3 credits
+sourceNote:
+  pt: >-
+    Disciplinas registradas no Lattes desde setembro de 2025. Resumos baseados nas ementas
+    publicadas pelo programa; consulte o LNCC para a oferta do período.
+  en: >-
+    Courses listed in Lattes since September 2025. Summaries follow the program’s published syllabi;
+    current offerings are listed by LNCC.
+syllabi:
+  label:
+    pt: Ementas oficiais
+    en: Official syllabi
+  url: https://posgrad.lncc.br/pt-br/disciplinas-e-ementas
+material:
+  label:
+    pt: Material de curso
+    en: Course material
+  heading:
+    pt: Introdução ao Firedrake
+    en: An introduction to Firedrake
+  description:
+    pt: Material computacional do curso introdutório do EAMC 2022, no LNCC.
+    en: Computational material from the introductory course at EAMC 2022, LNCC.
+  link:
+    label:
+      pt: Repositório do curso
+      en: Course repository
+    url: https://github.com/volpatto/curso_firedrake_eamc

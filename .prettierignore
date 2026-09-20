@@ -1,0 +1,10 @@
+dist/
+.astro/
+.cv-build/
+node_modules/
+public/
+pnpm-lock.yaml
+conteudo/
+cv/
+.pixi/
+pixi.lock

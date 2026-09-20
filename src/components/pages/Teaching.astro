@@ -1,0 +1,53 @@
+---
+// Conteúdo: conteudo/paginas/ensino.yaml
+import { content, t, type Language } from "../../content";
+import Arrow from "../Arrow.astro";
+import Icon from "../Icon.astro";
+import { href } from "../../lib/navigation";
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+const teaching = content.teaching;
+---
+
+<section
+  id="teaching"
+  class="section container teaching-section"
+  aria-labelledby="teaching-title"
+>
+  <div class="section-heading">
+    <div>
+      <h1 id="teaching-title">{t(teaching.heading, lang)}</h1>
+    </div>
+    <p class="section-intro">{t(teaching.introduction, lang)}</p>
+  </div>
+  <div class="teaching-layout">
+    <div class="course-list">
+      {teaching.courses.map((course) => (
+        <article class="course">
+          <span class="course-code">{course.code}</span>
+          <div>
+            <h2>{t(course.title, lang)}</h2>
+            <p class="course-meta">{t(course.metadata, lang)}</p>
+            <p>{t(course.description, lang)}</p>
+          </div>
+        </article>
+      ))}
+      <p class="source-note">{t(teaching.sourceNote, lang)}</p>
+      <a class="text-link" href={href(teaching.syllabi.url)}>
+        {t(teaching.syllabi.label, lang)}
+        <Arrow diagonal />
+      </a>
+    </div>
+    <aside class="teaching-material">
+      <p class="eyebrow">{t(teaching.material.label, lang)}</p>
+      <h2>{t(teaching.material.heading, lang)}</h2>
+      <p>{t(teaching.material.description, lang)}</p>
+      <a class="text-link" href={href(teaching.material.link.url)}>
+        <Icon name="github" />
+        {t(teaching.material.link.label, lang)}
+      </a>
+    </aside>
+  </div>
+</section>

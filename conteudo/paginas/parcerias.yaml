@@ -1,0 +1,273 @@
+# Página: Parcerias e projetos.
+# Edite os campos pt (português) e en (inglês). Guia: conteudo/README.md.
+# Parágrafos com links aceitam Markdown: [texto](https://exemplo.org).
+
+page:
+  id: collaborations
+  label:
+    pt: Parcerias e projetos
+    en: Collaborations
+  path:
+    pt: parcerias/
+    en: en/collaborations/
+  description:
+    pt: Parcerias acadêmicas e participação de Diego Volpatto em projetos de pesquisa.
+    en: Diego Volpatto’s academic collaborations and research projects.
+heading:
+  pt: Parcerias e projetos
+  en: Collaborations and projects
+introduction:
+  pt: >-
+    Colaboro com grupos da UNICAMP e da UDESC em modelagem computacional, termodinâmica e aplicações
+    no setor de energia.
+  en: >-
+    I collaborate with research groups at UNICAMP and UDESC on computational modeling,
+    thermodynamics and applications in the energy sector.
+partners:
+  - id: alfa
+    logos:
+      - kind: image
+        file: images/alfa.webp
+        width: 250
+        height: 80
+        alt:
+          pt: ALFA
+          en: ALFA
+      - kind: image
+        file: images/unicamp.svg
+        width: 80
+        height: 80
+        alt:
+          pt: Unicamp
+          en: Unicamp
+        class: institution-logo
+    affiliation: CEPETRO / UNICAMP
+    name:
+      pt: ALFA
+      en: ALFA
+    fullName: Artificial Lift and Flow Assurance Research Group
+    paragraphs:
+      - pt: >-
+          O ALFA estuda elevação artificial, garantia de escoamento e escoamentos em sistemas de
+          produção de petróleo. O grupo reúne pesquisa experimental e computacional no CEPETRO e na
+          Faculdade de Engenharia Mecânica da UNICAMP.
+        en: >-
+          The ALFA group studies artificial lift, flow assurance and fluid flow in petroleum
+          production systems. It brings together experimental and computational research at CEPETRO
+          and the School of Mechanical Engineering at UNICAMP.
+      - pt: >-
+          Minha colaboração se relaciona à modelagem computacional de sistemas de produção. Sou
+          pesquisador visitante convidado no CEPETRO desde 2024 e participo do projeto de sistemas
+          híbridos de dados e modelos para monitoramento de poços offshore, coordenado por Marcelo
+          Souza de Castro.
+        en: >-
+          My collaboration is connected to computational modeling of production systems. I have been
+          an invited visiting researcher at CEPETRO since 2024 and participate in the project on
+          hybrid data and model systems for offshore well monitoring, coordinated by Marcelo Souza
+          de Castro.
+    links:
+      - label:
+          pt: Grupo e equipe
+          en: Group and team
+        url:
+          pt: https://www.alfa.cepetro.unicamp.br/team/
+          en: https://www.alfa.cepetro.unicamp.br/team/
+        diagonal: true
+      - label:
+          pt: Linhas de pesquisa
+          en: Research areas
+        url:
+          pt: https://www.alfa.cepetro.unicamp.br/research-lines/
+          en: https://www.alfa.cepetro.unicamp.br/research-lines/
+        diagonal: true
+  - id: lef
+    logos:
+      - kind: lef
+      - kind: image
+        file: images/feq-unicamp.jpg
+        width: 380
+        height: 153
+        alt:
+          pt: Faculdade de Engenharia Química, Unicamp
+          en: School of Chemical Engineering, Unicamp
+        class: faculty-logo
+        loading: lazy
+    affiliation: FEQ / UNICAMP
+    name:
+      pt: LEF — Laboratório de Equilíbrio de Fases
+      en: LEF — Phase Equilibria Laboratory
+    paragraphs:
+      - pt: >-
+          Sob responsabilidade de Mariana Conceição da Costa, o LEF estuda equilíbrio de fases,
+          propriedades termofísicas e pontos de fulgor, combinando medidas experimentais e modelagem
+          termodinâmica.
+        en: >-
+          Led by Mariana Conceição da Costa, LEF studies phase equilibria, thermophysical properties
+          and flash points, combining experimental measurements with thermodynamic modeling.
+      - pt: >-
+          Desde 2024, tenho coorientado alunos de pós-graduação e iniciação científica em
+          colaboração com o LEF. O trabalho inclui modelos de redes neurais para pontos de fulgor de
+          biocombustíveis, com artigos publicados em Fluid Phase Equilibria em 2025 e 2026.
+        en: >-
+          Since 2024, I have co-supervised graduate and undergraduate research students in
+          collaboration with LEF. Our work includes neural-network models for biofuel flash points,
+          with papers published in Fluid Phase Equilibria in 2025 and 2026.
+    links:
+      - label:
+          pt: Página do laboratório
+          en: Laboratory website
+        url:
+          pt: https://erenova.feq.unicamp.br/lef-laboratorio-de-equilibrio-de-fases/
+          en: https://erenova.feq.unicamp.br/lef-laboratorio-de-equilibrio-de-fases/
+        diagonal: true
+      - label:
+          pt: Diretório CNPq
+          en: CNPq directory
+        url:
+          pt: http://dgp.cnpq.br/dgp/espelhogrupo/233040
+          en: http://dgp.cnpq.br/dgp/espelhogrupo/233040
+        diagonal: true
+      - label:
+          pt: Publicação conjunta (2026)
+          en: Joint publication (2026)
+        url:
+          pt: https://doi.org/10.1016/j.fluid.2026.114673
+          en: https://doi.org/10.1016/j.fluid.2026.114673
+        diagonal: true
+  - id: udesc
+    logos:
+      - kind: image
+        file: images/thermophase.png
+        width: 1220
+        height: 628
+        alt:
+          pt: ThermoPhase — Fluid and Complex Systems Research Group
+          en: ThermoPhase — Fluid and Complex Systems Research Group
+        loading: lazy
+    affiliation: LNCC / UDESC
+    name:
+      pt: ThermoPhase
+      en: ThermoPhase
+    paragraphs:
+      - pt: >-
+          O ThermoPhase é um grupo de pesquisa multi-institucional, com atuação tanto no LNCC quanto
+          na UDESC. Sou um de seus líderes e atuo como colaborador externo na UDESC desde 2023. O
+          grupo reúne pesquisa em termodinâmica de fluidos e modelagem computacional, formação de
+          alunos e desenvolvimento de software científico aberto.
+        en: >-
+          ThermoPhase is a multi-institutional research group based at both LNCC and UDESC. I am one
+          of its co-leaders and have been an external collaborator at UDESC since 2023. The group
+          brings together research in fluid thermodynamics and computational modeling, student
+          supervision and open-source scientific software development.
+      - pt: >-
+          Os temas incluem propriedades de misturas ricas em CO₂ para CCS/CCUS e modelos híbridos
+          para poços produtores e injetores, aproximando modelos físicos, dados operacionais e
+          aprendizado de máquina.
+        en: >-
+          Topics include properties of CO₂-rich mixtures for CCS/CCUS and hybrid models for
+          production and injection wells, connecting physical models, operational data and machine
+          learning.
+    links:
+      - label:
+          pt: Grupos de pesquisa
+          en: Research groups
+        url:
+          pt: /grupos/
+          en: /en/groups/
+        diagonal: false
+      - label:
+          pt: Orientações
+          en: Student supervision
+        url:
+          pt: /orientacoes/
+          en: /en/supervision/
+        diagonal: false
+projects:
+  heading:
+    pt: Projetos de pesquisa
+    en: Research projects
+  introduction:
+    pt: Projetos de que participo como integrante da equipe.
+    en: Projects in which I participate as a team member.
+  sinceLabel:
+    pt: "Desde "
+    en: "Since "
+  items:
+    - year: "2026"
+      title:
+        pt: Transferência de escala em rochas carbonáticas
+        en: Upscaling in carbonate rocks
+      text:
+        pt: >-
+          Métodos de transferência de escala e acoplamento hidromecânico para rochas carbonáticas
+          com fraturas e feições vugulares. Participação em projeto coordenado por Márcio Arab
+          Murad, com financiamento da Equinor Brasil.
+        en: >-
+          Upscaling methods and hydromechanical coupling for carbonate rocks with fractures and
+          vugs. Participant in a project led by Márcio Arab Murad and funded by Equinor Brasil.
+    - year: "2024"
+      title:
+        pt: Monitoramento de poços offshore
+        en: Offshore well monitoring
+      text:
+        pt: >-
+          Sistemas híbridos de dados e modelos para monitoramento de poços offshore de óleo e gás.
+          Participação em projeto coordenado por Marcelo Souza de Castro e certificado pela PRIO no
+          Lattes.
+        en: >-
+          Hybrid data and model systems for monitoring offshore oil and gas wells. Participant in a
+          project led by Marcelo Souza de Castro and certified by PRIO in the Lattes record.
+    - year: "2019"
+      title:
+        pt: Modelagem integrada da produção
+        en: Integrated production modeling
+      text:
+        pt: >-
+          Integração da modelagem de reservatórios e de produção de petróleo. Participação em
+          projeto coordenado por Antonio Marinho Barbosa Neto.
+        en: >-
+          Integration of reservoir and petroleum production modeling. Participant in a project led
+          by Antonio Marinho Barbosa Neto.
+  sourceNote:
+    pt: Períodos e situação dos projetos conforme o Lattes de 23 de agosto de 2026.
+    en: Periods and project status as recorded in Lattes on 23 August 2026.
+industryExperience:
+  heading:
+    pt: Atuação anterior na indústria
+    en: Previous work in industry
+  description:
+    pt: >-
+      Minha experiência prévia na indústria de software inclui aplicações científicas para óleo e
+      gás, abrangendo propriedades de fluidos, rocha digital e geoquímica. A trajetória profissional
+      e as frentes de desenvolvimento estão descritas no [currículo](/curriculo/).
+    en: >-
+      My previous experience in the software industry includes scientific applications for oil and
+      gas, covering fluid properties, digital rock analysis and geochemistry. My professional
+      background and areas of work are described in the [CV](/en/cv/).
+industryPartners:
+  heading:
+    pt: Parcerias com a indústria
+    en: Industry partnerships
+  items:
+    - url: https://www.equinor.com.br/
+      label:
+        pt: Site da Equinor Brasil
+        en: Equinor Brazil website
+      logo:
+        file: images/equinor.svg#red
+        width: 402
+        height: 160
+        alt:
+          pt: Equinor
+          en: Equinor
+    - url: https://prio3.com.br/
+      label:
+        pt: Site da PRIO
+        en: PRIO website
+      logo:
+        file: images/prio.svg
+        width: 121
+        height: 23
+        alt:
+          pt: PRIO
+          en: PRIO

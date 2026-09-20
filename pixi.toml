@@ -1,0 +1,58 @@
+[workspace]
+name = "diego-volpatto-website"
+description = "Ambiente de desenvolvimento e build do site acadêmico"
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "osx-64", "linux-64", "win-64"]
+requires-pixi = ">=0.72.2"
+
+[dependencies]
+nodejs = "24.*"
+# Mantenha esta versão igual a packageManager em package.json.
+pnpm = "==11.19.0"
+
+# Pixi instala Node.js e pnpm; pnpm instala Astro e as bibliotecas do site.
+# Os dois lockfiles (pixi.lock e pnpm-lock.yaml) devem acompanhar o repositório.
+# setup é idempotente e sempre confere o lockfile, inclusive após um git pull.
+[tasks.setup]
+cmd = "pnpm install --frozen-lockfile"
+description = "Instala as dependências do site nas versões registradas"
+
+[tasks.dev]
+cmd = "pnpm dev"
+depends-on = ["setup"]
+description = "Abre a prévia local com atualização automática"
+
+[tasks.check-content]
+cmd = "pnpm check:content"
+depends-on = ["setup"]
+description = "Confere os arquivos YAML e as imagens referenciadas"
+
+[tasks.check]
+cmd = "pnpm check"
+depends-on = ["setup"]
+description = "Confere conteúdo, tipos e componentes Astro"
+
+[tasks.build]
+cmd = "pnpm build"
+depends-on = ["setup"]
+description = "Gera os arquivos estáticos em dist/"
+
+[tasks.test]
+cmd = "pnpm test"
+depends-on = ["build"]
+description = "Gera o site e testa o conteúdo, as páginas e os links"
+
+[tasks.verify]
+cmd = "pnpm verify"
+depends-on = ["setup"]
+description = "Executa toda a validação antes de publicar"
+
+[tasks.preview]
+cmd = "pnpm preview"
+depends-on = ["build"]
+description = "Gera o site e abre a prévia do resultado estático"
+
+[tasks.format]
+cmd = "pnpm format"
+depends-on = ["setup"]
+description = "Formata o código; não modifica o conteúdo YAML"

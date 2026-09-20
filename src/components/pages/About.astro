@@ -1,0 +1,52 @@
+---
+// Conteúdo: conteudo/paginas/sobre.yaml
+import { content, profile, t, type Language } from "../../content";
+import { pageUrl, asset } from "../../lib/navigation";
+import Icon from "../Icon.astro";
+import RichText from "../RichText.astro";
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+const about = content.home;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="profile-affiliation">{t(about.affiliation, lang)}</p>
+    <h1 id="hero-title">{about.name}</h1>
+    {about.introduction.map((paragraph) => (
+      <p class="hero-description">{t(paragraph, lang)}</p>
+    ))}
+    <div class="profile-links">
+      {about.profileLinks.map((link) => (
+        <a
+          href={
+            link.profile ? profile[link.profile] : pageUrl(link.page!, lang)
+          }
+        >
+          <Icon name={link.icon} />
+          {t(link.label, lang)}
+        </a>
+      ))}
+    </div>
+  </div>
+  <figure class="portrait-block">
+    <img
+      src={asset(about.portrait.file)}
+      alt={t(about.portrait.alt, lang)}
+      width={about.portrait.width}
+      height={about.portrait.height}
+      fetchpriority="high"
+    />
+    <figcaption>{t(about.portrait.caption, lang)}</figcaption>
+  </figure>
+</section>
+<section class="about-details" aria-labelledby="about-details-title">
+  <h2 id="about-details-title">{t(about.background.heading, lang)}</h2>
+  {about.background.paragraphs.map((paragraph) => (
+    <p>
+      <RichText text={paragraph} lang={lang} />
+    </p>
+  ))}
+</section>

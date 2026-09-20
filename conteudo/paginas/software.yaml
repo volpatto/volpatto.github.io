@@ -1,0 +1,174 @@
+# Página: Software.
+# Edite os campos pt (português) e en (inglês). Guia: conteudo/README.md.
+# Parágrafos com links aceitam Markdown: [texto](https://exemplo.org).
+
+page:
+  id: software
+  label:
+    pt: Software
+    en: Software
+  path:
+    pt: software/
+    en: en/software/
+  description:
+    pt: "Software científico: voids, torch-flash, thermoml-io e outros projetos de código aberto."
+    en: "Scientific software: voids, torch-flash, thermoml-io and other open-source projects."
+heading:
+  pt: Software
+  en: Software
+introduction:
+  pt: Projetos de software científico com código aberto.
+  en: Open-source scientific software projects.
+practices:
+  heading:
+    pt: Engenharia de software e reprodutibilidade
+    en: Software engineering and reproducibility
+  paragraphs:
+    - pt: >-
+        Desenvolvo os códigos de pesquisa seguindo práticas usadas na indústria de software:
+        controle de versões, testes automatizados, verificações de qualidade e documentação. O
+        objetivo é facilitar a instalação, a verificação, a manutenção e o reúso dos métodos
+        computacionais.
+      en: >-
+        I develop research software following practices used in the software industry: version
+        control, automated testing, code quality checks and documentation. The aim is to make
+        computational methods easier to install, verify, maintain and reuse.
+    - pt: >-
+        Minha experiência prévia na indústria de software, com desenvolvimento de aplicações
+        científicas para óleo e gás, contribui para essa forma de trabalho. A trajetória
+        profissional está descrita no [currículo](/curriculo/).
+      en: >-
+        My previous experience in the software industry, developing scientific applications for oil
+        and gas, contributes to this approach. My professional background is described in the
+        [CV](/en/cv/).
+  items:
+    - title:
+        pt: Testes e qualidade
+        en: Testing and quality
+      description:
+        pt: >-
+          Suítes de testes automatizados e verificações em integração contínua, com casos de
+          validação adequados ao escopo de cada pacote.
+        en: >-
+          Automated test suites and checks in continuous integration, with validation cases
+          appropriate to each package’s scope.
+    - title:
+        pt: Distribuição em pacotes
+        en: Package distribution
+      description:
+        pt: >-
+          Pacotes Python instaláveis, com versões publicadas e dependências documentadas. Os links
+          de distribuição estão indicados em cada projeto abaixo.
+        en: >-
+          Installable Python packages with versioned releases and documented dependencies. Package
+          links are provided with each project below.
+    - title:
+        pt: Ambientes reproduzíveis
+        en: Reproducible environments
+      description:
+        pt: >-
+          Dependências explícitas, ambientes Pixi, exemplos e instruções de execução para facilitar
+          a reprodução do trabalho computacional.
+        en: >-
+          Explicit dependencies, Pixi environments, examples and execution instructions to help
+          others reproduce the computational work.
+items:
+  - name: voids
+    logo:
+      file: images/voids-logo.png
+      width: 597
+      height: 359
+    category:
+      pt: Rocha digital
+      en: Digital porous media
+    description:
+      pt: >-
+        Modelagem de meios porosos digitais em Python: redes de poros, propriedades petrofísicas e
+        simulação de transporte monofásico.
+      en: >-
+        Digital porous media modeling in Python: pore networks, petrophysical properties and
+        single-phase transport simulation.
+    repo: https://github.com/geomech-project/voids
+    docs: https://geomech-project.github.io/voids/
+    detail:
+      pt: >-
+        Tem como foco modelos de redes de poros, com métodos complementares de volumes finitos,
+        elementos finitos e Boltzmann em rede. A documentação reúne exemplos e distingue verificação
+        numérica de validação experimental.
+      en: >-
+        Its main focus is pore network modeling, with complementary finite-volume, finite-element
+        and lattice Boltzmann methods. The documentation includes examples and distinguishes
+        numerical verification from experimental validation.
+    packages:
+      - label: PyPI
+        url: https://pypi.org/project/voids/
+  - name: torch-flash
+    logo:
+      file: images/torch-flash-logo.svg
+      width: 680
+      height: 240
+    category:
+      pt: Termodinâmica diferenciável
+      en: Differentiable thermodynamics
+    description:
+      pt: >-
+        Propriedades termodinâmicas e equilíbrio de fases com PyTorch, integrando diferenciação
+        automática, otimização e aprendizado de máquina.
+      en: >-
+        Thermodynamic properties and phase equilibria with PyTorch, connecting automatic
+        differentiation, optimization and machine learning.
+    repo: https://github.com/ThermoPhase-FCSRG/torch-flash
+    docs: https://thermophase-fcsrg.github.io/torch-flash/
+    detail:
+      pt: >-
+        Inclui equações de estado, modelos de coeficiente de atividade e cálculos de estabilidade e
+        flash. Exemplos documentados mostram a avaliação de propriedades, suas derivadas e o uso de
+        parâmetros ajustáveis.
+      en: >-
+        Includes equations of state, activity coefficient models, and stability and flash
+        calculations. Documented examples cover property evaluation, derivatives and trainable
+        parameters.
+    packages:
+      - label: PyPI
+        url: https://pypi.org/project/torch-flash/
+      - label: Conda-Forge
+        url: https://anaconda.org/conda-forge/torch-flash
+  - name: thermoml-io
+    category:
+      pt: Dados termofísicos
+      en: Thermophysical data
+    description:
+      pt: >-
+        Acesso, busca e leitura de dados experimentais ThermoML em Python, preservando condições,
+        incertezas e referências de cada medida.
+      en: >-
+        Access, search and parse experimental ThermoML data in Python, preserving conditions,
+        uncertainties and references for each measurement.
+    repo: https://github.com/ThermoPhase-FCSRG/thermoml-io
+    docs: https://thermophase-fcsrg.github.io/thermoml-io/
+    detail:
+      pt: >-
+        Permite organizar dados de publicações para análise e ajuste de modelos, com exportação
+        tabular e rastreabilidade da fonte. Exemplos e notebooks documentam a busca, a leitura e o
+        tratamento dos resultados.
+      en: >-
+        Helps organize published data for analysis and model fitting, with tabular export and source
+        traceability. Examples and notebooks document searching, parsing and handling the results.
+    packages:
+      - label: PyPI
+        url: https://pypi.org/project/thermoml-io/
+      - label: Conda-Forge
+        url: https://anaconda.org/conda-forge/thermoml-io
+documentationLabel:
+  pt: Documentação
+  en: Documentation
+otherProjects:
+  pt: >-
+    Outros projetos: [porousdrake](https://github.com/volpatto/porousdrake) e
+    [perphil](https://github.com/ThermoPhase-FCSRG/perphil).
+  en: >-
+    Other projects: [porousdrake](https://github.com/volpatto/porousdrake) and
+    [perphil](https://github.com/ThermoPhase-FCSRG/perphil).
+githubLabel:
+  pt: Perfil no GitHub
+  en: GitHub profile

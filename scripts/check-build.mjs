@@ -2,24 +2,16 @@ import { readFileSync, existsSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 import assert from "node:assert/strict";
 
+import { loadContent } from "./lib/content.mjs";
+
+const content = loadContent();
 const root = resolve(process.env.BUILD_DIR || "dist");
-const prefix =
-  "/" +
-  (process.env.BASE_PATH ?? "/").replace(/^\/+|\/+$/g, "");
+const prefix = "/" + (process.env.BASE_PATH ?? "/").replace(/^\/+|\/+$/g, "");
 const base = prefix === "/" ? "" : prefix;
-const pagePairs = [
-  ["home", "", "en/"],
-  ["research", "pesquisa/", "en/research/"],
-  ["publications", "publicacoes/", "en/publications/"],
-  ["software", "software/", "en/software/"],
-  ["teaching", "ensino/", "en/teaching/"],
-  ["people", "orientacoes/", "en/supervision/"],
-  ["groups", "grupos/", "en/groups/"],
-  ["collaborations", "parcerias/", "en/collaborations/"],
-  ["cv", "curriculo/", "en/cv/"],
-  ["contact", "contato/", "en/contact/"],
-  ["licensing", "licenciamento/", "en/licensing/"],
-];
+const pagePairs = Object.values(content)
+  .filter((value) => "page" in value)
+  .map(({ page }) => [page.id, page.path.pt, page.path.en]);
+const academicPageCount = pagePairs.length - 1;
 const idsOf = (html) =>
   [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
 function checkLinks(html, file) {
@@ -91,7 +83,7 @@ for (const [id, ptPath, enPath] of pagePairs) {
     );
     assert.equal(
       (nav.match(/<a /g) || []).length,
-      10,
+      academicPageCount,
       `${file}: incomplete main navigation`,
     );
     if (id !== "licensing")
@@ -100,7 +92,8 @@ for (const [id, ptPath, enPath] of pagePairs) {
         `${file}: wrong active navigation item`,
       );
     const footer = html.match(/<footer\b[\s\S]*?<\/footer>/)?.[0] || "";
-    const licensePath = language === "en" ? "en/licensing/" : "licenciamento/";
+    const licensePath =
+      content.licensing.page.path[language === "en" ? "en" : "pt"];
     assert(
       footer.includes(`href="${base}/${licensePath}"`) &&
         footer.includes("CC BY 4.0") &&
@@ -108,10 +101,14 @@ for (const [id, ptPath, enPath] of pagePairs) {
       `${file}: missing scoped licensing notice or matching-language link`,
     );
     if (id === "licensing") {
-      assert(footer.includes('aria-current="page"'), `${file}: missing active footer link`);
+      assert(
+        footer.includes('aria-current="page"'),
+        `${file}: missing active footer link`,
+      );
       assert(
         html.includes("Operational Research Society 2021") &&
-          html.includes("Manrope-OFL.txt") && html.includes("Newsreader-OFL.txt") &&
+          html.includes("Manrope-OFL.txt") &&
+          html.includes("Newsreader-OFL.txt") &&
           html.includes("CC-BY-4.0.txt"),
         `${file}: missing third-party notices or full license texts`,
       );
@@ -138,22 +135,23 @@ for (const [id, ptPath, enPath] of pagePairs) {
     if (id === "publications")
       assert.equal(
         (html.match(/class="publication"/g) || []).length,
-        7,
-        `${file}: expected seven articles`,
+        content.publications.items.length,
+        `${file}: publication count differs from the YAML`,
       );
     if (id === "people")
       assert.equal(
         (html.match(/class="person"/g) || []).length,
-        6,
-        `${file}: expected six current students`,
+        content.people.students.length,
+        `${file}: supervision count differs from the YAML`,
       );
     if (id === "collaborations")
-      for (const partner of ["alfa", "lef", "udesc"])
+      for (const { id: partner } of content.collaborations.partners)
         assert(ids.includes(partner), `${file}: missing partner ${partner}`);
     if (id === "cv")
-      assert(
-        html.includes("ESSS") && html.includes("2018"),
-        `${file}: missing professional experience`,
+      assert.equal(
+        (html.match(/class="career-period"/g) || []).length,
+        content.cv.experience.items.length,
+        `${file}: professional experience count differs from the YAML`,
       );
     else
       assert(
@@ -166,11 +164,11 @@ for (const [id, ptPath, enPath] of pagePairs) {
 }
 checkLinks(readFileSync(resolve(root, "404.html"), "utf8"), "404.html");
 assert(
-  readFileSync(resolve(root, "files/cv-diego-volpatto-2026.pdf"))
+  readFileSync(resolve(root, content.cv.download.file))
     .subarray(0, 5)
     .toString() === "%PDF-",
   "Invalid CV PDF",
 );
 console.log(
-  "OK: 22 pages, scoped licensing, navigation, language alternates, internal links, images, 404 and CV download",
+  `OK: ${pagePairs.length * 2} pages, scoped licensing, navigation, language alternates, internal links, images, 404 and CV download`,
 );

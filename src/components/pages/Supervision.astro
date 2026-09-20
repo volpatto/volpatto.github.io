@@ -1,0 +1,74 @@
+---
+// Conteúdo: conteudo/paginas/orientacoes.yaml
+import { content, t, type Language } from "../../content";
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+const supervision = content.people;
+---
+
+<section
+  id="people"
+  class="people-section section"
+  aria-labelledby="people-title"
+>
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <h1 id="people-title">{t(supervision.heading, lang)}</h1>
+      </div>
+      <p class="section-intro">{t(supervision.introduction, lang)}</p>
+    </div>
+    <div class="subsection-heading">
+      <h2>{t(supervision.currentHeading, lang)}</h2>
+      <span>{t(supervision.sourceNote, lang)}</span>
+    </div>
+    <div class="people-grid">
+      {supervision.students.map((student) => (
+        <article class="person">
+          <div class="person-meta">
+            <span>{student.institution}</span>
+            <span>
+              {t(supervision.sinceLabel, lang)}
+              {student.year}
+            </span>
+          </div>
+          <h3>{student.name}</h3>
+          <p class="person-role">{t(student.role, lang)}</p>
+          {student.topic && (
+            <p class="person-topic">
+              {t(student.topic, lang)}
+              {student.provisional && (
+                <small>{t(supervision.provisionalLabel, lang)}</small>
+              )}
+            </p>
+          )}
+        </article>
+      ))}
+    </div>
+    <details class="alumni" open>
+      <summary>
+        {t(supervision.completedHeading, lang)}
+        <span class="expand-sign" aria-hidden="true">
+          +
+        </span>
+      </summary>
+      <div class="alumni-grid">
+        {supervision.alumni.map((student) => (
+          <article>
+            <p class="person-meta">
+              {student.year} · {student.institution} ·{" "}
+              {student.level && t(student.level, lang)}
+            </p>
+            <h3>{student.name}</h3>
+            <p class="person-role">{t(student.role, lang)}</p>
+            {student.topic && (
+              <p class="person-topic">{t(student.topic, lang)}</p>
+            )}
+          </article>
+        ))}
+      </div>
+    </details>
+  </div>
+</section>

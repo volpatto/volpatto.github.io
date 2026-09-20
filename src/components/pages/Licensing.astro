@@ -1,0 +1,47 @@
+---
+// Conteúdo: conteudo/paginas/licenciamento.yaml
+import { content, t, type Language } from "../../content";
+import RichText from "../RichText.astro";
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+const licensing = content.licensing;
+---
+
+<section
+  id="licensing"
+  class="section licensing-section"
+  aria-labelledby="licensing-title"
+>
+  <div class="section-heading">
+    <h1 id="licensing-title">{t(licensing.heading, lang)}</h1>
+  </div>
+  <p>{t(licensing.introduction, lang)}</p>
+  {licensing.sections.map((section) => (
+    <section
+      id={section.id}
+      class="page-subsection"
+      aria-labelledby={section.headingId}
+    >
+      <h2 id={section.headingId}>{t(section.heading, lang)}</h2>
+      {section.paragraphs.map((paragraph) => (
+        <p class={paragraph.class}>
+          <RichText text={paragraph.text} lang={lang} />
+        </p>
+      ))}
+      {section.credits.length > 0 && (
+        <dl class="license-credits">
+          {section.credits.map((credit) => (
+            <div>
+              <dt>{t(credit.title, lang)}</dt>
+              <dd>
+                <RichText text={credit.description} lang={lang} />
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </section>
+  ))}
+</section>

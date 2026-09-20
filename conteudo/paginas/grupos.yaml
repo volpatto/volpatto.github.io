@@ -1,0 +1,88 @@
+# Página: Grupos de pesquisa.
+# Edite os campos pt (português) e en (inglês). Guia: conteudo/README.md.
+# Parágrafos com links aceitam Markdown: [texto](https://exemplo.org).
+
+page:
+  id: groups
+  label:
+    pt: Grupos de pesquisa
+    en: Research groups
+  path:
+    pt: grupos/
+    en: en/groups/
+  description:
+    pt: Participação de Diego Volpatto nos grupos de pesquisa ThermoPhase e IPES.
+    en: Diego Volpatto’s participation in the ThermoPhase and IPES research groups.
+heading:
+  pt: Grupos de pesquisa
+  en: Research groups
+items:
+  - id: thermophase
+    logo:
+      file: images/thermophase.png
+      width: 1220
+      height: 628
+      alt:
+        pt: ThermoPhase - Fluid and Complex Systems Research Group
+        en: ThermoPhase - Fluid and Complex Systems Research Group
+    affiliation: UDESC / LNCC
+    role:
+      pt: Coliderança
+      en: Co-leader
+    name: ThermoPhase
+    paragraphs:
+      - pt: >-
+          O ThermoPhase é um grupo de pesquisa multi-institucional, com atuação tanto no LNCC quanto
+          na UDESC. Estuda modelagem termodinâmica e simulação numérica de fluidos complexos,
+          conectando dados, aprendizado de máquina e aplicações em engenharia de energia.
+        en: >-
+          ThermoPhase is a multi-institutional research group based at both LNCC and UDESC. It
+          studies thermodynamic modeling and numerical simulation of complex fluids, connecting
+          data, machine learning and applications in energy engineering.
+      - pt: >-
+          As atividades incluem orientação de alunos e desenvolvimento de ferramentas como
+          torch-flash e thermoml-io, com exemplos computacionais documentados e pacotes Python
+          reutilizáveis.
+        en: >-
+          Activities include student supervision and development of tools such as torch-flash and
+          thermoml-io, with documented computational examples and reusable Python packages.
+    links:
+      - label:
+          pt: GitHub
+          en: GitHub
+        url: https://github.com/ThermoPhase-FCSRG
+        icon: github
+      - label:
+          pt: Diretório CNPq
+          en: CNPq directory
+        url: http://dgp.cnpq.br/dgp/espelhogrupo/820839
+        icon: arrow-diagonal
+  - id: ipes
+    logo:
+      file: images/ipes.jpg
+      width: 224
+      height: 200
+      alt:
+        pt: IPES - Innovative Parallel Finite Element Solvers
+        en: IPES - Innovative Parallel Finite Element Solvers
+    affiliation: LNCC
+    role:
+      pt: Membro
+      en: Member
+    name: IPES
+    paragraphs:
+      - pt: >-
+          O grupo IPES, no LNCC, desenvolve e analisa métodos numéricos para problemas multiescala,
+          reunindo elementos finitos, computação paralela e software científico. Entre os temas
+          estão métodos multiescala híbridos mistos e simulação de escoamentos em meios
+          heterogêneos.
+        en: >-
+          The IPES group at LNCC develops and analyzes numerical methods for multiscale problems,
+          combining finite elements, parallel computing and scientific software. Research topics
+          include hybrid mixed multiscale methods and flow simulation in heterogeneous media.
+    links:
+      - label:
+          pt: Site do grupo
+          en: Group website
+        url: https://ipes.lncc.br/
+        icon: globe

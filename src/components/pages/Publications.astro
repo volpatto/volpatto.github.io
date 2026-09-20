@@ -1,0 +1,42 @@
+---
+// Conteúdo: conteudo/paginas/publicacoes.yaml
+import { content, profile, t, type Language } from "../../content";
+import Publication from "../Publication.astro";
+import Icon from "../Icon.astro";
+import { href } from "../../lib/navigation";
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+const publications = content.publications;
+---
+
+<section
+  id="publications"
+  class="publications-section section"
+  aria-labelledby="publications-title"
+>
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <h1 id="publications-title">{t(publications.heading, lang)}</h1>
+      </div>
+      <a class="text-link" href={href(profile.orcid)}>
+        <Icon name="orcid" />
+        ORCID
+      </a>
+    </div>
+    <div class="publication-list">
+      {publications.items.map((publication) => (
+        <Publication publication={publication} lang={lang} />
+      ))}
+    </div>
+    <p class="source-note">
+      {t(publications.fullRecord, lang)}
+      <a href={href(profile.lattes)}>
+        <Icon name="lattes" /> Lattes
+      </a>
+      .
+    </p>
+  </div>
+</section>
