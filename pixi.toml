@@ -56,3 +56,13 @@ description = "Gera o site e abre a prévia do resultado estático"
 cmd = "pnpm format"
 depends-on = ["setup"]
 description = "Formata o código; não modifica o conteúdo YAML"
+
+[tasks.dev-stop]
+cmd = "pnpm exec astro dev stop"
+depends-on = ["setup"]
+description = "Encerra o servidor de desenvolvimento deste projeto"
+
+[tasks.preview-stop]
+cmd = "pnpm exec astro preview stop"
+depends-on = ["setup"]
+description = "Encerra o servidor de prévia estática deste projeto"

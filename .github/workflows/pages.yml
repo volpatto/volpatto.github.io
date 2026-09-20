@@ -23,26 +23,19 @@ jobs:
       pages: read
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: prefix-dev/setup-pixi@v0.10.2
         with:
-          node-version: "24"
-      - uses: pnpm/action-setup@v4
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-      - name: Check editable content, types and templates
-        run: pnpm check
+          pixi-version: v0.72.2
+          locked: true
+          cache: true
       - name: Configure Pages
         id: pages
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
-      - name: Build static website
-        run: pnpm build
+      - name: Validate, build and test website
+        run: pixi run --locked verify
         env:
           SITE_URL: ${{ steps.pages.outputs.origin || 'https://volpatto.github.io' }}
-          BASE_PATH: ${{ steps.pages.outputs.base_path || '/' }}
-      - name: Test content loading, generated pages and local links
-        run: pnpm test
-        env:
           BASE_PATH: ${{ steps.pages.outputs.base_path || '/' }}
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'

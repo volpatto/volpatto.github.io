@@ -44,6 +44,7 @@ students:
     topic:
       pt: Cálculos de equilíbrio termodinâmico em sistemas reativos acelerados por K-NN de Taylor.
       en: Acceleration of thermodynamic equilibrium calculations in reactive transport via taylor K-NN
+    provisional: true
   - name: Breno Vieira Sousa
     institution: LNCC
     year: "2025"

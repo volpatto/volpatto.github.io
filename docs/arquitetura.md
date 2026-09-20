@@ -1,6 +1,7 @@
 # Organização do projeto
 
 ```text
+pixi.toml / pixi.lock        Ferramentas e tarefas do ambiente de build
 conteudo/                    Conteúdo editável em YAML
   site.yaml                  Identidade, contatos, interface e página 404
   paginas/                   Um arquivo por página, com pt e en
@@ -58,7 +59,7 @@ um clarão ao abrir o site em modo escuro.
 1. Acrescente o campo ao esquema da página em `src/content/schema.ts`.
 2. Preencha-o no YAML, nos dois idiomas quando for texto traduzível.
 3. Apresente-o no componente correspondente, mantendo a semântica do HTML.
-4. Execute `pnpm verify` e confira a prévia.
+4. Execute `pixi run verify` e confira a prévia.
 
 Para uma página inteiramente nova, cadastre também o arquivo em `contentFiles`,
 o identificador em `pageIds`, o componente em `src/pages/[...page].astro` e, se
@@ -69,7 +70,8 @@ internos quebrados no HTML gerado.
 
 ## Verificações
 
-`pnpm verify` executa a mesma sequência principal do workflow:
+`pixi run verify` prepara o ambiente e executa `pnpm verify`, a mesma sequência
+principal do workflow:
 
 - `pnpm check`: campos, traduções, arquivos locais, tipos e componentes Astro;
 - `pnpm build`: geração estática;
@@ -80,12 +82,15 @@ Os testes também verificam navegação, idiomas, links internos, arquivos de im
 download do currículo e o limite editorial de menções à ESSS somente no CV.
 Não conferem a validade científica dos textos nem a disponibilidade de sites externos.
 
-Use `pnpm format` para formatar o código. Os YAMLs editoriais são mantidos fora
+Use `pixi run format` para formatar o código. Os YAMLs editoriais são mantidos fora
 dessa formatação automática para preservar seus comentários e parágrafos legíveis.
 
 ## Publicação
 
-O workflow `pages.yml` compila **Astro** e publica somente o artefato `dist/`.
+O workflow `pages.yml` instala o ambiente definido em `pixi.lock`, executa
+`pixi run --locked verify` e publica somente o artefato `dist/`.
+Pixi fornece Node.js/pnpm; pnpm instala Astro e as demais bibliotecas conforme
+`pnpm-lock.yaml`.
 Pull requests executam verificações e compilação sem publicar. Na configuração
 do repositório, **Settings → Pages → Source** deve estar em **GitHub Actions**.
 O build automático por branch usa Jekyll e não consegue compilar os arquivos Astro.

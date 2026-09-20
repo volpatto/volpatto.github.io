@@ -148,17 +148,22 @@ datas de referência em `site.yaml`, quando necessário.
 
 ## Veja o resultado e confira
 
-Abra um terminal na pasta do repositório e execute:
+Com Pixi instalado, abra um terminal na pasta do repositório.
+O ambiente e as dependências são preparados automaticamente:
 
 ```sh
-pnpm dev
+pixi run dev
 ```
 
 Abra `http://127.0.0.1:4321/`. Salve o YAML; a prévia será atualizada automaticamente.
+O servidor continua em segundo plano; encerre-o com `pixi run dev-stop`.
+Se aparecer `Another astro dev server is already running`, abra o endereço
+informado: a prévia anterior ainda está ativa. Para reiniciá-la, execute
+`pixi run --locked dev-stop` e depois `pixi run --locked dev`.
 Confira as duas línguas e os dois temas. Antes de enviar as mudanças ao GitHub:
 
 ```sh
-pnpm verify
+pixi run verify
 ```
 
 Esse comando valida conteúdo, imagens locais, componentes, geração e links.
@@ -166,7 +171,7 @@ Um erro como `conteudo/paginas/pesquisa.yaml: items.0.description.en` indica que
 o problema está na descrição em inglês do **primeiro** item (a contagem começa em
 zero). Erros de sintaxe YAML também indicam linha e coluna.
 
-Para conferir só os arquivos de conteúdo, use `pnpm check:content`.
+Para conferir só os arquivos de conteúdo, use `pixi run check-content`.
 O resultado publicado é estático; os arquivos YAML não são carregados pelo navegador.
 
 ## Quando é necessário mexer no código
