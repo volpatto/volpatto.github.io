@@ -4,6 +4,7 @@ import '@fontsource-variable/newsreader';
 import '../styles/global.css';
 import Arrow from './Arrow.astro';
 import LnccSymbol from './LnccSymbol.astro';
+import Icon from './Icon.astro';
 import { profile, t, type Language } from '../data/profile';
 import { pages, pageUrl, pageLabel, pageDescriptions, type PageId } from '../data/navigation';
 interface Props { lang: Language; page?: PageId; }
@@ -11,6 +12,7 @@ const { lang, page = 'home' } = Astro.props;
 const en = lang === 'en';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
 const asset = (path: string) => base + path;
+const navIcons = { home: 'user', research: 'flask', publications: 'book', software: 'code', teaching: 'teaching', people: 'users', groups: 'network', collaborations: 'link', cv: 'file', contact: 'mail' } as const;
 const title = page === 'home'
   ? (en ? 'Diego Volpatto · Researcher at LNCC' : 'Diego Volpatto · Pesquisador do LNCC')
   : `${pageLabel(page, lang)} · Diego Volpatto`;
@@ -53,7 +55,7 @@ const canonical = new URL(pageUrl(page, lang), Astro.site);
         <div class="site-identity"><a href={pageUrl('home', lang)}>Diego Volpatto</a><span>LNCC / MCTI</span></div>
         <div class="header-controls">
           <div class="language-switch" aria-label={en ? 'Language' : 'Idioma'}>
-            <a href={pageUrl(page, 'pt')} lang="pt-BR" aria-current={!en ? 'page' : undefined} aria-label="Português">PT</a><span>/</span><a href={pageUrl(page, 'en')} lang="en" aria-current={en ? 'page' : undefined} aria-label="English">EN</a>
+            <a href={pageUrl(page, 'pt')} lang="pt-BR" aria-current={!en ? 'page' : undefined} aria-label="Português" title="Português"><img class="language-flag" src={asset('images/flags/br.svg')} alt="" width="20" height="15" />PT</a><span aria-hidden="true">/</span><a href={pageUrl(page, 'en')} lang="en" aria-current={en ? 'page' : undefined} aria-label="English" title="English"><img class="language-flag" src={asset('images/flags/gb.svg')} alt="" width="20" height="15" />EN</a>
           </div>
           <button class="theme-toggle" type="button" hidden aria-pressed="false" aria-label={en ? 'Enable dark mode' : 'Ativar modo escuro'} data-dark-label={en ? 'Enable dark mode' : 'Ativar modo escuro'} data-light-label={en ? 'Enable light mode' : 'Ativar modo claro'}>
             <svg class="moon-icon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 13.1A8.5 8.5 0 0 1 10.9 3.5a8.5 8.5 0 1 0 9.6 9.6Z" /></svg>
@@ -67,7 +69,7 @@ const canonical = new URL(pageUrl(page, lang), Astro.site);
         <nav id="main-nav" aria-label={en ? 'Main navigation' : 'Navegação principal'}>
           <details class="navigation-disclosure" open>
             <summary class="menu-toggle">Menu <span aria-hidden="true">☰</span></summary>
-            <div class="nav-links">{pages.map(item => <a href={pageUrl(item.id, lang)} data-page={item.id} aria-current={page === item.id ? 'page' : undefined}>{t(item.label, lang)}</a>)}</div>
+            <div class="nav-links">{pages.map(item => <a href={pageUrl(item.id, lang)} data-page={item.id} aria-current={page === item.id ? 'page' : undefined}><Icon name={navIcons[item.id]} /><span>{t(item.label, lang)}</span></a>)}</div>
           </details>
         </nav>
       </aside>

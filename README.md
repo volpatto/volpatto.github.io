@@ -21,7 +21,7 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Acesse `http://localhost:4321/personal-website/`.
+Acesse `http://127.0.0.1:4321/`.
 
 ```sh
 pnpm check     # Valida os componentes e os tipos
@@ -43,6 +43,8 @@ Nota mais para eu mesmo, já que JS não é meu forte.
 | `src/data/career.ts`                      | Experiência profissional e colaborações acadêmicas              |
 | `src/data/navigation.ts`                  | Rotas, navegação e descrições das páginas                       |
 | `src/components/AcademicSite.astro`       | Layout compartilhado, navegação, idiomas e temas                |
+| `src/components/Icon.astro`              | Ícones de navegação, perfis e ações, acompanhados por texto      |
+| `src/data/brand-icons.ts`                | Desenhos de ícones de marcas, com licenças próprias             |
 | `src/components/AcademicHome.astro`       | Apresentação da página inicial                                  |
 | `src/components/Collaborations.astro`     | Parcerias ALFA, LEF, UDESC e projetos                           |
 | `src/components/Curriculum.astro`         | Currículo e experiência profissional                            |
@@ -55,20 +57,22 @@ Nota mais para eu mesmo, já que JS não é meu forte.
 
 As rotas são geradas em `src/pages/[...page].astro`, além das duas páginas iniciais. Os campos com traduções usam `{ pt: '...', en: '...' }`. Ao acrescentar conteúdo, preencha ambos. Os títulos de artigos permanecem no idioma original. Não há importação automática do Lattes: as atualizações são editoriais, para permitir conferência antes de publicar.
 
+Ícones e bandeiras são locais, sem bibliotecas carregadas por CDN. Os desenhos acompanham rótulos textuais e são decorativos para leitores de tela. O seletor de idiomas usa as bandeiras do Brasil e do Reino Unido junto de PT e EN, preservando os nomes acessíveis Português e English. Créditos e licenças de Academicons, Font Awesome e flag-icons constam na página de licenciamento e em `THIRD_PARTY_NOTICES.md`.
+
 O conjunto inicial de artigos e alunos é conferido em `scripts/check-build.mjs`. Ao acrescentar ou remover registros, atualize as contagens esperadas nesse script.
 
 ## Publicar no GitHub Pages
 
-O remoto local está configurado para `volpatto/personal-website`. O workflow `.github/workflows/pages.yml` instala as dependências, executa as verificações, gera os arquivos e publica quando há um push em `main`. Nenhum commit, push ou ativação do Pages é feito pela implementação inicial.
+O site está preparado para o repositório `volpatto/volpatto.github.io`, publicado na raiz de `https://volpatto.github.io/`. O workflow `.github/workflows/pages.yml` instala as dependências, executa as verificações, gera os arquivos e publica quando há um push em `main`.
 
-1. Revise o conteúdo e envie os arquivos ao repositório.
+1. Renomeie o repositório no GitHub para `volpatto.github.io`. Atualize o remoto local com `git remote set-url origin git@github.com:volpatto/volpatto.github.io.git`, revise o conteúdo e envie os arquivos ao repositório.
 2. No GitHub, abra **Settings → Pages → Build and deployment** e escolha **GitHub Actions**.
 3. Execute **Actions → Publish website to GitHub Pages → Run workflow** se o primeiro push tiver ocorrido antes de habilitar Pages.
-4. Aguarde a conclusão da execução. O endereço esperado para esse repositório é `https://volpatto.github.io/personal-website/`.
+4. Aguarde a conclusão da execução. O endereço esperado para esse repositório é `https://volpatto.github.io/`.
 
 Esse endereço é a configuração de destino; só ficará publicado após o workflow terminar com sucesso. O workflow recebe domínio e subdiretório do próprio GitHub Pages.
 
-Para hospedar em `https://volpatto.github.io/`, use o repositório `volpatto.github.io`. Na configuração local, mude `base` para `/`. O workflow já adapta o caminho ao repositório detectado pelo Pages.
+A configuração local já usa `base: "/"`. O workflow adapta o caminho ao repositório detectado pelo Pages, preservando a possibilidade de hospedar em outro domínio ou subdiretório.
 
 ## Migrar para o LNCC
 

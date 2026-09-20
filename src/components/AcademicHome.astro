@@ -1,6 +1,7 @@
 ---
 import { profile, type Language } from '../data/profile';
 import { pageUrl } from '../data/navigation';
+import Icon from './Icon.astro';
 interface Props { lang: Language; }
 const { lang } = Astro.props;
 const en = lang === 'en';
@@ -13,7 +14,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
     <p class="hero-description">{en ? 'I am a researcher at the National Laboratory for Scientific Computing (LNCC/MCTI) and a faculty member of its Graduate Program in Computational Modeling.' : 'Sou pesquisador adjunto do Laboratório Nacional de Computação Científica (LNCC/MCTI) e docente permanente do Programa de Pós-Graduação em Modelagem Computacional.'}</p>
     <p class="hero-description">{en ? 'I work on numerical methods for porous media flow, computational thermodynamics and machine learning applied to scientific problems.' : 'Trabalho com métodos numéricos para escoamentos em meios porosos, termodinâmica computacional e aprendizado de máquina aplicado a problemas científicos.'}</p>
     <p class="hero-description">{en ? 'My previous experience in the software industry includes work as a senior developer of scientific software for oil and gas applications. In my research projects, I adopt software engineering practices such as automated testing, installable packages and documented environments to support reproducibility.' : 'Minha experiência prévia na indústria de software inclui a atuação como desenvolvedor sênior de software científico para aplicações em óleo e gás. Nos projetos de pesquisa, adoto práticas de engenharia de software como testes automatizados, pacotes instaláveis e ambientes documentados para facilitar a reprodutibilidade.'}</p>
-    <div class="profile-links"><a href={profile.lattes}>Lattes</a><a href={profile.orcid}>ORCID</a><a href={profile.github}>GitHub</a><a href={profile.linkedin}>LinkedIn</a><a href={pageUrl('contact', lang)}>{en ? 'Contact' : 'Contato'}</a></div>
+    <div class="profile-links"><a href={profile.lattes}><Icon name="lattes" />Lattes</a><a href={profile.orcid}><Icon name="orcid" />ORCID</a><a href={profile.github}><Icon name="github" />GitHub</a><a href={profile.linkedin}><Icon name="linkedin" />LinkedIn</a><a href={pageUrl('contact', lang)}><Icon name="mail" />{en ? 'Contact' : 'Contato'}</a></div>
   </div>
   <figure class="portrait-block">
     <img src={base + 'images/diego-volpatto.jpg'} alt="Diego Volpatto" width="460" height="460" fetchpriority="high" />

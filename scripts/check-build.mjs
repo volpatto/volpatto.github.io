@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 const root = resolve(process.env.BUILD_DIR || "dist");
 const prefix =
   "/" +
-  (process.env.BASE_PATH ?? "/personal-website").replace(/^\/+|\/+$/g, "");
+  (process.env.BASE_PATH ?? "/").replace(/^\/+|\/+$/g, "");
 const base = prefix === "/" ? "" : prefix;
 const pagePairs = [
   ["home", "", "en/"],

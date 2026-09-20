@@ -1,5 +1,6 @@
 ---
 import Arrow from './Arrow.astro';
+import Icon from './Icon.astro';
 import { profile, t, type Language } from '../data/profile';
 import { education } from '../data/academic';
 import { experience, academicAppointments } from '../data/career';
@@ -13,7 +14,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
   <div class="cv-intro">
     <h1 id="cv-title">{en ? 'Experience and education' : 'Experiência e formação'}</h1>
     <p>{en ? 'My work combines academic research, teaching and professional scientific software development. Since 2025, I have been a researcher at LNCC, following my experience in the software industry.' : 'Minha trajetória reúne pesquisa acadêmica, ensino e desenvolvimento profissional de software científico. Desde 2025, sou pesquisador do LNCC, após uma atuação na indústria de software.'}</p>
-    <div class="cv-actions"><a class="text-link" href={profile.lattes}>{en ? 'Lattes CV' : 'Currículo Lattes'}<Arrow diagonal /></a><a class="text-link" href={profile.linkedin}>LinkedIn<Arrow diagonal /></a><a class="text-link" href={base + 'files/cv-diego-volpatto-2026.pdf'} download>{en ? 'Download academic CV (PDF, Portuguese)' : 'Baixar currículo acadêmico (PDF)'}<span aria-hidden="true">↓</span></a></div>
+    <div class="cv-actions"><a class="text-link" href={profile.lattes}><Icon name="lattes" />{en ? 'Lattes CV' : 'Currículo Lattes'}</a><a class="text-link" href={profile.linkedin}><Icon name="linkedin" />LinkedIn</a><a class="text-link" href={base + 'files/cv-diego-volpatto-2026.pdf'} download><Icon name="download" />{en ? 'Download academic CV (PDF, Portuguese)' : 'Baixar currículo acadêmico (PDF)'}</a></div>
     <p class="source-note">{en ? 'Academic CV based on the Lattes record updated on 23 August 2026. The complete record is available on the Lattes platform.' : 'Currículo acadêmico com dados do Lattes atualizado em 23 de agosto de 2026. O registro completo está disponível na Plataforma Lattes.'}</p>
   </div>
   <section class="page-subsection" aria-labelledby="experience-title">

@@ -28,6 +28,8 @@ See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for item-level sources, cre
 
 The legal texts and upstream notices under `public/licenses/` retain their own status; they are included to communicate terms, not relicensed as editorial content.
 
+The third-party brand paths in `src/data/brand-icons.ts` retain the Academicons OFL 1.1 (Lattes) and Font Awesome CC BY 4.0 (GitHub, ORCID, LinkedIn) terms. The original interface icon drawings and their rendering component remain under MIT. Brand and flag assets under `public/images/` retain the item-level terms recorded in `THIRD_PARTY_NOTICES.md`.
+
 ## Resumo em português
 
 - **Código e documentação técnica originais:** MIT.

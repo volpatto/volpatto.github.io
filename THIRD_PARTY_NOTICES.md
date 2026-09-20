@@ -22,6 +22,15 @@ These assets identify the author, institutions, research groups, software and co
 | `public/images/equinor.svg` | [Official Equinor logo](https://cdn.eds.equinor.com/logo/equinor-logo-horizontal.svg#red); unchanged SVG, with the provided red variant selected by the fragment identifier. Link destination: [Equinor Brasil](https://www.equinor.com.br/). |
 | `public/images/prio.svg` | [Official PRIO logo](https://prio3.com.br/wp-content/uploads/2025/01/logo_azul_novo.svg), unchanged. |
 
+## Interface icons and language flags
+
+- **Lattes:** `public/images/icons/lattes.svg`, from [Academicons](https://github.com/jpswalsh/academicons/blob/master/svg/lattes.svg) by James Walsh and Katja Bercic. The SVG's own metadata identifies the SIL Open Font License. The [original OFL 1.1 license and attribution](public/licenses/Academicons-OFL.txt) were extracted from the upstream Academicons font's license record. The source SVG is retained unchanged; its view box and path are also copied into `src/data/brand-icons.ts` for inline rendering, with the theme's text color and decorative accessibility attributes. No icon font is loaded.
+- **GitHub, ORCID and LinkedIn:** `public/images/icons/github.svg`, `orcid.svg` and `linkedin-in.svg`, from [Font Awesome Free](https://github.com/FortAwesome/Font-Awesome/tree/7.x/svgs/brands) by Fonticons, Inc., under CC BY 4.0. [Upstream license and notices](public/licenses/Font-Awesome.txt). Original SVG files and their notices are retained unchanged; view boxes and paths are copied into `src/data/brand-icons.ts`, rendered inline in the theme's text color, and marked decorative alongside visible text. These icons retain their own CC BY grant, separately from the website's editorial text.
+- **Brazil and United Kingdom flags:** `public/images/flags/br.svg` and `gb.svg`, from [flag-icons](https://github.com/lipis/flag-icons/tree/main/flags/4x3) by Panayiotis Lipiridis and contributors. [Original MIT license](public/licenses/Flag-icons-MIT.txt). Unchanged 4:3 SVGs, displayed beside PT and EN; the English selector uses the United Kingdom’s Union Jack. Language names remain available to assistive technology.
+- **General interface icons:** original geometric drawings in `src/components/Icon.astro`, covered by the website implementation's MIT license.
+
+All icon assets are served locally. The upstream licenses do not imply endorsement or grant additional trademark rights.
+
 ## Scientific figures
 
 ### `public/images/research/voids-darcy-brinkman.png`

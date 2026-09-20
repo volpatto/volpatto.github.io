@@ -83,6 +83,18 @@ button {
 svg {
   flex-shrink: 0;
 }
+.icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  vertical-align: -0.15em;
+}
+.text-link .icon,
+.software-links .icon {
+  width: 17px;
+  height: 17px;
+}
 img {
   max-width: 100%;
   display: block;
@@ -161,8 +173,18 @@ html[data-theme="dark"] .lncc-symbol {
   align-items: center;
 }
 .language-switch a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 6px 2px;
   color: var(--muted);
+}
+.language-flag {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 15px;
+  border-radius: 2px;
+  outline: 1px solid var(--line);
 }
 .language-switch a[aria-current] {
   color: var(--purple);
@@ -221,11 +243,19 @@ html[data-theme="dark"] .moon-icon {
   gap: 3px;
 }
 .nav-links a {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
   font-size: 0.875rem;
   color: var(--muted);
   padding: 7px 12px;
   border-left: 2px solid transparent;
   line-height: 1.7;
+}
+.nav-links .icon {
+  width: 16px;
+  height: 16px;
+  margin-top: 4px;
 }
 .nav-links a:hover {
   color: var(--purple);
@@ -287,6 +317,11 @@ html[data-theme="dark"] .moon-icon {
 .profile-links a:hover,
 .about-details a:hover {
   text-decoration-color: currentColor;
+}
+.profile-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
 }
 .portrait-block {
   padding-top: 5px;
@@ -1224,6 +1259,12 @@ details[open] > summary > .expand-sign {
   .language-switch {
     gap: 6px;
     font-size: 0.75rem;
+  }
+  .language-switch a {
+    flex-direction: column;
+    gap: 3px;
+    line-height: 1.1;
+    padding: 4px 2px;
   }
   .theme-toggle {
     width: 32px;
