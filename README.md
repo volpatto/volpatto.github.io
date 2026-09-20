@@ -284,12 +284,6 @@ A badge abaixo do título acompanha esse workflow na branch `main`.
 4. Aguarde a conclusão. O site estará em `https://volpatto.github.io/` após uma
    publicação bem-sucedida.
 
-Se o remoto local ainda apontar para o nome antigo, atualize-o:
-
-```sh
-git remote set-url origin git@github.com:volpatto/volpatto.github.io.git
-```
-
 ### Erro “Invalid YAML front matter” nos arquivos Astro
 
 Se o log executar `actions/jekyll-build-pages`, o GitHub está usando o build por
