@@ -35,7 +35,7 @@ courses:
       pt: "Método de Elementos Finitos: Implementação Computacional"
       en: "Finite Element Method: Computational Implementation"
     metadata:
-      pt: LNCC · Pós-graduação · 36 h/a · 3 créditos
+      pt: LNCC · Pós-graduação · 36 h · 3 créditos
       en: LNCC · Graduate course · 36 hours · 3 credits
   - code: GA-020
     description:
@@ -49,7 +49,7 @@ courses:
       pt: Solução Numérica de Equações Diferenciais
       en: Numerical Solution of Differential Equations
     metadata:
-      pt: LNCC · Pós-graduação · 36 h/a · 3 créditos
+      pt: LNCC · Pós-graduação · 36 h · 3 créditos
       en: LNCC · Graduate course · 36 hours · 3 credits
 sourceNote:
   pt: >-
