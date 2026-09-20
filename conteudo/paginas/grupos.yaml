@@ -69,17 +69,20 @@ items:
     role:
       pt: Membro
       en: Member
-    name: IPES
+    name: IPES - Innovative Parallel Finite Element Solvers
     paragraphs:
       - pt: >-
           O grupo IPES, no LNCC, desenvolve e analisa métodos numéricos para problemas multiescala,
           reunindo elementos finitos, computação paralela e software científico. Entre os temas
           estão métodos multiescala híbridos mistos e simulação de escoamentos em meios
-          heterogêneos.
+          heterogêneos. Além disso, o IPES pesquisa a combinação de aprendizado de máquina (e.g., Operadores Neurais)
+          com métodos numéricos clássicos, objetivando propor novos métodos híbridos.
         en: >-
           The IPES group at LNCC develops and analyzes numerical methods for multiscale problems,
           combining finite elements, parallel computing and scientific software. Research topics
-          include hybrid mixed multiscale methods and flow simulation in heterogeneous media.
+          include hybrid mixed multiscale methods and flow simulation in heterogeneous media. Furthermore, IPES i
+          nvestigates the combination of machine learning (e.g., Neural Operators) with
+          classical numerical methods, aiming to propose new hybrid methods.
     links:
       - label:
           pt: Site do grupo
