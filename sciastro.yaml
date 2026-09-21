@@ -87,6 +87,7 @@ bibliography:
   file: publicacoes.bib
   style: apa
 people:
+  file: orientacoes.yaml
   avatarFallback:
     src: /images/lncc-original.png
     alt:

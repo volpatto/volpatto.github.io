@@ -6,7 +6,7 @@ feitas em YAML e BibTeX; não é necessário conhecer JavaScript nem alterar com
 - `../sciastro.yaml`: identidade, tema, logo, idiomas, rodapé e ordem das páginas.
 - `paginas/`: um arquivo por página, com os textos em português (`pt`) e inglês (`en`).
 - `publicacoes.bib`: dados bibliográficos compartilhados por publicações e citações.
-- `team.yaml`: orientações, fotos e símbolos institucionais.
+- `orientacoes.yaml`: orientações, fotos e símbolos institucionais.
 - `../public/`: imagens, documentos e licenças servidos pelo site.
 
 ## Visualizar e conferir
@@ -74,7 +74,7 @@ um objeto com `pt` e `en` fornece traduções.
 | `timeline` | Experiência e formação; cada item tem `period` |
 | `logos` | Logos com links, como nas parcerias industriais |
 | `publications` | Cards preenchidos por BibTeX, com categorias definidas no YAML |
-| `team` | Orientações estruturadas a partir de `team.yaml` |
+| `team` | Orientações estruturadas a partir de `orientacoes.yaml` |
 | `custom` | Extensão avançada com componente Astro registrado |
 
 Cards, listas e trajetórias aceitam `title`, `eyebrow` (linha acima do título),
@@ -179,7 +179,19 @@ O build não busca metadados na internet: mantenha o `.bib` junto com o site no 
 
 ### Orientações, fotos e símbolos
 
-Edite `team.yaml`. Cada pessoa tem `id` único, `name`, `role: student`,
+O cadastro fica em `conteudo/orientacoes.yaml`, selecionado em `sciastro.yaml`:
+
+```yaml
+people:
+  file: orientacoes.yaml
+  # Mantenha avatarFallback neste mesmo bloco para configurar o símbolo padrão.
+```
+
+O caminho de `file` é relativo a `contentDir` (`conteudo/` neste site). O arquivo
+`paginas/orientacoes.yaml` contém a introdução e a composição da página; os dados
+dos alunos ficam no cadastro acima. Não é necessário manter um arquivo auxiliar.
+
+Edite `orientacoes.yaml`. Cada pessoa tem `id` único, `name`, `role: student`,
 `status` (`active` ou `alumni`), `level` e, quando conhecidos, `startYear` e
 `endYear`. Os níveis disponíveis são `undergraduate`, `masters`, `phd` e `postdoc`.
 `affiliation` identifica a instituição e a atuação como orientador ou coorientador;
@@ -201,7 +213,7 @@ vertical, de 0 a 100; sem esse campo, o recorte fica centralizado em `[50, 50]`.
 Omitir `photo` ativa o símbolo alternativo: primeiro `avatarFallback` da pessoa,
 depois `people.avatarFallback` em `sciastro.yaml` (LNCC neste site).
 
-Os alunos da UDESC e da Unicamp têm seus próprios símbolos. Em `team.yaml`,
+Os alunos da UDESC e da Unicamp têm seus próprios símbolos. Em `orientacoes.yaml`,
 `&udesc` dá um nome à configuração do símbolo e `*udesc` a reutiliza; ao mover ou
 remover a primeira definição, mantenha-a antes dos usos. Você também pode copiar
 o bloco completo ou definir outro `avatarFallback` para uma pessoa. `viewBox`,

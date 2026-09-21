@@ -18,7 +18,7 @@ do currículo usa Python, separadamente do build do site.
 
 Os dados bibliográficos ficam em `conteudo/publicacoes.bib`; cada card seleciona
 uma chave e uma categoria em `conteudo/paginas/publicacoes.yaml`. As orientações
-usam `conteudo/team.yaml`, com suporte a fotos circulares e símbolos das
+usam `conteudo/orientacoes.yaml`, com suporte a fotos circulares e símbolos das
 instituições como alternativa. O build lê esses arquivos localmente, sem consultar
 DOIs ou serviços externos.
 
@@ -256,7 +256,7 @@ Nota mais para eu mesmo, já que JS não é meu forte.
 
 **Comece pelo [guia de edição em `conteudo/README.md`](conteudo/README.md).**
 Os textos, links, imagens e listas estão em YAML. As publicações usam BibTeX,
-e os alunos têm um cadastro compartilhado em `team.yaml`. Para acrescentar um
+e os alunos têm um cadastro compartilhado em `orientacoes.yaml`. Para acrescentar um
 registro, siga os exemplos do guia; não é preciso alterar os componentes nem
 atualizar contagens nos testes.
 
@@ -269,7 +269,7 @@ atualizar contagens nos testes.
 | `conteudo/paginas/publicacoes.yaml` | Chaves BibTeX, categorias e ordem das publicações |
 | `conteudo/paginas/software.yaml` | Softwares, práticas, documentação e pacotes |
 | `conteudo/paginas/ensino.yaml` | Disciplinas e materiais |
-| `conteudo/team.yaml` | Alunos, temas, situação, nível, fotos e símbolos institucionais |
+| `conteudo/orientacoes.yaml` | Alunos, temas, situação, nível, fotos e símbolos institucionais |
 | `conteudo/paginas/orientacoes.yaml` | Introdução e composição da página de orientações |
 | `conteudo/paginas/grupos.yaml` | Grupos de pesquisa |
 | `conteudo/paginas/parcerias.yaml` | Parcerias acadêmicas, projetos e indústria |
