@@ -1,13 +1,26 @@
 # Diego Volpatto -- site acadêmico
 
-[![Build e publicação](https://github.com/volpatto/volpatto.github.io/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/volpatto/volpatto.github.io/actions/workflows/pages.yml)
+[![Build, Tests e publicação](https://github.com/volpatto/volpatto.github.io/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/volpatto/volpatto.github.io/actions/workflows/pages.yml)
+[![SciAstro](https://img.shields.io/badge/SciAstro-475569)](https://volpatto.github.io/sciastro/)
 [![Astro](https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=white)](https://astro.build/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Node.js 24](https://img.shields.io/badge/Node.js-24-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
 [![Pixi](https://img.shields.io/badge/Pixi-41B3A3)](https://pixi.sh/)
 
-Site pessoal estático em português e inglês, construído com Astro e TypeScript, com conteúdo editável em YAML. Apesar de ter sido montado para o Github Pages, fiz pensando em mover facilmente para outros domínios.
+Site pessoal estático em português e inglês, construído com **[SciAstro](https://volpatto.github.io/sciastro/) e [Astro](https://astro.build/)**, usando o **LNCC Theme** e conteúdo editável em YAML. Apesar de ter sido montado para o GitHub Pages, foi preparado para publicação em outros domínios.
+
+As páginas são definidas em `sciastro.yaml` e `conteudo/paginas/`. O SciAstro
+fornece os componentes, estilos e interações; este repositório mantém apenas
+a configuração de integração, o conteúdo, os arquivos públicos e os testes do site.
+O JavaScript local se limita às configurações e aos testes. A geração opcional
+do currículo usa Python, separadamente do build do site.
+
+O SciAstro é instalado diretamente do [npm](https://www.npmjs.com/package/sciastro),
+com versão fixa em `package.json` e dependências registradas em `pnpm-lock.yaml`.
+Não é preciso clonar nem compilar o repositório do framework. A
+[documentação do SciAstro](https://volpatto.github.io/sciastro/) descreve os
+componentes, as opções de configuração e a API disponíveis.
 
 Organizado em dez páginas acadêmicas por idioma: apresentação, pesquisa, publicações, software, ensino, orientações, grupos de pesquisa, parcerias e projetos, currículo e contato. Uma página adicional de licenciamento em cada idioma é acessível pelo rodapé. Inclui experiência profissional, práticas de engenharia de software, resumos de ementas e logos dos grupos e instituições. Os modos claro e escuro respeitam a preferência do sistema na primeira visita; o botão no cabeçalho salva a escolha localmente. As fontes e imagens são servidas pelo próprio site. Não há analytics, formulário, banco de dados nem chamadas ao GitHub durante a navegação.
 
@@ -27,6 +40,7 @@ O resultado pronto para hospedagem fica em `dist/`.
 
 - [Instalar o Pixi e preparar o ambiente](#ambiente-e-uso-local-com-pixi)
 - [Editar o conteúdo](#onde-atualizar-o-conteúdo)
+- [Atualizar o SciAstro](#atualizar-o-sciastro)
 - [Gerar o site para domínio próprio ou subdiretório](#gerar-o-site-para-publicação)
 - [Publicar em servidor web](#publicar-em-servidor-web)
 - [Atualizar e restaurar uma versão anterior](#atualizar-e-restaurar-uma-versão-anterior)
@@ -153,7 +167,7 @@ pixi run --locked dev
 ```
 
 Abra `http://127.0.0.1:4321/` ou o endereço informado pelo terminal, caso a porta
-esteja ocupada. As alterações salvas nos YAMLs e componentes aparecem na prévia.
+esteja ocupada. As alterações salvas nos YAMLs aparecem na prévia.
 As tarefas também preparam as dependências automaticamente: é possível começar
 diretamente por `dev` ou `verify`, sem executar `install` e `setup` separadamente.
 
@@ -162,11 +176,13 @@ diretamente por `dev` ou `verify`, sem executar `install` e `setup` separadament
 | Comando | Resultado |
 | --- | --- |
 | `pixi run --locked dev` | Prévia com atualização automática ao salvar os arquivos |
-| `pixi run --locked verify` | Validação completa: conteúdo, tipos, build e testes |
+| `pixi run --locked verify` | Valida configuração e conteúdo, gera o site e executa os testes |
 | `pixi run --locked build` | Gera o site estático em `dist/` |
 | `pixi run --locked preview` | Gera o site e serve a versão de publicação localmente |
 | `pixi run --locked check-content` | Confere os YAMLs e os arquivos referenciados |
-| `pixi run --locked check` | Confere conteúdo, tipos e componentes |
+| `pixi run --locked check` | Valida configuração, conteúdo e arquivos com SciAstro |
+| `pixi run --locked test-browser` | Gera o site e executa Browser Tests; instale Chromium primeiro |
+| `pixi run --locked verify-all` | Validação completa, incluindo Browser Tests |
 | `pixi run --locked test` | Gera o site e executa os testes |
 | `pixi run --locked setup` | Instala somente as bibliotecas do site |
 | `pixi run --locked format` | Formata o código, preservando a formatação dos YAMLs editoriais |
@@ -179,8 +195,10 @@ alterar o lockfile durante a execução. A instalação das bibliotecas também 
 e `pnpm-lock.yaml`. Instalações posteriores reutilizam os pacotes disponíveis
 localmente; atualizar dependências pode exigir novos downloads.
 
-Nesta versão do Astro, os servidores ficam em segundo plano: fechar o terminal
-não os encerra. Para encerrar, use as tarefas `dev-stop` ou `preview-stop`.
+Em um terminal comum, os servidores normalmente permanecem ligados ao terminal;
+use **Ctrl+C** para encerrar. Quando o Astro inicia em segundo plano, como pode
+ocorrer em ferramentas de desenvolvimento automatizadas, fechar o terminal não
+os encerra. Nesse caso, use as tarefas `dev-stop` ou `preview-stop`.
 Os servidores de desenvolvimento e prévia atendem somente em `127.0.0.1` por padrão.
 
 #### Mensagem “Another astro dev server is already running”
@@ -206,7 +224,7 @@ os comandos equivalentes são `pixi run --locked preview-stop` e
 
 - `pixi.toml`: ferramentas e tarefas disponíveis;
 - `pixi.lock`: versões e arquivos exatos do Node.js, pnpm e bibliotecas do ambiente;
-- `package.json`: dependências Astro/TypeScript e scripts do site;
+- `package.json`: dependências e comandos do site;
 - `pnpm-lock.yaml`: versões exatas das dependências do site;
 - `.pixi/` e `node_modules/`: instalações locais, ignoradas pelo Git.
 
@@ -238,7 +256,7 @@ nem atualizar contagens nos testes.
 
 | Arquivo | O que editar |
 | --- | --- |
-| `conteudo/site.yaml` | Nome, e-mail, perfis e textos compartilhados |
+| `sciastro.yaml` | Identidade, tema, idiomas, menu, rodapé e metadados |
 | `conteudo/paginas/sobre.yaml` | Apresentação, foto e formação resumida |
 | `conteudo/paginas/pesquisa.yaml` | Linhas de pesquisa, figuras e fontes |
 | `conteudo/paginas/publicacoes.yaml` | Artigos e DOIs |
@@ -258,22 +276,85 @@ Os campos traduzidos têm `pt` e `en`. Não há importação automática do Latt
 as atualizações continuam editoriais e devem ser conferidas antes de publicar.
 O guia inclui exemplos de parágrafos, links, publicações e alunos.
 
-Para mudanças de estrutura ou aparência, veja o
-[mapa da arquitetura](docs/arquitetura.md). Cada página tem seu próprio componente
-em `src/components/pages/`. Cores, fontes e responsividade continuam em
-`src/styles/global.css`. `src/layouts/AcademicLayout.astro` reúne cabeçalho,
-navegação, rodapé e comportamento de tema/menu.
+Para mudanças de estrutura, edite `sections` nos YAMLs. Para cores, fontes e
+largura, use `appearance` em `sciastro.yaml`. O **LNCC Theme**, os componentes
+e os comportamentos de navegação pertencem ao pacote SciAstro. Veja o
+[mapa do repositório](#estrutura-do-repositório).
 
 Ícones e bandeiras são locais. Os desenhos acompanham rótulos textuais e são
 decorativos para leitores de tela. As bandeiras do Brasil e do Reino Unido
 acompanham PT e EN; os nomes acessíveis são Português e English. Os créditos
 continuam na página de licenciamento e em `THIRD_PARTY_NOTICES.md`.
 
+## Estrutura do repositório
+
+Este repositório contém o conteúdo e a configuração do site. O SciAstro fornece
+as páginas, os componentes, o LNCC Theme, a navegação e a validação dos YAMLs.
+Não é necessário manter uma pasta `src/` nem um ambiente de TypeScript aqui.
+
+| Caminho | Responsabilidade |
+| --- | --- |
+| `sciastro.yaml` | Identidade, tema, idiomas, menu, rodapé e destino de publicação |
+| `conteudo/` | Textos e composição das páginas; inclui o guia de edição |
+| `public/` | Imagens, currículo e licenças distribuídos com o site |
+| `astro.config.mjs` | Ativa o SciAstro; normalmente não precisa ser editado |
+| `cv/` | Script e configurações para gerar novamente o currículo |
+| `tests/` e `playwright.config.mjs` | Tests do conteúdo publicado e da navegação |
+| `.github/workflows/pages.yml` | Build, Tests e publicação no GitHub Pages |
+| `package.json`, `pnpm-workspace.yaml` e `pnpm-lock.yaml` | Dependências do site e política de instalação |
+| `pixi.toml` e `pixi.lock` | Ferramentas e tarefas reproduzíveis |
+
+Os testes próprios continuam úteis para conferir o conteúdo publicado, os links,
+o currículo, as imagens e os idiomas deste site. O compilador TypeScript e os
+testes dos componentes ficam no desenvolvimento do SciAstro. A prévia dos Browser
+Tests usa o servidor oficial do Astro, sem um servidor HTTP próprio no repositório.
+A verificação automática não confirma afirmações científicas nem links externos.
+
+As pastas `dist/`, `.astro/`, `.test-output/` e `.cv-build/` são saídas locais,
+ignoradas pelo Git. Podem ser removidas quando seus processos estiverem parados;
+serão recriadas pelo build, pelos testes ou pela geração do currículo. Guarde à
+parte relatórios de conversão do CV que queira conservar. `.pixi/` e `node_modules/`
+são o ambiente de trabalho: removê-las exige instalar as dependências novamente.
+
+## Atualizar o SciAstro
+
+O site usa o pacote publicado no npm. A versão instalada aparece no campo
+`dependencies.sciastro` de `package.json`; ela é fixa, sem `^` ou `~`.
+Instalações e builds usam o lockfile e não adotam novas releases automaticamente.
+Editar textos, imagens ou o currículo não exige atualizar o framework.
+
+Para atualizar intencionalmente:
+
+1. Leia as [notas da release](https://github.com/volpatto/sciastro/releases) e
+   escolha uma versão publicada no npm. O SciAstro ainda está em **alpha**;
+   confira eventuais instruções de migração.
+2. Na pasta **deste site**, substitua `VERSAO` pelo número escolhido e execute:
+
+   ```sh
+   pixi run --locked pnpm add sciastro@VERSAO --save-exact
+   pixi run --locked browser-install
+   pixi run --locked verify-all
+   ```
+
+   `browser-install` prepara o Chromium para os testes. Pode ser omitido quando
+   a versão de navegador exigida pelo Playwright já estiver instalada.
+3. Execute `pixi run --locked preview` e confira as páginas em português e
+   inglês, os temas claro/escuro e a apresentação em uma tela pequena.
+4. Revise e registre `package.json` e `pnpm-lock.yaml` juntos. Se o pnpm
+   acrescentar uma exceção para uma release recém-publicada em
+   `pnpm-workspace.yaml`, revise e inclua esse arquivo também. Envie um PR para
+   `main`; o CI executa os testes antes da publicação.
+
+Não é necessário copiar arquivos `.tgz`, manter uma pasta `vendor/` ou gerar
+uma release do site no npm. O projeto do site é privado para fins de publicação
+de pacotes (`private: true`); seu resultado é o conteúdo estático de `dist/`.
+Uma release do SciAstro só chega a este site quando sua dependência é atualizada.
+
 ## Publicar no GitHub Pages
 
 O destino é o repositório `volpatto/volpatto.github.io`, publicado na raiz de
 `https://volpatto.github.io/`. O workflow [pages.yml](.github/workflows/pages.yml)
-usa o ambiente Pixi, valida o conteúdo, confere os componentes, gera o site com Astro e executa os testes
+usa o ambiente Pixi, valida o conteúdo com SciAstro, gera o site com Astro e executa os testes
 e publica em pushes para `main`. Pull requests são conferidos sem publicação.
 A badge abaixo do título acompanha esse workflow na branch `main`.
 
@@ -284,17 +365,17 @@ A badge abaixo do título acompanha esse workflow na branch `main`.
 4. Aguarde a conclusão. O site estará em `https://volpatto.github.io/` após uma
    publicação bem-sucedida.
 
-### Erro “Invalid YAML front matter” nos arquivos Astro
+### GitHub Pages executa Jekyll em vez do build do site
 
 Se o log executar `actions/jekyll-build-pages`, o GitHub está usando o build por
-branch com **Jekyll**. O cabeçalho de um arquivo `.astro` contém código e não é
-um cabeçalho YAML de Jekyll. Isso não é um erro dos arquivos em `conteudo/`.
+branch com **Jekyll**. Este projeto precisa instalar o SciAstro e gerar o site com
+Astro antes de publicar. Os YAMLs de `conteudo/` não são páginas prontas para
+hospedagem. O SciAstro é baixado do npm durante a instalação das dependências.
 
 A correção é selecionar **GitHub Actions** em Pages, conforme o passo 1, e executar
 o workflow `Publish website to GitHub Pages`. Ele publica o HTML de `dist/`.
-Não selecione a pasta de código-fonte como site estático nem tente corrigir esse
-erro editando os cabeçalhos Astro. Adicionar `.nojekyll` ao código-fonte, sozinho,
-também não compila o projeto.
+Não selecione a pasta de código-fonte como site estático. Adicionar `.nojekyll`
+ao código-fonte, sozinho, também não compila o projeto.
 
 Essa configuração fica no GitHub e não é alterada por editar o workflow localmente.
 O procedimento segue a [documentação oficial de configuração da fonte de publicação](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
@@ -350,10 +431,10 @@ pixi run --locked verify
 
 Defina as duas variáveis na mesma sessão em que executa o comando. Em um serviço
 de integração contínua, configure-as no ambiente da etapa de build. Este projeto
-lê essas opções de `process.env` em `astro.config.mjs`; colocar os valores apenas
+lê essas opções de `process.env` pela integração SciAstro; colocar os valores apenas
 em um arquivo `.env` não substitui essas instruções.
 
-`verify` instala as dependências, valida o conteúdo e os tipos, gera o site e
+`verify` instala as dependências, valida o conteúdo, gera o site e
 confere os testes e links internos. Publique somente se o comando terminar
 com sucesso (código de saída zero). Os testes locais não conferem a configuração
 do servidor de destino nem a disponibilidade de links externos.
@@ -396,7 +477,7 @@ Ao mudar de domínio ou subdiretório, gere e publique novamente o site inteiro.
 Copiar um build antigo para outro endereço não atualiza seus links e metadados.
 Para voltar aos padrões locais em Bash/Zsh, use `unset SITE_URL BASE_PATH`;
 no PowerShell, abra uma nova sessão. Também é possível mudar os valores padrão
-em `astro.config.mjs` para tornar permanente o novo destino.
+nos campos `url` e `base` de `sciastro.yaml` para tornar permanente o novo destino.
 
 ## Publicar em servidor web
 
@@ -610,7 +691,7 @@ Com Python 3.12 ou superior, na raiz do projeto, em Linux/macOS:
 ```sh
 python3 -m venv .venv-cv
 .venv-cv/bin/python -m pip install -r cv/requirements.txt
-.venv-cv/bin/python scripts/generate-cv.py /caminho/para/CV_3999178670179183.zip --output .cv-build/revisao.pdf
+.venv-cv/bin/python cv/generate.py /caminho/para/CV_3999178670179183.zip --output .cv-build/revisao.pdf
 ```
 
 A primeira geração precisa de acesso à internet para os pacotes Typst. A exportação de entrada permanece fora do repositório. `.cv-build/` recebe o PDF, o YAML editável, o relatório de conversão e as somas de verificação. O cabeçalho usa somente os contatos públicos de `cv/header.yaml`; não se publicam XML, telefone, endereço residencial ou campos pessoais da exportação.
@@ -618,3 +699,20 @@ A primeira geração precisa de acesso à internet para os pacotes Typst. A expo
 Revise o PDF, incluindo todas as páginas, antes de copiar `.cv-build/revisao.pdf` para `public/files/cv-diego-volpatto-2026.pdf`. Sem `--output`, o script substitui diretamente esse PDF do site. Atualize a data indicada em `conteudo/paginas/curriculo.yaml` quando o registro Lattes mudar. O build do site usa o PDF já revisado e não depende de Python ou de acesso ao Lattes.
 
 As figuras de pesquisa são artefatos existentes, com referências, alterações e condições de uso descritas em `THIRD_PARTY_NOTICES.md`. Ao trocar uma figura, confira também legenda, texto alternativo e dimensões em `conteudo/paginas/pesquisa.yaml`, além dos créditos na página de licenciamento.
+
+## Browser Tests
+
+Além dos Tests das páginas estáticas, há testes em Chromium para os dois idiomas,
+modos claro/escuro e larguras de desktop/celular. Eles verificam navegação,
+persistência do tema, figuras, logos, PDF e ausência de transbordamento horizontal.
+
+```sh
+pixi run --locked browser-install
+pixi run --locked verify-all
+```
+
+No Linux, use `pixi run --locked pnpm exec playwright install --with-deps chromium`
+se as bibliotecas do navegador estiverem ausentes. O CI instala essas dependências
+e roda os Browser Tests antes de publicar. Relatórios, capturas e evidências de
+falhas ficam em `.test-output/`; no CI são preservados como artefato. Os testes
+utilizam uma instância temporária na porta 4370, sem encerrar a prévia na 4321.

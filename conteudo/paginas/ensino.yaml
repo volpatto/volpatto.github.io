@@ -1,80 +1,87 @@
-# Página: Ensino.
-# Edite os campos pt (português) e en (inglês). Guia: conteudo/README.md.
-# Parágrafos com links aceitam Markdown: [texto](https://exemplo.org).
+# Conteúdo da página. Guia de edição: ../README.md
+# Reordene ou acrescente entradas em sections; textos aceitam Markdown.
 
-page:
-  id: teaching
-  label:
-    pt: Ensino
-    en: Teaching
-  path:
-    pt: ensino/
-    en: en/teaching/
-  description:
-    pt: Disciplinas de Diego Volpatto no PPG em Modelagem Computacional do LNCC e materiais de ensino.
-    en: Courses taught by Diego Volpatto in LNCC’s Graduate Program in Computational Modeling, and
-      teaching materials.
-heading:
+id: teaching
+title:
   pt: Ensino
   en: Teaching
-introduction:
-  pt: Disciplinas no Programa de Pós-Graduação em Modelagem Computacional do LNCC.
-  en: Courses in the Graduate Program in Computational Modeling at LNCC.
-courses:
-  - code: GA-033
-    description:
-      pt: >-
-        Implementação de elementos finitos: malhas, funções de base, quadratura, montagem de
-        sistemas e condições de contorno. A ementa inclui verificação de implementações, taxas de
-        convergência e aplicações com FEniCS, Firedrake e NGSolve.
-      en: >-
-        Finite element implementation: meshes, basis functions, quadrature, system assembly and
-        boundary conditions. The syllabus includes implementation verification, convergence rates
-        and applications with FEniCS, Firedrake and NGSolve.
+paths:
+  pt: ensino/
+  en: en/teaching/
+description:
+  pt: Disciplinas de Diego Volpatto no PPG em Modelagem Computacional do LNCC e materiais de ensino.
+  en: Courses taught by Diego Volpatto in LNCC’s Graduate Program in Computational Modeling, and
+    teaching materials.
+icon: lucide:presentation
+sections:
+  - type: prose
+    text:
+      pt: Disciplinas no Programa de Pós-Graduação em Modelagem Computacional do LNCC.
+      en: Courses in the Graduate Program in Computational Modeling at LNCC.
+  - type: list
+    items:
+      - title:
+          pt: "Método de Elementos Finitos: Implementação Computacional"
+          en: "Finite Element Method: Computational Implementation"
+        eyebrow: GA-033
+        meta:
+          pt: LNCC · Pós-graduação · 36 h · 3 créditos
+          en: LNCC · Graduate course · 36 hours · 3 credits
+        text:
+          pt: "Implementação de elementos finitos: malhas, funções de base, quadratura, montagem de sistemas e
+            condições de contorno. A ementa inclui verificação de implementações, taxas de
+            convergência e aplicações com FEniCS, Firedrake e NGSolve."
+          en: "Finite element implementation: meshes, basis functions, quadrature, system assembly and
+            boundary conditions. The syllabus includes implementation verification, convergence
+            rates and applications with FEniCS, Firedrake and NGSolve."
+      - title:
+          pt: Solução Numérica de Equações Diferenciais
+          en: Numerical Solution of Differential Equations
+        eyebrow: GA-020
+        meta:
+          pt: LNCC · Pós-graduação · 36 h · 3 créditos
+          en: LNCC · Graduate course · 36 hours · 3 credits
+        text:
+          pt: Métodos para equações diferenciais ordinárias, diferenças finitas e elementos finitos. Abrange
+            discretizações variacionais e a aproximação de problemas elípticos e parabólicos.
+          en: Methods for ordinary differential equations, finite differences and finite elements. Covers
+            variational discretizations and the approximation of elliptic and parabolic problems.
+  - type: prose
+    text:
+      pt: Disciplinas registradas no Lattes desde setembro de 2025. Resumos baseados nas ementas
+        publicadas pelo programa; consulte o LNCC para a oferta do período.
+      en: Courses listed in Lattes since September 2025. Summaries follow the program’s published syllabi;
+        current offerings are listed by LNCC.
+    links:
+      - label:
+          pt: Ementas oficiais
+          en: Official syllabi
+        url: https://posgrad.lncc.br/pt-br/disciplinas-e-ementas
+  - type: cards
+    id: teaching-material
     title:
-      pt: "Método de Elementos Finitos: Implementação Computacional"
-      en: "Finite Element Method: Computational Implementation"
-    metadata:
-      pt: LNCC · Pós-graduação · 36 h · 3 créditos
-      en: LNCC · Graduate course · 36 hours · 3 credits
-  - code: GA-020
-    description:
-      pt: >-
-        Métodos para equações diferenciais ordinárias, diferenças finitas e elementos finitos.
-        Abrange discretizações variacionais e a aproximação de problemas elípticos e parabólicos.
-      en: >-
-        Methods for ordinary differential equations, finite differences and finite elements. Covers
-        variational discretizations and the approximation of elliptic and parabolic problems.
-    title:
-      pt: Solução Numérica de Equações Diferenciais
-      en: Numerical Solution of Differential Equations
-    metadata:
-      pt: LNCC · Pós-graduação · 36 h · 3 créditos
-      en: LNCC · Graduate course · 36 hours · 3 credits
-sourceNote:
-  pt: >-
-    Disciplinas registradas no Lattes desde setembro de 2025. Resumos baseados nas ementas
-    publicadas pelo programa; consulte o LNCC para a oferta do período.
-  en: >-
-    Courses listed in Lattes since September 2025. Summaries follow the program’s published syllabi;
-    current offerings are listed by LNCC.
-syllabi:
-  label:
-    pt: Ementas oficiais
-    en: Official syllabi
-  url: https://posgrad.lncc.br/pt-br/disciplinas-e-ementas
-material:
-  label:
-    pt: Material de curso
-    en: Course material
-  heading:
-    pt: Introdução ao Firedrake
-    en: An introduction to Firedrake
-  description:
-    pt: Material computacional do curso introdutório do EAMC 2022, no LNCC.
-    en: Computational material from the introductory course at EAMC 2022, LNCC.
-  link:
-    label:
-      pt: Repositório do curso
-      en: Course repository
-    url: https://github.com/volpatto/curso_firedrake_eamc
+      pt: Cursos de curta-duração e Palestras
+      en: Short courses and talks
+    items:
+      - title:
+          pt: Introdução ao Firedrake
+          en: An introduction to Firedrake
+        eyebrow:
+          pt: Material de curso
+          en: Course material
+        text:
+          pt: Material computacional do curso introdutório do EAMC 2022, no LNCC.
+          en: Computational material from the introductory course at EAMC 2022, LNCC.
+        links:
+          - label:
+              pt: Repositório do curso
+              en: Course repository
+            url: https://github.com/volpatto/curso_firedrake_eamc
+            icon:
+              src: /images/icons/github.svg
+              monochrome: true
+          - label:
+              pt: Playlist no YouTube
+              en: YouTube playlist
+            url: https://www.youtube.com/playlist?list=PLt6jbZlqPK1z2f0aOieIgNZzNY638pAvR
+            icon: lucide:youtube

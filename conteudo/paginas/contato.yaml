@@ -1,38 +1,41 @@
-# Página: Contato.
-# Edite os campos pt (português) e en (inglês). Guia: conteudo/README.md.
-# Parágrafos com links aceitam Markdown: [texto](https://exemplo.org).
+# Conteúdo da página. Guia de edição: ../README.md
+# Reordene ou acrescente entradas em sections; textos aceitam Markdown.
 
-page:
-  id: contact
-  label:
-    pt: Contato
-    en: Contact
-  path:
-    pt: contato/
-    en: en/contact/
-  description:
-    pt: Contato de Diego Volpatto no Laboratório Nacional de Computação Científica, em Petrópolis.
-    en: Contact Diego Volpatto at the National Laboratory for Scientific Computing in Petrópolis,
-      Brazil.
-heading:
+id: contact
+title:
   pt: Contato
   en: Contact
-institution:
-  pt: Laboratório Nacional de Computação Científica
-  en: National Laboratory for Scientific Computing
-address:
-  pt:
-    - Sala 2A-12
-    - Av. Getúlio Vargas, 333 · Quitandinha
-    - Petrópolis, RJ · Brasil
-    - 25651-075
-  en:
-    - Room 2A-12
-    - Av. Getúlio Vargas, 333 · Quitandinha
-    - Petrópolis, RJ · Brazil
-    - 25651-075
-institutionalLink:
-  label:
-    pt: Site institucional
-    en: Institutional website
-  url: https://www.gov.br/lncc/pt-br
+paths:
+  pt: contato/
+  en: en/contact/
+description:
+  pt: Contato de Diego Volpatto no Laboratório Nacional de Computação Científica, em Petrópolis.
+  en: Contact Diego Volpatto at the National Laboratory for Scientific Computing in Petrópolis, Brazil.
+icon: lucide:mail
+sections:
+  - type: prose
+    links:
+      - label: volpatto@lncc.br
+        url: mailto:volpatto@lncc.br
+        icon: lucide:mail
+  - type: prose
+    title:
+      pt: Laboratório Nacional de Computação Científica
+      en: National Laboratory for Scientific Computing
+    text:
+      pt: |-
+        Sala 2A-12\
+        Av. Getúlio Vargas, 333 · Quitandinha\
+        Petrópolis, RJ · Brasil\
+        25651-075
+      en: |-
+        Room 2A-12\
+        Av. Getúlio Vargas, 333 · Quitandinha\
+        Petrópolis, RJ · Brazil\
+        25651-075
+    links:
+      - label:
+          pt: Site institucional
+          en: Institutional website
+        url: https://www.gov.br/lncc/pt-br
+        icon: lucide:globe

@@ -6,7 +6,7 @@ This repository contains differently licensed materials. It is not a choice betw
 
 ## Website implementation - MIT
 
-Original functional code, styles, build/deployment configuration and scripts are licensed under the [MIT License](public/licenses/MIT.txt). This includes the implementation in `src/`, `scripts/`, `.github/`, the root configuration files and the author's original configuration in `cv/`.
+Original functional code, build/deployment configuration and scripts are licensed under the [MIT License](public/licenses/MIT.txt). This includes `tests/`, `.github/`, the root configuration files and the author's original code and configuration in `cv/`. SciAstro supplies the website components and styles under its [MIT license](public/licenses/SciAstro-MIT.txt).
 
 Original developer documentation explaining how to build, maintain and deploy that code is also covered by MIT. Third-party notices, license documents and upstream template portions retain their own terms.
 
@@ -28,7 +28,7 @@ See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for item-level sources, cre
 
 The legal texts and upstream notices under `public/licenses/` retain their own status; they are included to communicate terms, not relicensed as editorial content.
 
-The third-party brand paths in `src/data/brand-icons.ts` retain the Academicons OFL 1.1 (Lattes) and Font Awesome CC BY 4.0 (GitHub, ORCID, LinkedIn) terms. The original interface icon drawings and their rendering component remain under MIT. Brand and flag assets under `public/images/` retain the item-level terms recorded in `THIRD_PARTY_NOTICES.md`.
+The brand icons in `public/images/icons/` retain the Academicons OFL 1.1 (Lattes) and Font Awesome CC BY 4.0 (GitHub, ORCID, LinkedIn) terms. Interface icons supplied by SciAstro retain the [Lucide license notices](public/licenses/SciAstro-icons.txt). Brand and flag assets under `public/images/` retain the item-level terms recorded in `THIRD_PARTY_NOTICES.md`.
 
 ## Resumo em português
 
