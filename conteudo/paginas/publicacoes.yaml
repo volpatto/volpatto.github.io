@@ -22,75 +22,45 @@ sections:
           monochrome: true
   - type: publications
     items:
-      - year: "2026"
-        title: Modeling flash points of biofuels using thermodynamically consistent neural networks
-        authors: M. P. de Omena Souza, D. T. Volpatto, A. M. Barbosa Neto, M. C. da Costa
-        journal: Fluid Phase Equilibria
-        citation: 605, 114673
-        doi: 10.1016/j.fluid.2026.114673
+      - bibtex:
+          file: publicacoes.bib
+          key: souza2026thermodynamic
         topic:
           pt: Termodinâmica & SciML
           en: Thermodynamics & SciML
-      - year: "2025"
-        title: Using Reaktoro for mineral and gas solubility calculations with the Extended UNIQUAC model
-        authors: A. M. M. Leal, T. Tambach, D. Volpatto, X. Liang, P. L. Fosbøl, K. Thomsen
-        journal: Applied Geochemistry
-        citation: 180, 106274
-        doi: 10.1016/j.apgeochem.2024.106274
+      - bibtex:
+          file: publicacoes.bib
+          key: leal2025reaktoro
         topic:
           pt: Geoquímica
           en: Geochemistry
-      - year: "2025"
-        title: Modeling flash points of biofuels using neural networks
-        authors: M. P. de Omena Souza, D. C. do Nascimento, D. T. Volpatto, G. G. Ribeiro, A. M. Barbosa
-          Neto, M. C. da Costa
-        journal: Fluid Phase Equilibria
-        citation: 596, 114439
-        doi: 10.1016/j.fluid.2025.114439
+      - bibtex:
+          file: publicacoes.bib
+          key: souza2025flash
         topic:
           pt: Termodinâmica & SciML
           en: Thermodynamics & SciML
-      - year: "2023"
-        title: "A new modelling framework for predator-prey interactions: A case study of an
-          aphid-ladybeetle system"
-        authors: L. dos Anjos, G. T. Naozuka, D. T. Volpatto, W. A. C. Godoy, M. I. da Silveira Costa, R. C.
-          Almeida
-        journal: Ecological Informatics
-        citation: 77, 102168
-        doi: 10.1016/j.ecoinf.2023.102168
+      - bibtex:
+          file: publicacoes.bib
+          key: anjos2023predator
         topic:
           pt: Modelagem & inferência
           en: Modeling & inference
-      - year: "2022"
-        title: Accelerated reactive transport simulations in heterogeneous porous media using Reaktoro and
-          Firedrake
-        authors: S. Kyas, D. Volpatto, M. O. Saar, A. M. M. Leal
-        journal: Computational Geosciences
-        citation: 26, 295–327
-        doi: 10.1007/s10596-021-10126-2
+      - bibtex:
+          file: publicacoes.bib
+          key: kyas2022reactive
         topic:
           pt: Transporte reativo
           en: Reactive transport
-      - year: "2022"
-        title: Avaliação de Estratégias de Relaxamento do Distanciamento Social para o Brasil e o Estado do
-          Rio de Janeiro
-        authors: D. T. Volpatto, A. C. M. Resende, L. dos Anjos, J. V. O. Silva, C. M. Dias, R. C. Almeida,
-          S. M. C. Malta
-        journal: Trends in Computational and Applied Mathematics
-        citation: 23, 223–242
-        doi: 10.5540/tcam.2022.023.02.00223
+      - bibtex:
+          file: publicacoes.bib
+          key: volpatto2022distanciamento
         topic:
           pt: Modelagem & inferência
           en: Modeling & inference
-      - year: "2021"
-        title: "A generalised SEIRD model with implicit social distancing mechanism: A Bayesian approach for
-          the identification of the spread of COVID-19 with applications in Brazil and Rio de
-          Janeiro state"
-        authors: D. T. Volpatto, A. C. M. Resende, L. dos Anjos, J. V. O. Silva, C. M. Dias, R. C. Almeida,
-          S. M. C. Malta
-        journal: Journal of Simulation
-        citation: Online first, 2021
-        doi: 10.1080/17477778.2021.1977731
+      - bibtex:
+          file: publicacoes.bib
+          key: volpatto2021seird
         topic:
           pt: Modelagem & inferência
           en: Modeling & inference

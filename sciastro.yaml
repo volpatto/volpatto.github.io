@@ -83,3 +83,22 @@ structuredData:
     - https://orcid.org/0000-0002-3107-3259
     - https://github.com/volpatto
     - https://www.linkedin.com/in/diego-volpatto-1a286068
+bibliography:
+  file: publicacoes.bib
+  style: apa
+people:
+  avatarFallback:
+    src: /images/lncc-original.png
+    alt:
+      pt: Símbolo do LNCC
+      en: LNCC symbol
+    width: 2048
+    height: 966
+    viewBox: 205 202 555 557
+ui:
+  students:
+    pt: Orientações em andamento
+    en: Current supervision
+  alumni:
+    pt: Orientações concluídas
+    en: Completed supervision

@@ -83,11 +83,14 @@ test("all pages load in both themes without horizontal overflow or runtime error
           () => document.documentElement.scrollWidth <= innerWidth + 1,
         ),
       ).toBe(true);
-      if (record.id === "home" && record.locale === "pt") {
+      if (
+        ["home", "publications", "people"].includes(record.id) &&
+        record.locale === "pt"
+      ) {
         await page.evaluate(() => document.fonts.ready);
         await mkdir(".test-output/review", { recursive: true });
         await page.screenshot({
-          path: `.test-output/review/home-${info.project.name}-${mode}.png`,
+          path: `.test-output/review/${record.id}-${info.project.name}-${mode}.png`,
           fullPage: true,
         });
       }
@@ -142,4 +145,69 @@ test("research figures, partner logos and CV remain reachable", async ({
   const response = await request.get(href);
   expect(response.ok()).toBe(true);
   expect((await response.body()).subarray(0, 4).toString()).toBe("%PDF");
+});
+
+test("supervision shows each student's data and a circular portrait or institutional symbol", async ({
+  page,
+}) => {
+  const localized = (value, locale) =>
+    typeof value === "string" ? value : value[locale];
+  for (const locale of site.config.locales) {
+    await page.goto(
+      site.pages.find((p) => p.id === "people" && p.locale === locale).path,
+    );
+    await expect(page.locator(".member-card")).toHaveCount(site.members.length);
+    for (const member of site.members) {
+      const card = page.locator(`#member-${member.id}`);
+      await expect(
+        card.getByRole("heading", { name: member.name, exact: true }),
+      ).toBeVisible();
+      await expect(card).toContainText(localized(member.affiliation, locale));
+      if (member.topic)
+        await expect(card).toContainText(localized(member.topic, locale));
+      if (member.startYear)
+        await expect(card).toContainText(String(member.startYear));
+      if (member.endYear)
+        await expect(card).toContainText(String(member.endYear));
+      const section =
+        member.status === "alumni" ? "#alumni" : `#level-${member.level}`;
+      await expect(page.locator(`${section} #member-${member.id}`)).toHaveCount(
+        1,
+      );
+      const avatar = card.locator(".avatar");
+      const dimensions = await avatar.evaluate((element) => {
+        const box = element.getBoundingClientRect();
+        const style = getComputedStyle(element);
+        return {
+          width: box.width,
+          height: box.height,
+          radius: style.borderRadius,
+          overflow: style.overflow,
+        };
+      });
+      expect(dimensions.width).toBe(dimensions.height);
+      expect(dimensions.radius).toBe("50%");
+      expect(dimensions.overflow).toBe("hidden");
+      if (member.photo) {
+        await expect(avatar.locator("img")).toHaveAttribute(
+          "src",
+          site.config.base + member.photo.src.slice(1),
+        );
+      } else {
+        const fallback =
+          member.avatarFallback ?? site.config.people.avatarFallback;
+        const svg = avatar.getByRole("img", {
+          name: localized(fallback.alt, locale),
+          exact: true,
+        });
+        await expect(svg).toHaveAttribute("viewBox", fallback.viewBox);
+        // External image documents isolate the original SVG styles from each other.
+        await expect(svg.locator("image")).toHaveAttribute(
+          "href",
+          site.config.base + fallback.src.slice(1),
+        );
+        await expect(svg.locator("style, path, text")).toHaveCount(0);
+      }
+    }
+  }
 });

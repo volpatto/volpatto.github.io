@@ -8,13 +8,19 @@
 [![pnpm](https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
 [![Pixi](https://img.shields.io/badge/Pixi-41B3A3)](https://pixi.sh/)
 
-Site pessoal estático em português e inglês, construído com **[SciAstro](https://volpatto.github.io/sciastro/) e [Astro](https://astro.build/)**, usando o **LNCC Theme** e conteúdo editável em YAML. Apesar de ter sido montado para o GitHub Pages, foi preparado para publicação em outros domínios.
+Site pessoal estático em português e inglês, construído com **[SciAstro](https://volpatto.github.io/sciastro/) e [Astro](https://astro.build/)**, usando o **LNCC Theme** e conteúdo editável em YAML e BibTeX. Apesar de ter sido montado para o GitHub Pages, foi preparado para publicação em outros domínios.
 
 As páginas são definidas em `sciastro.yaml` e `conteudo/paginas/`. O SciAstro
 fornece os componentes, estilos e interações; este repositório mantém apenas
 a configuração de integração, o conteúdo, os arquivos públicos e os testes do site.
 O JavaScript local se limita às configurações e aos testes. A geração opcional
 do currículo usa Python, separadamente do build do site.
+
+Os dados bibliográficos ficam em `conteudo/publicacoes.bib`; cada card seleciona
+uma chave e uma categoria em `conteudo/paginas/publicacoes.yaml`. As orientações
+usam `conteudo/team.yaml`, com suporte a fotos circulares e símbolos das
+instituições como alternativa. O build lê esses arquivos localmente, sem consultar
+DOIs ou serviços externos.
 
 O SciAstro é instalado diretamente do [npm](https://www.npmjs.com/package/sciastro),
 com versão fixa em `package.json` e dependências registradas em `pnpm-lock.yaml`.
@@ -242,27 +248,29 @@ de manutenção; não fazem parte da publicação habitual de conteúdo.
 Os scripts pnpm continuam disponíveis dentro do ambiente (`pixi run pnpm …`
 ou `pixi shell`). Para o uso habitual, prefira as tarefas da tabela.
 
-O site funciona sem JavaScript para leitura, navegação entre páginas, menu móvel, download do CV e orientações expansíveis. O seletor de tema e a adaptação automática do estado do menu usam JavaScript. A mudança de idioma preserva a página atual; a escolha de tema persiste entre páginas. Links antigos como `/#teaching` são encaminhados à página correspondente quando JavaScript está disponível.
+O site funciona sem JavaScript para leitura, navegação entre páginas, menu móvel e download do CV. As orientações em andamento e concluídas aparecem em seções próprias, com os cards sempre visíveis. O seletor de tema e a adaptação automática do estado do menu usam JavaScript. A mudança de idioma preserva a página atual; a escolha de tema persiste entre páginas. Links antigos como `/#teaching` são encaminhados à página correspondente quando JavaScript está disponível.
 
 ## Onde atualizar o conteúdo
 
 Nota mais para eu mesmo, já que JS não é meu forte.
 
 **Comece pelo [guia de edição em `conteudo/README.md`](conteudo/README.md).**
-Os textos, links, imagens e listas estão em YAML, com um arquivo por página.
-Para acrescentar um artigo, aluno, software ou parceria, copie um registro da
-lista correspondente e edite seus campos; não é preciso alterar os componentes
-nem atualizar contagens nos testes.
+Os textos, links, imagens e listas estão em YAML. As publicações usam BibTeX,
+e os alunos têm um cadastro compartilhado em `team.yaml`. Para acrescentar um
+registro, siga os exemplos do guia; não é preciso alterar os componentes nem
+atualizar contagens nos testes.
 
 | Arquivo | O que editar |
 | --- | --- |
 | `sciastro.yaml` | Identidade, tema, idiomas, menu, rodapé e metadados |
 | `conteudo/paginas/sobre.yaml` | Apresentação, foto e formação resumida |
 | `conteudo/paginas/pesquisa.yaml` | Linhas de pesquisa, figuras e fontes |
-| `conteudo/paginas/publicacoes.yaml` | Artigos e DOIs |
+| `conteudo/publicacoes.bib` | Autoria, títulos, anos, periódicos e DOIs |
+| `conteudo/paginas/publicacoes.yaml` | Chaves BibTeX, categorias e ordem das publicações |
 | `conteudo/paginas/software.yaml` | Softwares, práticas, documentação e pacotes |
 | `conteudo/paginas/ensino.yaml` | Disciplinas e materiais |
-| `conteudo/paginas/orientacoes.yaml` | Alunos atuais e orientações concluídas |
+| `conteudo/team.yaml` | Alunos, temas, situação, nível, fotos e símbolos institucionais |
+| `conteudo/paginas/orientacoes.yaml` | Introdução e composição da página de orientações |
 | `conteudo/paginas/grupos.yaml` | Grupos de pesquisa |
 | `conteudo/paginas/parcerias.yaml` | Parcerias acadêmicas, projetos e indústria |
 | `conteudo/paginas/curriculo.yaml` | Experiência, formação e download do CV |
@@ -296,6 +304,7 @@ Não é necessário manter uma pasta `src/` nem um ambiente de TypeScript aqui.
 | --- | --- |
 | `sciastro.yaml` | Identidade, tema, idiomas, menu, rodapé e destino de publicação |
 | `conteudo/` | Textos e composição das páginas; inclui o guia de edição |
+| `styles/people.css` | Fundo dos símbolos institucionais para contraste nos dois temas |
 | `public/` | Imagens, currículo e licenças distribuídos com o site |
 | `astro.config.mjs` | Ativa o SciAstro; normalmente não precisa ser editado |
 | `cv/` | Script e configurações para gerar novamente o currículo |
@@ -326,8 +335,7 @@ Editar textos, imagens ou o currículo não exige atualizar o framework.
 Para atualizar intencionalmente:
 
 1. Leia as [notas da release](https://github.com/volpatto/sciastro/releases) e
-   escolha uma versão publicada no npm. O SciAstro ainda está em **alpha**;
-   confira eventuais instruções de migração.
+   escolha uma versão publicada no npm; confira eventuais instruções de migração.
 2. Na pasta **deste site**, substitua `VERSAO` pelo número escolhido e execute:
 
    ```sh
