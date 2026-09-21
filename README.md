@@ -1,19 +1,26 @@
 # Diego Volpatto -- site acadêmico
 
 [![Build, Tests e publicação](https://github.com/volpatto/volpatto.github.io/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/volpatto/volpatto.github.io/actions/workflows/pages.yml)
+[![SciAstro](https://img.shields.io/badge/SciAstro-475569)](https://volpatto.github.io/sciastro/)
 [![Astro](https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=white)](https://astro.build/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Node.js 24](https://img.shields.io/badge/Node.js-24-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
 [![Pixi](https://img.shields.io/badge/Pixi-41B3A3)](https://pixi.sh/)
 
-Site pessoal estático em português e inglês, construído com **SciAstro e Astro**, usando o **LNCC Theme** e conteúdo editável em YAML. Apesar de ter sido montado para o Github Pages, fiz pensando em mover facilmente para outros domínios.
+Site pessoal estático em português e inglês, construído com **[SciAstro](https://volpatto.github.io/sciastro/) e [Astro](https://astro.build/)**, usando o **LNCC Theme** e conteúdo editável em YAML. Apesar de ter sido montado para o GitHub Pages, foi preparado para publicação em outros domínios.
 
 As páginas são definidas em `sciastro.yaml` e `conteudo/paginas/`. O SciAstro
 fornece os componentes, estilos e interações; este repositório mantém apenas
 a configuração de integração, o conteúdo, os arquivos públicos e os testes do site.
 O JavaScript local se limita às configurações e aos testes. A geração opcional
 do currículo usa Python, separadamente do build do site.
+
+O SciAstro é instalado diretamente do [npm](https://www.npmjs.com/package/sciastro),
+com versão fixa em `package.json` e dependências registradas em `pnpm-lock.yaml`.
+Não é preciso clonar nem compilar o repositório do framework. A
+[documentação do SciAstro](https://volpatto.github.io/sciastro/) descreve os
+componentes, as opções de configuração e a API disponíveis.
 
 Organizado em dez páginas acadêmicas por idioma: apresentação, pesquisa, publicações, software, ensino, orientações, grupos de pesquisa, parcerias e projetos, currículo e contato. Uma página adicional de licenciamento em cada idioma é acessível pelo rodapé. Inclui experiência profissional, práticas de engenharia de software, resumos de ementas e logos dos grupos e instituições. Os modos claro e escuro respeitam a preferência do sistema na primeira visita; o botão no cabeçalho salva a escolha localmente. As fontes e imagens são servidas pelo próprio site. Não há analytics, formulário, banco de dados nem chamadas ao GitHub durante a navegação.
 
@@ -33,6 +40,7 @@ O resultado pronto para hospedagem fica em `dist/`.
 
 - [Instalar o Pixi e preparar o ambiente](#ambiente-e-uso-local-com-pixi)
 - [Editar o conteúdo](#onde-atualizar-o-conteúdo)
+- [Atualizar o SciAstro](#atualizar-o-sciastro)
 - [Gerar o site para domínio próprio ou subdiretório](#gerar-o-site-para-publicação)
 - [Publicar em servidor web](#publicar-em-servidor-web)
 - [Atualizar e restaurar uma versão anterior](#atualizar-e-restaurar-uma-versão-anterior)
@@ -290,7 +298,6 @@ Não é necessário manter uma pasta `src/` nem um ambiente de TypeScript aqui.
 | `conteudo/` | Textos e composição das páginas; inclui o guia de edição |
 | `public/` | Imagens, currículo e licenças distribuídos com o site |
 | `astro.config.mjs` | Ativa o SciAstro; normalmente não precisa ser editado |
-| `vendor/` | Pacote SciAstro usado pelo build, até sua publicação no npm |
 | `cv/` | Script e configurações para gerar novamente o currículo |
 | `tests/` e `playwright.config.mjs` | Tests do conteúdo publicado e da navegação |
 | `.github/workflows/pages.yml` | Build, Tests e publicação no GitHub Pages |
@@ -311,36 +318,37 @@ são o ambiente de trabalho: removê-las exige instalar as dependências novamen
 
 ## Atualizar o SciAstro
 
-A versão experimental `0.1.0-alpha.1` está em
-`vendor/sciastro-0.1.0-alpha.1.tgz`, referenciada no `package.json` e no
-`pnpm-lock.yaml`. **Inclua esse arquivo nos commits.** Assim, o build funciona
-em qualquer máquina com este repositório, sem precisar clonar o SciAstro ao lado.
-Ainda não há dependência de uma versão publicada no npm.
+O site usa o pacote publicado no npm. A versão instalada aparece no campo
+`dependencies.sciastro` de `package.json`; ela é fixa, sem `^` ou `~`.
+Instalações e builds usam o lockfile e não adotam novas releases automaticamente.
+Editar textos, imagens ou o currículo não exige atualizar o framework.
 
-Para desenvolver uma nova versão, na pasta do SciAstro:
+Para atualizar intencionalmente:
 
-```sh
-pixi run --locked verify-all
-pixi run --locked pack
-```
+1. Leia as [notas da release](https://github.com/volpatto/sciastro/releases) e
+   escolha uma versão publicada no npm. O SciAstro ainda está em **alpha**;
+   confira eventuais instruções de migração.
+2. Na pasta **deste site**, substitua `VERSAO` pelo número escolhido e execute:
 
-Instale o Chromium com `pixi run --locked browser-install` na primeira execução
-da suíte completa. Depois copie o `.tgz` gerado em `artifacts/` para `vendor/`
-neste repositório. Aqui, execute, substituindo `NOVA-VERSAO`:
+   ```sh
+   pixi run --locked pnpm add sciastro@VERSAO --save-exact
+   pixi run --locked browser-install
+   pixi run --locked verify-all
+   ```
 
-```sh
-pixi run pnpm add ./vendor/sciastro-NOVA-VERSAO.tgz --save-exact
-pixi run --locked verify
-```
+   `browser-install` prepara o Chromium para os testes. Pode ser omitido quando
+   a versão de navegador exigida pelo Playwright já estiver instalada.
+3. Execute `pixi run --locked preview` e confira as páginas em português e
+   inglês, os temas claro/escuro e a apresentação em uma tela pequena.
+4. Revise e registre `package.json` e `pnpm-lock.yaml` juntos. Se o pnpm
+   acrescentar uma exceção para uma release recém-publicada em
+   `pnpm-workspace.yaml`, revise e inclua esse arquivo também. Envie um PR para
+   `main`; o CI executa os testes antes da publicação.
 
-Confira a prévia e registre o arquivo, `package.json` e `pnpm-lock.yaml` juntos.
-Se estiver reconstruindo a mesma versão experimental durante uma sessão local,
-substitua o arquivo em `vendor/` e rode `pixi run pnpm update sciastro`; versões
-já distribuídas devem receber um novo número, preservando a reprodutibilidade.
-
-Quando houver uma versão publicada no npm, será possível trocar a dependência
-local por `pixi run pnpm add sciastro@VERSAO --save-exact`, usando o nome final
-publicado. Essa troca não exige mover os textos, as imagens ou os PDFs.
+Não é necessário copiar arquivos `.tgz`, manter uma pasta `vendor/` ou gerar
+uma release do site no npm. O projeto do site é privado para fins de publicação
+de pacotes (`private: true`); seu resultado é o conteúdo estático de `dist/`.
+Uma release do SciAstro só chega a este site quando sua dependência é atualizada.
 
 ## Publicar no GitHub Pages
 
@@ -362,7 +370,7 @@ A badge abaixo do título acompanha esse workflow na branch `main`.
 Se o log executar `actions/jekyll-build-pages`, o GitHub está usando o build por
 branch com **Jekyll**. Este projeto precisa instalar o SciAstro e gerar o site com
 Astro antes de publicar. Os YAMLs de `conteudo/` não são páginas prontas para
-hospedagem, e o pacote em `vendor/` também precisa ser instalado.
+hospedagem. O SciAstro é baixado do npm durante a instalação das dependências.
 
 A correção é selecionar **GitHub Actions** em Pages, conforme o passo 1, e executar
 o workflow `Publish website to GitHub Pages`. Ele publica o HTML de `dist/`.
