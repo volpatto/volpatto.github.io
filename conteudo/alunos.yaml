@@ -1,0 +1,163 @@
+# Cadastro dos alunos. Dados migrados do Lattes (agosto de 2026), sem atualização de situação.
+# Guia de edição, fotos e símbolos: README.md.
+# Sem photo, usa avatarFallback da pessoa ou o símbolo do LNCC em sciastro.yaml.
+# &udesc define um símbolo reutilizável; *udesc o reutiliza nos demais alunos.
+# Nos egressos sem data inicial, o ano de conclusão também fica em affiliation
+# para aparecer no card; não preencha startYear sem conhecer a data.
+
+- id: karen-dayana-arias-sandoval
+  name: Karen Dayana Arias Sandoval
+  role: student
+  status: active
+  level: masters
+  affiliation:
+    pt: LNCC · Orientação
+    en: LNCC · Supervisor
+  topic:
+    pt: Cálculos de equilíbrio termodinâmico em sistemas reativos acelerados por K-NN de Taylor.
+      Tema provisório
+    en: Acceleration of thermodynamic equilibrium calculations in reactive transport via taylor
+      K-NN Provisional topic
+  startYear: 2025
+- id: breno-vieira-sousa
+  name: Breno Vieira Sousa
+  role: student
+  status: active
+  level: masters
+  affiliation:
+    pt: LNCC · Orientação
+    en: LNCC · Supervisor
+  topic:
+    pt: Formulações estabilizadas de elementos finitos para transporte de CO₂ em carbodutos. Tema
+      provisório
+    en: Stabilized finite element formulations for CO₂ transport in pipelines. Provisional topic
+  startYear: 2025
+- id: laira-lopes-silva
+  name: Laira Lopes Silva
+  role: student
+  status: active
+  level: masters
+  affiliation:
+    pt: LNCC · Coorientação
+    en: LNCC · Co-supervisor
+  startYear: 2025
+- id: rennan-marques-de-souza-damasceno
+  name: Rennan Marques de Souza Damasceno
+  role: student
+  status: active
+  level: masters
+  affiliation:
+    pt: UDESC · Coorientação
+    en: UDESC · Co-supervisor
+  topic:
+    pt: Análise de dados para validação automatizada de BSW em poços offshore. Tema provisório
+    en: A data analysis pipeline for automated BSW validation in offshore wells. Provisional topic
+  startYear: 2026
+  avatarFallback: &udesc
+    src: /images/udesc.svg
+    alt:
+      pt: Símbolo da UDESC
+      en: UDESC symbol
+    width: 277.83
+    height: 49.03
+    viewBox: 0 0 51 49.03
+- id: hanna-heloise-heyde
+  name: Hanna Heloise Heyde
+  role: student
+  status: active
+  level: masters
+  affiliation:
+    pt: UDESC · Coorientação
+    en: UDESC · Co-supervisor
+  topic:
+    pt: Modelagem baseada em SINDy de queda de pressão em poços produtores offshore. Tema
+      provisório
+    en: SINDy-based modeling of pressure drop in offshore production wells. Provisional topic
+  startYear: 2026
+  avatarFallback: *udesc
+- id: marcel-de-araujo
+  name: Marcel de Araujo
+  role: student
+  status: active
+  level: masters
+  affiliation:
+    pt: UDESC · Coorientação
+    en: UDESC · Co-supervisor
+  topic:
+    pt: Modelagem híbrida de escoamento monofásico em poços injetores de petróleo. Tema provisório
+    en: Hybrid modeling of single-phase flow in oilfield injection wells. Provisional topic
+  startYear: 2026
+  avatarFallback: *udesc
+- id: mauricio-prado-de-omena-souza
+  name: Maurício Prado de Omena Souza
+  role: student
+  status: alumni
+  level: masters
+  affiliation:
+    pt: UNICAMP · 2025 · Coorientação
+    en: UNICAMP · 2025 · Co-supervisor
+  topic:
+    pt: "Flash Point Modeling with Neural Networks: From a Data-Driven Approach to PINNs."
+    en: "Flash Point Modeling with Neural Networks: From a Data-Driven Approach to PINNs."
+  endYear: 2025
+  avatarFallback:
+    src: /images/unicamp.svg
+    alt:
+      pt: Símbolo da Unicamp
+      en: Unicamp symbol
+    width: 239.86
+    height: 269.2
+    viewBox: 0 0 240 205
+- id: natalia-kauana-gesser-miotto
+  name: Natália Kauana Gesser Miotto
+  role: student
+  status: alumni
+  level: masters
+  affiliation:
+    pt: UDESC · 2024 · Coorientação
+    en: UDESC · 2024 · Co-supervisor
+  topic:
+    pt: Analysis of the impact of impurities in CO2-rich mixtures in CCS/CCUS applications.
+    en: Analysis of the impact of impurities in CO2-rich mixtures in CCS/CCUS applications.
+  endYear: 2024
+  avatarFallback: *udesc
+- id: maria-fernanda-marmilli-de-alvarenga-campos-franzin
+  name: Maria Fernanda Marmilli de Alvarenga Campos Franzin
+  role: student
+  status: alumni
+  level: undergraduate
+  affiliation:
+    pt: UDESC · 2024 · Orientação
+    en: UDESC · 2024 · Supervisor
+  endYear: 2024
+  avatarFallback: *udesc
+- id: leonardo-augusto-lemos
+  name: Leonardo Augusto Lemos
+  role: student
+  status: alumni
+  level: undergraduate
+  affiliation:
+    pt: UDESC · 2024 · Orientação
+    en: UDESC · 2024 · Supervisor
+  endYear: 2024
+  avatarFallback: *udesc
+- id: giovanna-girotto
+  name: Giovanna Girotto
+  role: student
+  status: alumni
+  level: undergraduate
+  affiliation:
+    pt: UDESC · 2024 · Orientação
+    en: UDESC · 2024 · Supervisor
+  endYear: 2024
+  avatarFallback: *udesc
+- id: bernardo-skovronski-woitas
+  name: Bernardo Skovronski Woitas
+  role: student
+  status: alumni
+  level: undergraduate
+  affiliation:
+    pt: UDESC · 2024 · Orientação
+    en: UDESC · 2024 · Supervisor
+  endYear: 2024
+  avatarFallback: *udesc

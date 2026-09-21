@@ -12,8 +12,8 @@ importers:
         specifier: 7.3.3
         version: 7.3.3(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@24.13.6)(yaml@2.9.1)
       sciastro:
-        specifier: 0.1.0-alpha.1
-        version: 0.1.0-alpha.1(astro@7.3.3(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@24.13.6)(yaml@2.9.1))
+        specifier: 0.1.2
+        version: 0.1.2(astro@7.3.3(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@24.13.6)(yaml@2.9.1))
     devDependencies:
       '@playwright/test':
         specifier: 1.63.0
@@ -1304,8 +1304,8 @@ packages:
     resolution: {integrity: sha512-42tBVwLWnaQvW5zc4HbZrTuWccECCZfBi92FDuwtqxasH+JbPB3/FOKb1m222K42R4WxuxzzMsTswfzgtSu64Q==}
     engines: {node: '>=11.0.0'}
 
-  sciastro@0.1.0-alpha.1:
-    resolution: {integrity: sha512-2BQYLuKY+ca4Lh31QSAQw2d9nKIlggACmqQo5F5vKDWoQeEBRDW+QfWMVD1liQl6sH5hz0WK696pDRJKbhGzvQ==}
+  sciastro@0.1.2:
+    resolution: {integrity: sha512-CEKPtJVFAm3U/n8VyPD2CKpyq6fnSWH1+pPDgv0p25CTX7w4Oum9aZ4SHPzwmiz7q/XV8WOzmBqUNJoRl2ehgA==}
     engines: {node: '>=24'}
     hasBin: true
     peerDependencies:
@@ -2754,7 +2754,7 @@ snapshots:
 
   sax@1.6.1: {}
 
-  sciastro@0.1.0-alpha.1(astro@7.3.3(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@24.13.6)(yaml@2.9.1)):
+  sciastro@0.1.2(astro@7.3.3(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@24.13.6)(yaml@2.9.1)):
     dependencies:
       '@citation-js/core': 0.9.0
       '@citation-js/plugin-bibtex': 0.9.0(@citation-js/core@0.9.0)

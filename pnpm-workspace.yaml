@@ -1,4 +1,4 @@
 allowBuilds:
   esbuild: true
 minimumReleaseAgeExclude:
-  - sciastro@0.1.0-alpha.1
+  - sciastro@0.1.2

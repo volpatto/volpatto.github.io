@@ -1,0 +1,4 @@
+/* Preserve the original institutional colors and their contrast in both themes. */
+.avatar-fallback {
+  background: #fff;
+}

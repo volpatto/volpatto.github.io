@@ -1,10 +1,12 @@
 # Editar o conteúdo do site
 
 O site usa o pacote **SciAstro**, com o **LNCC Theme**. As edições habituais são
-feitas em YAML; não é necessário conhecer JavaScript nem alterar componentes.
+feitas em YAML e BibTeX; não é necessário conhecer JavaScript nem alterar componentes.
 
 - `../sciastro.yaml`: identidade, tema, logo, idiomas, rodapé e ordem das páginas.
 - `paginas/`: um arquivo por página, com os textos em português (`pt`) e inglês (`en`).
+- `publicacoes.bib`: dados bibliográficos compartilhados por publicações e citações.
+- `alunos.yaml`: orientações, fotos e símbolos institucionais.
 - `../public/`: imagens, documentos e licenças servidos pelo site.
 
 ## Visualizar e conferir
@@ -71,8 +73,8 @@ um objeto com `pt` e `en` fornece traduções.
 | `list` | Listas; pode usar `collapsible: true` e `open: true` |
 | `timeline` | Experiência e formação; cada item tem `period` |
 | `logos` | Logos com links, como nas parcerias industriais |
-| `publications` | Publicações com autoria, ano, periódico e DOI |
-| `team` | Equipe estruturada a partir de `team.yaml`, quando utilizada |
+| `publications` | Cards preenchidos por BibTeX, com categorias definidas no YAML |
+| `team` | Orientações estruturadas a partir de `alunos.yaml` |
 | `custom` | Extensão avançada com componente Astro registrado |
 
 Cards, listas e trajetórias aceitam `title`, `eyebrow` (linha acima do título),
@@ -120,15 +122,110 @@ exibição do logo; o arquivo original é preservado.
 
 ### Publicações e referências
 
-Em `publicacoes.yaml`, adicione registros na seção `type: publications`, mantendo
-`title`, `authors`, `year`, `journal`, `citation`, `doi` e `topic`. O DOI deve ser
-somente o identificador, como `10.1234/exemplo`, sem `https://doi.org/`.
+Para acrescentar uma publicação:
 
-Também é possível adicionar `bibliography: { file: references.bib, style: apa }`
-em `sciastro.yaml`, criar `conteudo/references.bib` e usar `[@chave]` nos textos.
-O campo `references: [chave1, chave2]` de uma página lista referências sem exigir
-citações no corpo. As publicações atuais mantêm o texto editorial da versão
-anterior; elas não são convertidas automaticamente em registros BibTeX.
+1. Exporte o BibTeX pelo periódico ou gerenciador bibliográfico e acrescente a
+   entrada em `publicacoes.bib`. Confira os metadados e escolha uma chave única.
+2. Em `paginas/publicacoes.yaml`, acrescente um item à seção `type: publications`:
+
+   ```yaml
+   - bibtex:
+       file: publicacoes.bib
+       key: leal2025reaktoro
+     topic:
+       pt: Geoquímica
+       en: Geochemistry
+   ```
+
+3. Substitua a chave pela da nova entrada e ajuste a categoria nos dois idiomas.
+   A posição do item no YAML determina a ordem do card.
+4. Execute `pixi run --locked verify` e confira a prévia.
+
+O exemplo acima corresponde a um artigo já cadastrado; não duplique o item.
+`file` é relativo a `conteudo/`, não a `conteudo/paginas/`. Como `bibliography.file`
+já aponta para esse arquivo em `sciastro.yaml`, a forma curta
+`bibtex: leal2025reaktoro` também funciona. Use `{ file, key }` para selecionar
+entradas de outro `.bib` dentro de `conteudo/`.
+
+Não repita `title`, `authors`, `year`, `journal`, `citation` ou `doi` no YAML:
+o SciAstro os preenche durante o build. Esses campos, quando escritos manualmente,
+substituem os dados do BibTeX. O campo `topic` continua sendo uma escolha editorial.
+Adicionar uma entrada ao `.bib` não cria um card: é preciso selecioná-la no YAML.
+
+No BibTeX, separe autores por `and`, proteja siglas ou títulos com chaves e use
+`--` em intervalos de páginas. `number` é o número da edição; números de artigo
+podem ficar em `pages`, como nas entradas existentes. O DOI deve conter somente o
+identificador. O arquivo já inclui exemplos de periódicos com páginas e com
+números de artigo. Os metadados iniciais foram conferidos no Crossref; para o
+artigo SEIRD, `year` registra a primeira publicação online, em 29 de setembro de
+2021. O volume, número e páginas correspondem à edição de 2023; essa distinção
+fica registrada em `note` (esse campo não aparece no card).
+
+**Citar uma referência em um texto:** a bibliografia padrão já está configurada
+em `../sciastro.yaml`. Por exemplo, em um bloco `prose`:
+
+```yaml
+text:
+  pt: "Uma aplicação em transporte reativo é apresentada em [@kyas2022reactive]."
+  en: "A reactive transport application is presented in [@kyas2022reactive]."
+```
+
+O SciAstro cria a citação e a referência ao final da página. O campo
+`references: [kyas2022reactive]`, no nível da página, inclui uma referência sem
+citação no corpo. Essas citações usam o arquivo de `bibliography.file`; selecionar
+um card de outro `.bib` não acrescenta esse arquivo à bibliografia das citações.
+Os cards de publicações, sozinhos, não duplicam uma lista de referências no rodapé.
+O build não busca metadados na internet: mantenha o `.bib` junto com o site no Git.
+
+### Orientações, fotos e símbolos
+
+O cadastro fica em `conteudo/alunos.yaml`, selecionado em `sciastro.yaml`:
+
+```yaml
+people:
+  file: alunos.yaml
+  # Mantenha avatarFallback neste mesmo bloco para configurar o símbolo padrão.
+```
+
+O caminho de `file` é relativo a `contentDir` (`conteudo/` neste site). O arquivo
+`paginas/orientacoes.yaml` contém a introdução e a composição da página; os dados
+dos alunos ficam no cadastro acima. Não é necessário manter um arquivo auxiliar.
+
+Edite `alunos.yaml`. Cada pessoa tem `id` único, `name`, `role: student`,
+`status` (`active` ou `alumni`), `level` e, quando conhecidos, `startYear` e
+`endYear`. Os níveis disponíveis são `undergraduate`, `masters`, `phd` e `postdoc`.
+`affiliation` identifica a instituição e a atuação como orientador ou coorientador;
+`topic` contém o tema nos dois idiomas. A ordem dos registros é preservada dentro
+de cada grupo. A página usa `type: team` para separar ativos por nível e egressos.
+
+Para adicionar uma foto, coloque o arquivo em `public/images/people/` e acrescente
+à pessoa (substituindo o nome do arquivo):
+
+```yaml
+photo:
+  src: /images/people/nome-da-pessoa.jpg
+  alt: { pt: "Retrato de Nome da Pessoa", en: "Portrait of Person Name" }
+  position: [50, 35]
+```
+
+A foto será exibida em um círculo. `position` ajusta o enquadramento horizontal e
+vertical, de 0 a 100; sem esse campo, o recorte fica centralizado em `[50, 50]`.
+Omitir `photo` ativa o símbolo alternativo: primeiro `avatarFallback` da pessoa,
+depois `people.avatarFallback` em `sciastro.yaml` (LNCC neste site).
+
+Os alunos da UDESC e da Unicamp têm seus próprios símbolos. Em `alunos.yaml`,
+`&udesc` dá um nome à configuração do símbolo e `*udesc` a reutiliza; ao mover ou
+remover a primeira definição, mantenha-a antes dos usos. Você também pode copiar
+o bloco completo ou definir outro `avatarFallback` para uma pessoa. `viewBox`,
+`width` e `height` permitem mostrar somente o símbolo de um logo sem alterar o
+arquivo original. Preserve os créditos em `THIRD_PARTY_NOTICES.md` e na página
+de licenciamento ao adicionar imagens. O fundo branco de `styles/people.css`
+mantém o contraste das cores originais nos modos claro e escuro.
+
+Para concluir uma orientação, mude `status` para `alumni` e informe `endYear`.
+Quando o ano inicial não for conhecido, mantenha-o ausente e inclua o ano de
+conclusão também em `affiliation`, como nos exemplos existentes: atualmente o
+card só exibe automaticamente o período quando há `startYear`.
 
 ### Criar uma página
 
