@@ -8,3 +8,5 @@ dist/
 .venv-cv/
 .cv-build/
 .pixi/
+
+.test-output/

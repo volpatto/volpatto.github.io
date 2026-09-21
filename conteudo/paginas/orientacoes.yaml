@@ -1,154 +1,143 @@
-# Página: Orientações.
-# Edite os campos pt (português) e en (inglês). Guia: conteudo/README.md.
-# Parágrafos com links aceitam Markdown: [texto](https://exemplo.org).
+# Conteúdo da página. Guia de edição: ../README.md
+# Reordene ou acrescente entradas em sections; textos aceitam Markdown.
 
-page:
-  id: people
-  label:
-    pt: Orientações
-    en: Supervision
-  path:
-    pt: orientacoes/
-    en: en/supervision/
-  description:
-    pt: Orientações e coorientações de Diego Volpatto no LNCC e em instituições parceiras.
-    en: Students supervised and co-supervised by Diego Volpatto at LNCC and partner institutions.
-heading:
+id: people
+title:
   pt: Orientações
   en: Supervision
-introduction:
-  pt: Alunos que oriento ou cooriento no LNCC e em instituições parceiras.
-  en: Students I supervise or co-supervise at LNCC and partner institutions.
-currentHeading:
-  pt: Mestrado em andamento
-  en: Current MSc students
-sourceNote:
-  pt: Lattes · agosto de 2026
-  en: Lattes · August 2026
-sinceLabel:
-  pt: "Desde "
-  en: "Since "
-provisionalLabel:
-  pt: Tema provisório
-  en: Provisional topic
-completedHeading:
-  pt: Orientações concluídas
-  en: Completed supervision
-students:
-  - name: Karen Dayana Arias Sandoval
-    institution: LNCC
-    year: "2025"
-    role:
-      pt: Orientação
-      en: Supervisor
-    topic:
-      pt: Cálculos de equilíbrio termodinâmico em sistemas reativos acelerados por K-NN de Taylor.
-      en: Acceleration of thermodynamic equilibrium calculations in reactive transport via taylor K-NN
-    provisional: true
-  - name: Breno Vieira Sousa
-    institution: LNCC
-    year: "2025"
-    role:
-      pt: Orientação
-      en: Supervisor
-    topic:
-      pt: Formulações estabilizadas de elementos finitos para transporte de CO₂ em carbodutos.
-      en: Stabilized finite element formulations for CO₂ transport in pipelines.
-    provisional: true
-  - name: Laira Lopes Silva
-    institution: LNCC
-    year: "2025"
-    role:
-      pt: Coorientação
-      en: Co-supervisor
-  - name: Rennan Marques de Souza Damasceno
-    institution: UDESC
-    year: "2026"
-    role:
-      pt: Coorientação
-      en: Co-supervisor
-    topic:
-      pt: Análise de dados para validação automatizada de BSW em poços offshore.
-      en: A data analysis pipeline for automated BSW validation in offshore wells.
-    provisional: true
-  - name: Hanna Heloise Heyde
-    institution: UDESC
-    year: "2026"
-    role:
-      pt: Coorientação
-      en: Co-supervisor
-    topic:
-      pt: Modelagem baseada em SINDy de queda de pressão em poços produtores offshore.
-      en: SINDy-based modeling of pressure drop in offshore production wells.
-    provisional: true
-  - name: Marcel de Araujo
-    institution: UDESC
-    year: "2026"
-    role:
-      pt: Coorientação
-      en: Co-supervisor
-    topic:
-      pt: Modelagem híbrida de escoamento monofásico em poços injetores de petróleo.
-      en: Hybrid modeling of single-phase flow in oilfield injection wells.
-    provisional: true
-alumni:
-  - name: Maurício Prado de Omena Souza
-    institution: UNICAMP
-    year: "2025"
-    role:
-      pt: Coorientação
-      en: Co-supervisor
-    level:
-      pt: Mestrado
-      en: MSc
-    topic:
-      pt: "Flash Point Modeling with Neural Networks: From a Data-Driven Approach to PINNs."
-      en: "Flash Point Modeling with Neural Networks: From a Data-Driven Approach to PINNs."
-  - name: Natália Kauana Gesser Miotto
-    institution: UDESC
-    year: "2024"
-    role:
-      pt: Coorientação
-      en: Co-supervisor
-    level:
-      pt: Mestrado
-      en: MSc
-    topic:
-      pt: Analysis of the impact of impurities in CO2-rich mixtures in CCS/CCUS applications.
-      en: Analysis of the impact of impurities in CO2-rich mixtures in CCS/CCUS applications.
-  - name: Maria Fernanda Marmilli de Alvarenga Campos Franzin
-    institution: UDESC
-    year: "2024"
-    role:
-      pt: Orientação
-      en: Supervisor
-    level:
-      pt: Iniciação científica
-      en: Undergraduate research
-  - name: Leonardo Augusto Lemos
-    institution: UDESC
-    year: "2024"
-    role:
-      pt: Orientação
-      en: Supervisor
-    level:
-      pt: Iniciação científica
-      en: Undergraduate research
-  - name: Giovanna Girotto
-    institution: UDESC
-    year: "2024"
-    role:
-      pt: Orientação
-      en: Supervisor
-    level:
-      pt: Iniciação científica
-      en: Undergraduate research
-  - name: Bernardo Skovronski Woitas
-    institution: UDESC
-    year: "2024"
-    role:
-      pt: Orientação
-      en: Supervisor
-    level:
-      pt: Iniciação científica
-      en: Undergraduate research
+paths:
+  pt: orientacoes/
+  en: en/supervision/
+description:
+  pt: Orientações e coorientações de Diego Volpatto no LNCC e em instituições parceiras.
+  en: Students supervised and co-supervised by Diego Volpatto at LNCC and partner institutions.
+icon: lucide:users-round
+sections:
+  - type: prose
+    text:
+      pt: Alunos que oriento ou cooriento no LNCC e em instituições parceiras.
+      en: Students I supervise or co-supervise at LNCC and partner institutions.
+  - type: cards
+    title:
+      pt: Mestrado em andamento
+      en: Current MSc students
+    text:
+      pt: Lattes · agosto de 2026
+      en: Lattes · August 2026
+    items:
+      - title: Karen Dayana Arias Sandoval
+        eyebrow:
+          pt: LNCC · Desde 2025
+          en: LNCC · Since 2025
+        subtitle:
+          pt: Orientação
+          en: Supervisor
+        text:
+          pt: Cálculos de equilíbrio termodinâmico em sistemas reativos acelerados por K-NN de Taylor. Tema
+            provisório
+          en: Acceleration of thermodynamic equilibrium calculations in reactive transport via taylor K-NN
+            Provisional topic
+      - title: Breno Vieira Sousa
+        eyebrow:
+          pt: LNCC · Desde 2025
+          en: LNCC · Since 2025
+        subtitle:
+          pt: Orientação
+          en: Supervisor
+        text:
+          pt: Formulações estabilizadas de elementos finitos para transporte de CO₂ em carbodutos. Tema
+            provisório
+          en: Stabilized finite element formulations for CO₂ transport in pipelines. Provisional topic
+      - title: Laira Lopes Silva
+        eyebrow:
+          pt: LNCC · Desde 2025
+          en: LNCC · Since 2025
+        subtitle:
+          pt: Coorientação
+          en: Co-supervisor
+      - title: Rennan Marques de Souza Damasceno
+        eyebrow:
+          pt: UDESC · Desde 2026
+          en: UDESC · Since 2026
+        subtitle:
+          pt: Coorientação
+          en: Co-supervisor
+        text:
+          pt: Análise de dados para validação automatizada de BSW em poços offshore. Tema provisório
+          en: A data analysis pipeline for automated BSW validation in offshore wells. Provisional topic
+      - title: Hanna Heloise Heyde
+        eyebrow:
+          pt: UDESC · Desde 2026
+          en: UDESC · Since 2026
+        subtitle:
+          pt: Coorientação
+          en: Co-supervisor
+        text:
+          pt: Modelagem baseada em SINDy de queda de pressão em poços produtores offshore. Tema provisório
+          en: SINDy-based modeling of pressure drop in offshore production wells. Provisional topic
+      - title: Marcel de Araujo
+        eyebrow:
+          pt: UDESC · Desde 2026
+          en: UDESC · Since 2026
+        subtitle:
+          pt: Coorientação
+          en: Co-supervisor
+        text:
+          pt: Modelagem híbrida de escoamento monofásico em poços injetores de petróleo. Tema provisório
+          en: Hybrid modeling of single-phase flow in oilfield injection wells. Provisional topic
+  - type: list
+    id: alumni
+    title:
+      pt: Orientações concluídas
+      en: Completed supervision
+    collapsible: true
+    open: true
+    items:
+      - title: Maurício Prado de Omena Souza
+        eyebrow:
+          pt: UNICAMP · 2025 · Mestrado
+          en: UNICAMP · 2025 · MSc
+        subtitle:
+          pt: Coorientação
+          en: Co-supervisor
+        text:
+          pt: "Flash Point Modeling with Neural Networks: From a Data-Driven Approach to PINNs."
+          en: "Flash Point Modeling with Neural Networks: From a Data-Driven Approach to PINNs."
+      - title: Natália Kauana Gesser Miotto
+        eyebrow:
+          pt: UDESC · 2024 · Mestrado
+          en: UDESC · 2024 · MSc
+        subtitle:
+          pt: Coorientação
+          en: Co-supervisor
+        text:
+          pt: Analysis of the impact of impurities in CO2-rich mixtures in CCS/CCUS applications.
+          en: Analysis of the impact of impurities in CO2-rich mixtures in CCS/CCUS applications.
+      - title: Maria Fernanda Marmilli de Alvarenga Campos Franzin
+        eyebrow:
+          pt: UDESC · 2024 · Iniciação científica
+          en: UDESC · 2024 · Undergraduate research
+        subtitle:
+          pt: Orientação
+          en: Supervisor
+      - title: Leonardo Augusto Lemos
+        eyebrow:
+          pt: UDESC · 2024 · Iniciação científica
+          en: UDESC · 2024 · Undergraduate research
+        subtitle:
+          pt: Orientação
+          en: Supervisor
+      - title: Giovanna Girotto
+        eyebrow:
+          pt: UDESC · 2024 · Iniciação científica
+          en: UDESC · 2024 · Undergraduate research
+        subtitle:
+          pt: Orientação
+          en: Supervisor
+      - title: Bernardo Skovronski Woitas
+        eyebrow:
+          pt: UDESC · 2024 · Iniciação científica
+          en: UDESC · 2024 · Undergraduate research
+        subtitle:
+          pt: Orientação
+          en: Supervisor

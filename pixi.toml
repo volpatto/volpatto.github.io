@@ -30,7 +30,7 @@ description = "Confere os arquivos YAML e as imagens referenciadas"
 [tasks.check]
 cmd = "pnpm check"
 depends-on = ["setup"]
-description = "Confere conteúdo, tipos e componentes Astro"
+description = "Valida configuração, conteúdo e arquivos com o SciAstro"
 
 [tasks.build]
 cmd = "pnpm build"
@@ -66,3 +66,18 @@ description = "Encerra o servidor de desenvolvimento deste projeto"
 cmd = "pnpm exec astro preview stop"
 depends-on = ["setup"]
 description = "Encerra o servidor de prévia estática deste projeto"
+
+[tasks.browser-install]
+cmd = "pnpm exec playwright install chromium"
+depends-on = ["setup"]
+description = "Instala o navegador para os Tests automatizados"
+
+[tasks.test-browser]
+cmd = "pnpm test:browser"
+depends-on = ["build"]
+description = "Executa Browser Tests no desktop e no celular"
+
+[tasks.verify-all]
+cmd = "pnpm verify:all"
+depends-on = ["setup"]
+description = "Checks, build, Tests de páginas e Browser Tests"

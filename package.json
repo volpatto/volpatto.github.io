@@ -12,26 +12,20 @@
     "dev": "astro dev --host 127.0.0.1",
     "build": "astro build",
     "preview": "astro preview --host 127.0.0.1",
-    "check": "pnpm check:content && astro check",
-    "test": "pnpm test:unit && node scripts/check-build.mjs",
-    "check:content": "node scripts/check-content.mjs",
-    "test:unit": "node --test tests/*.test.ts",
+    "check": "sciastro check",
+    "test": "node --test tests/*.test.mjs",
+    "check:content": "sciastro check",
     "verify": "pnpm check && pnpm build && pnpm test",
-    "format": "prettier --write src scripts tests .github package.json astro.config.mjs tsconfig.json"
+    "format": "prettier --write tests .github package.json astro.config.mjs playwright.config.mjs",
+    "test:browser": "playwright test",
+    "verify:all": "pnpm verify && pnpm test:browser"
   },
   "dependencies": {
-    "@fontsource-variable/manrope": "^5.2.8",
-    "@fontsource-variable/newsreader": "^5.2.8",
     "astro": "7.3.3",
-    "marked": "^17.0.6",
-    "yaml": "2.9.1",
-    "zod": "^4.6.5"
+    "sciastro": "file:vendor/sciastro-0.1.0-alpha.1.tgz"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.6",
-    "@types/node": "^24.13.6",
-    "prettier": "^3.9.8",
-    "prettier-plugin-astro": "^1.0.1",
-    "typescript": "^5.9.3"
+    "@playwright/test": "1.63.0",
+    "prettier": "^3.9.8"
   }
 }

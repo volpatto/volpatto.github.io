@@ -1,10 +1,9 @@
 import { defineConfig } from "astro/config";
+import sciastro from "sciastro";
 
-// Change these two values (or environment variables) when moving to LNCC.
+// Content, theme, languages and deployment defaults are in sciastro.yaml.
+// SITE_URL and BASE_PATH override the deployment destination at build time.
 export default defineConfig({
-  site: process.env.SITE_URL || "https://volpatto.github.io",
-  base: process.env.BASE_PATH ?? "/",
-  output: "static",
-  trailingSlash: "always",
+  integrations: [sciastro()],
   devToolbar: { enabled: false },
 });

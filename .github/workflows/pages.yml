@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   build:
-    name: Check and build Astro
+    name: Build and Tests
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -32,11 +32,27 @@ jobs:
         id: pages
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
-      - name: Validate, build and test website
+      - name: Checks, build and Tests
         run: pixi run --locked verify
         env:
           SITE_URL: ${{ steps.pages.outputs.origin || 'https://volpatto.github.io' }}
           BASE_PATH: ${{ steps.pages.outputs.base_path || '/' }}
+      - name: Install Chromium for Browser Tests
+        run: pixi run --locked pnpm exec playwright install --with-deps chromium
+      - name: Browser Tests
+        run: pixi run --locked pnpm test:browser
+        env:
+          SITE_URL: ${{ steps.pages.outputs.origin || 'https://volpatto.github.io' }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path || '/' }}
+      - name: Save Browser Tests report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-browser-tests
+          path: .test-output/
+          include-hidden-files: true
+          if-no-files-found: ignore
+          retention-days: 14
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
         with:

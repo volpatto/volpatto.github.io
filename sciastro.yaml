@@ -1,0 +1,85 @@
+# Configuração do site. Conteúdo das páginas: conteudo/paginas/.
+
+schemaVersion: 1
+kind: individual
+name: Diego Volpatto
+description:
+  pt: Diego Volpatto, pesquisador do LNCC e docente em Modelagem Computacional. Métodos numéricos,
+    termodinâmica e aprendizado de máquina científico.
+  en: Diego Volpatto, researcher at LNCC and faculty member in Computational Modeling. Numerical
+    methods, thermodynamics and scientific machine learning.
+affiliation: LNCC / MCTI
+url: https://volpatto.github.io
+base: /
+locales:
+  - pt
+  - en
+defaultLocale: pt
+theme: lncc
+themeStorageKey: dv-theme
+contentDir: conteudo
+pageFiles:
+  - paginas/sobre.yaml
+  - paginas/pesquisa.yaml
+  - paginas/publicacoes.yaml
+  - paginas/software.yaml
+  - paginas/ensino.yaml
+  - paginas/orientacoes.yaml
+  - paginas/grupos.yaml
+  - paginas/parcerias.yaml
+  - paginas/curriculo.yaml
+  - paginas/contato.yaml
+  - paginas/licenciamento.yaml
+navigation:
+  - home
+  - research
+  - publications
+  - software
+  - teaching
+  - people
+  - groups
+  - collaborations
+  - cv
+  - contact
+favicon: /favicon.svg
+logo:
+  src: /images/lncc-original.png
+  alt:
+    pt: Símbolo do LNCC
+    en: LNCC symbol
+  width: 2048
+  height: 966
+  viewBox: 205 202 555 557
+  monochrome: true
+icons:
+  languages:
+    pt:
+      src: /images/flags/br.svg
+    en:
+      src: /images/flags/gb.svg
+copyright: >-
+  © 2026 Diego Tavares Volpatto · [LNCC / MCTI](https://www.gov.br/lncc/pt-br)
+footer:
+  pt: >-
+    Textos autorais: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Código:
+    [MIT](/licenses/MIT.txt). Logos e materiais de terceiros mantêm suas condições de uso.
+    [Licenciamento e créditos](/licenciamento/).
+  en: >-
+    Original text: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Code:
+    [MIT](/licenses/MIT.txt). Logos and third-party materials retain their own terms. [Licensing and
+    credits](/en/licensing/).
+structuredData:
+  "@context": https://schema.org
+  "@type": Person
+  name: Diego Tavares Volpatto
+  url: https://volpatto.github.io
+  jobTitle: Researcher
+  worksFor:
+    "@type": Organization
+    name: Laboratório Nacional de Computação Científica
+    url: https://www.gov.br/lncc/pt-br
+  sameAs:
+    - http://lattes.cnpq.br/3999178670179183
+    - https://orcid.org/0000-0002-3107-3259
+    - https://github.com/volpatto
+    - https://www.linkedin.com/in/diego-volpatto-1a286068
