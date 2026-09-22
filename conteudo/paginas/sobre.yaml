@@ -56,6 +56,8 @@ sections:
         en: Diego Volpatto
       width: 460
       height: 460
+      shape: circle
+      position: [50, 50]
       caption:
         pt: Petrópolis, Brasil
         en: Petrópolis, Brazil
@@ -91,9 +93,7 @@ sections:
       - label:
           pt: Contato
           en: Contact
-        url:
-          pt: /contato/
-          en: /en/contact/
+        url: page:contact
         icon: lucide:mail
   - type: prose
     title:
@@ -110,10 +110,10 @@ sections:
 
 
         Minha trajetória profissional e formação estão detalhadas na página de
-        [currículo](/curriculo/).
+        [currículo](page:cv).
 
 
-        As páginas de [pesquisa](/pesquisa/), [publicações](/publicacoes/) e [software](/software/)
+        As páginas de [pesquisa](page:research), [publicações](page:publications) e [software](page:software)
         apresentam mais detalhes sobre meu trabalho.
       en: >-
         I hold a degree in Chemical Engineering from UFRN and MSc and DSc degrees in Computational
@@ -124,9 +124,9 @@ sections:
         researchers at UDESC and UNICAMP.
 
 
-        My professional background and education are detailed in the [CV](/en/cv/) page.
+        My professional background and education are detailed in the [CV](page:cv) page.
 
 
-        My [research](/en/research/), [publications](/en/publications/) and
-        [software](/en/software/) pages describe my work in more detail.
+        My [research](page:research), [publications](page:publications) and
+        [software](page:software) pages describe my work in more detail.
     id: about-details-title

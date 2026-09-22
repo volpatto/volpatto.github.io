@@ -3,7 +3,7 @@
 O site usa o pacote **SciAstro**, com o **LNCC Theme**. As edições habituais são
 feitas em YAML e BibTeX; não é necessário conhecer JavaScript nem alterar componentes.
 
-- `../sciastro.yaml`: identidade, tema, logo, idiomas, rodapé e ordem das páginas.
+- `../sciastro.yaml`: identidade, tema, logo, compartilhamento, idiomas, rodapé e ordem das páginas.
 - `paginas/`: um arquivo por página, com os textos em português (`pt`) e inglês (`en`).
 - `publicacoes.bib`: dados bibliográficos compartilhados por publicações e citações.
 - `alunos.yaml`: orientações, fotos e símbolos institucionais.
@@ -90,16 +90,35 @@ text:
   pt: |
     Um primeiro parágrafo.
 
-    Outro parágrafo com **ênfase** e [um link](/pesquisa/).
+    Outro parágrafo com **ênfase** e [um link](page:research).
   en: |
     A first paragraph.
 
-    Another paragraph with **emphasis** and [a link](/en/research/).
+    Another paragraph with **emphasis** and [a link](page:research).
 ```
 
-Links internos começam por `/`. Nas traduções inglesas, use o caminho inglês.
-Links de download podem usar `download: true`. Markdown é tratado como conteúdo;
-HTML bruto não é executado.
+Use `page:ID` para ligar outra página pelo seu campo `id`, independente do idioma.
+Por exemplo, `research` identifica Pesquisa, `cv` identifica Currículo, `people`
+identifica Orientações e `collaborations` identifica Parcerias. O SciAstro escolhe
+o caminho do idioma atual e acrescenta o subdiretório de publicação automaticamente.
+
+Para uma seção, acrescente seu `id` após `#`, como
+`[SciML](page:research#sciml)`. Os mesmos destinos funcionam nos campos de links:
+
+```yaml
+links:
+  - label: { pt: Contato, en: Contact }
+    url: page:contact
+    icon: lucide:mail
+```
+
+O build rejeita páginas e âncoras inexistentes. Preserve esses identificadores
+ao renomear títulos ou mudar endereços. Imagens, PDFs e outros arquivos continuam
+usando caminhos de `public/`, como `/images/figura.png` e `/files/documento.pdf`.
+O rodapé ainda usa URLs explícitos por idioma, como `/licenciamento/` e
+`/en/licensing/`; não use `page:` em `footer` ou `copyright`.
+Links de download podem usar `download: true`. HTML bruto não é executado nos
+textos Markdown das seções.
 
 ### Imagens e créditos
 
@@ -119,6 +138,78 @@ image:
 O arquivo deve existir em `public/images/`. Não remova os créditos e condições
 de uso das figuras e logos existentes. Uma janela `viewBox` recorta apenas a
 exibição do logo; o arquivo original é preservado.
+
+As legendas ficam centralizadas por padrão. Em `../sciastro.yaml`, configure
+figuras e tabelas separadamente:
+
+```yaml
+appearance:
+  captions:
+    figures: center
+    tables: center
+```
+
+Os valores aceitos são `left`, `center`, `right` e `justify`. Para uma exceção,
+acrescente `captionAlign: left` ao objeto `image` da figura desejada; omita o
+campo para herdar o padrão global. Isso também vale para a foto de apresentação,
+imagens de cards e logos. Os links de fonte e licença acompanham o alinhamento;
+com `justify`, os links ficam à esquerda. Essas opções não movem nem recortam a
+imagem e dispensam CSS adicional.
+
+### Foto de apresentação e compartilhamento
+
+A imagem da seção `profile` em `paginas/sobre.yaml` usa as opções nativas:
+
+```yaml
+image:
+  src: /images/diego-volpatto.jpg
+  alt: { pt: Diego Volpatto, en: Diego Volpatto }
+  width: 460
+  height: 460
+  shape: circle
+  position: [50, 50]
+  caption: { pt: "Petrópolis, Brasil", en: "Petrópolis, Brazil" }
+```
+
+`shape: circle` exibe o retrato dentro de um círculo. `rectangle` preserva o
+formato retangular. `position` define o enquadramento horizontal e vertical em
+porcentagens; `[50, 50]` centraliza. Ao substituir o arquivo, atualize `width` e
+`height` com suas dimensões originais. O recorte não altera a imagem em disco.
+
+A imagem da prévia de links é configurada separadamente em `../sciastro.yaml`:
+
+```yaml
+social:
+  fallback: logo
+```
+
+O site reutiliza o PNG original do LNCC, inteiro, sem o `viewBox` nem as cores
+aplicadas no cabeçalho. Essa alternativa pertence a `social` e não consulta
+`people.avatarFallback` ou as fotos das pessoas.
+
+Para escolher outra imagem, coloque um PNG/JPEG em `public/images/` e acrescente
+`image` ao mesmo bloco, substituindo o exemplo por um arquivo existente:
+
+```yaml
+social:
+  fallback: logo
+  image:
+    src: /images/compartilhamento.png
+    alt: { pt: "Apresentação de Diego Volpatto", en: "Diego Volpatto's website" }
+    width: 1200
+    height: 630
+```
+
+`social.image` tem prioridade. `width` e `height` são opcionais e descrevem as
+dimensões reais do arquivo, sem redimensioná-lo. `social.fallback` também aceita
+um objeto `src`/`alt` próprio, com dimensões opcionais, ou `false` para desativar
+a alternativa automática. A mesma imagem serve todas as páginas; título e
+descrição seguem a página e o idioma.
+
+A prévia local permite conferir os metadados, mas WhatsApp e outros serviços só
+conseguem buscar a imagem depois da publicação em um endereço público. Eles
+controlam o recorte e o cache, portanto uma imagem anterior pode persistir algum
+tempo após a atualização.
 
 ### Publicações e referências
 
@@ -219,7 +310,7 @@ remover a primeira definição, mantenha-a antes dos usos. Você também pode co
 o bloco completo ou definir outro `avatarFallback` para uma pessoa. `viewBox`,
 `width` e `height` permitem mostrar somente o símbolo de um logo sem alterar o
 arquivo original. Preserve os créditos em `THIRD_PARTY_NOTICES.md` e na página
-de licenciamento ao adicionar imagens. O fundo branco de `styles/people.css`
+de licenciamento ao adicionar imagens. O fundo branco de `styles/site.css`
 mantém o contraste das cores originais nos modos claro e escuro.
 
 Para concluir uma orientação, mude `status` para `alumni` e informe `endYear`.
@@ -253,3 +344,5 @@ mostrada à esquerda do crédito “Feito com SciAstro”. O campo `footer` cont
 as mensagens de licença em português e inglês, na linha seguinte, ocupando
 toda a largura disponível. No celular, os textos quebram conforme o espaço.
 Ambos aceitam links em Markdown. Não repita o copyright dentro de `footer`.
+Use caminhos explícitos por idioma nesses campos; os links `page:ID` ficam
+restritos aos textos e links das páginas.

@@ -8,6 +8,37 @@ const site = await loadSite(resolve("sciastro.yaml"), {
 });
 const pt = (id) => site.pages.find((p) => p.id === id && p.locale === "pt");
 
+test("About portrait uses a circular frame with its caption outside the image", async ({
+  page,
+}) => {
+  for (const locale of site.config.locales) {
+    await page.goto(
+      site.pages.find((p) => p.id === "home" && p.locale === locale).path,
+    );
+    const figure = page.locator("#hero-title .sp-figure");
+    const frame = figure.locator(".sp-figure-media");
+    const portrait = frame.locator("img");
+    await expect(frame).toHaveCSS("border-radius", "50%");
+    await expect(frame).toHaveCSS("overflow", "hidden");
+    await expect(portrait).toHaveCSS("object-fit", "cover");
+    await expect(portrait).toHaveCSS("object-position", "50% 50%");
+    expect(
+      await portrait.evaluate(
+        (image) => image.complete && image.naturalWidth > 0,
+      ),
+    ).toBe(true);
+    const bounds = await frame.boundingBox();
+    expect(Math.abs(bounds.width - bounds.height)).toBeLessThan(1);
+    const caption = figure.locator("figcaption");
+    await expect(caption).toHaveText(
+      locale === "pt" ? "Petrópolis, Brasil" : "Petrópolis, Brazil",
+    );
+    expect((await caption.boundingBox()).y).toBeGreaterThanOrEqual(
+      bounds.y + bounds.height,
+    );
+  }
+});
+
 test("footer has one copyright, aligned framework credit and full-width licensing", async ({
   page,
 }, info) => {
@@ -83,6 +114,41 @@ test("all pages load in both themes without horizontal overflow or runtime error
           () => document.documentElement.scrollWidth <= innerWidth + 1,
         ),
       ).toBe(true);
+      if (["home", "research"].includes(record.id)) {
+        await page.evaluate(() => document.fonts.ready);
+        const figures = page
+          .locator("main figure.sp-figure")
+          .filter({ has: page.locator("figcaption") });
+        expect(await figures.count()).toBeGreaterThan(0);
+        for (const figure of await figures.all()) {
+          const caption = figure.locator("figcaption");
+          await expect(caption).toHaveCSS("text-align", "center");
+          const frame = await figure.locator(".sp-figure-media").boundingBox();
+          const captionBox = await caption.boundingBox();
+          expect(
+            Math.abs(
+              captionBox.x + captionBox.width / 2 - (frame.x + frame.width / 2),
+            ),
+          ).toBeLessThan(1);
+          const credits = caption.locator(".sp-links");
+          if (await credits.count()) {
+            await expect(credits).toHaveCSS("justify-content", "center");
+            await expect(credits.locator("a").first()).toBeVisible();
+          }
+          if (record.id === "home") {
+            const textBox = await caption.evaluate((element) => {
+              const range = document.createRange();
+              range.selectNodeContents(element);
+              return range.getBoundingClientRect().toJSON();
+            });
+            expect(
+              Math.abs(
+                textBox.x + textBox.width / 2 - (frame.x + frame.width / 2),
+              ),
+            ).toBeLessThan(1);
+          }
+        }
+      }
       if (
         ["home", "publications", "people"].includes(record.id) &&
         record.locale === "pt"

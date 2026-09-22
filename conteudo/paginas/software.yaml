@@ -31,7 +31,7 @@ sections:
 
         Minha experiência prévia na indústria de software, com desenvolvimento de aplicações
         científicas para óleo e gás, contribui para essa forma de trabalho. A trajetória
-        profissional está descrita no [currículo](/curriculo/).
+        profissional está descrita no [currículo](page:cv).
 
 
         **Testes e qualidade** — Suítes de testes automatizados e verificações em integração
@@ -52,7 +52,7 @@ sections:
 
         My previous experience in the software industry, developing scientific applications for oil
         and gas, contributes to this approach. My professional background is described in the
-        [CV](/en/cv/).
+        [CV](page:cv).
 
 
         **Testing and quality** — Automated test suites and checks in continuous integration, with

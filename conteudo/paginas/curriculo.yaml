@@ -113,9 +113,9 @@ sections:
   - type: prose
     text:
       pt: Essa experiência na indústria orienta as práticas de testes, distribuição e reprodutibilidade
-        dos meus projetos de [software científico](/software/).
+        dos meus projetos de [software científico](page:software).
       en: This industry experience informs the testing, packaging and reproducibility practices used in my
-        [scientific software projects](/en/software/).
+        [scientific software projects](page:software).
   - type: timeline
     id: education-title
     title:
@@ -190,9 +190,7 @@ sections:
       - label:
           pt: Parcerias e projetos de pesquisa
           en: Collaborations and research projects
-        url:
-          pt: /parcerias/
-          en: /en/collaborations/
+        url: page:collaborations
 heading:
   pt: Experiência e formação
   en: Experience and education
