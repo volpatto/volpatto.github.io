@@ -2,3 +2,8 @@
 .avatar-fallback {
   background: #fff;
 }
+
+/* Keep the copyright aligned with the framework credit and its monogram. */
+.site-footer {
+  align-items: center;
+}

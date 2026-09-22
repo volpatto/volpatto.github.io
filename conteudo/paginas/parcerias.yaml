@@ -165,16 +165,12 @@ sections:
           - label:
               pt: Grupos de pesquisa
               en: Research groups
-            url:
-              pt: /grupos/
-              en: /en/groups/
+            url: page:groups
             icon: lucide:arrow-up-right
           - label:
               pt: Orientações
               en: Student supervision
-            url:
-              pt: /orientacoes/
-              en: /en/supervision/
+            url: page:people
             icon: lucide:arrow-up-right
   - type: cards
     id: projects-title

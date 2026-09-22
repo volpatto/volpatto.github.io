@@ -16,6 +16,11 @@ locales:
   - en
 defaultLocale: pt
 theme: lncc
+# Alinhamento padrão das legendas; cada imagem pode usar captionAlign.
+appearance:
+  captions:
+    figures: center
+    tables: center
 themeStorageKey: dv-theme
 contentDir: conteudo
 pageFiles:
@@ -51,6 +56,10 @@ logo:
   height: 966
   viewBox: 205 202 555 557
   monochrome: true
+# Prévias de compartilhamento usam o PNG completo do logo do site.
+# Para outra imagem, configure social.image; este fallback é independente dos alunos.
+social:
+  fallback: logo
 icons:
   languages:
     pt:

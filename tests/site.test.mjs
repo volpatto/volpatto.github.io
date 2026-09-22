@@ -45,6 +45,37 @@ for (const page of site.pages) {
       html.includes(`lang="${page.locale === "pt" ? "pt-BR" : page.locale}"`),
     );
     assert(html.includes(`href="${new URL(page.path, url)}"`), "canonical URL");
+    assert.doesNotMatch(
+      html,
+      /href="page:/,
+      "internal page links are resolved",
+    );
+    assert(site.socialImage, "sharing image is configured");
+    for (const [attribute, key, value] of [
+      ["property", "og:image", site.socialImage.url],
+      ["name", "twitter:image", site.socialImage.url],
+      ["property", "og:image:type", site.socialImage.type],
+      ["property", "og:image:width", site.socialImage.width?.toString()],
+      ["property", "og:image:height", site.socialImage.height?.toString()],
+    ]) {
+      if (value === undefined) continue;
+      assert(
+        html.includes(
+          `<meta ${attribute}="${key}" content="${escapeHTML(value)}"`,
+        ),
+        `${key}: sharing metadata rendered without JavaScript`,
+      );
+    }
+    const sharingURL = new URL(site.socialImage.url);
+    assert.equal(sharingURL.origin, new URL(url).origin);
+    assert(
+      sharingURL.pathname.startsWith(base),
+      "sharing image includes deployment base",
+    );
+    const image = await readFile(
+      join(directory, sharingURL.pathname.slice(base.length)),
+    );
+    assert(image.length > 0, "sharing image is included in the build");
     for (const locale of site.config.locales) {
       const translated = site.pages.find(
         (p) => p.id === page.id && p.locale === locale,

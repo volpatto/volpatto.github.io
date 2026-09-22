@@ -22,6 +22,11 @@ usam `conteudo/alunos.yaml`, com suporte a fotos circulares e símbolos das
 instituições como alternativa. O build lê esses arquivos localmente, sem consultar
 DOIs ou serviços externos.
 
+A foto de apresentação usa o recorte circular nativo do SciAstro. Os links entre
+páginas usam identificadores estáveis, como `page:research`, que resolvem o idioma
+e o endereço de publicação. O logo do LNCC também fornece a imagem padrão para
+compartilhamento de links; essa configuração é independente das fotos dos alunos.
+
 O SciAstro é instalado diretamente do [npm](https://www.npmjs.com/package/sciastro),
 com versão fixa em `package.json` e dependências registradas em `pnpm-lock.yaml`.
 Não é preciso clonar nem compilar o repositório do framework. A
@@ -262,8 +267,8 @@ atualizar contagens nos testes.
 
 | Arquivo | O que editar |
 | --- | --- |
-| `sciastro.yaml` | Identidade, tema, idiomas, menu, rodapé e metadados |
-| `conteudo/paginas/sobre.yaml` | Apresentação, foto e formação resumida |
+| `sciastro.yaml` | Identidade, tema, idiomas, menu, rodapé, metadados e imagem de compartilhamento (`social`) |
+| `conteudo/paginas/sobre.yaml` | Apresentação, foto, recorte circular (`image.shape`) e formação resumida |
 | `conteudo/paginas/pesquisa.yaml` | Linhas de pesquisa, figuras e fontes |
 | `conteudo/publicacoes.bib` | Autoria, títulos, anos, periódicos e DOIs |
 | `conteudo/paginas/publicacoes.yaml` | Chaves BibTeX, categorias e ordem das publicações |
@@ -284,8 +289,26 @@ Os campos traduzidos têm `pt` e `en`. Não há importação automática do Latt
 as atualizações continuam editoriais e devem ser conferidas antes de publicar.
 O guia inclui exemplos de parágrafos, links, publicações e alunos.
 
-Para mudanças de estrutura, edite `sections` nos YAMLs. Para cores, fontes e
-largura, use `appearance` em `sciastro.yaml`. O **LNCC Theme**, os componentes
+Para ligar páginas nos textos e campos `links`, use o `id` da página de destino:
+`[Pesquisa](page:research)` ou `url: page:research#sciml`. O mesmo destino serve
+para os dois idiomas, e o build confere a página e a âncora. No rodapé e nos
+caminhos de imagens e arquivos, mantenha os endereços explícitos começando por `/`.
+Veja [textos e links](conteudo/README.md#textos-e-links).
+
+O retrato circular é configurado em `conteudo/paginas/sobre.yaml`, sem CSS adicional.
+Em `sciastro.yaml`, `social.fallback: logo` reutiliza o PNG completo do LNCC,
+sem aplicar o recorte do cabeçalho. Para escolher outra imagem de compartilhamento,
+configure `social.image` com um PNG/JPEG em `public/`; veja os exemplos de
+[foto de apresentação e compartilhamento](conteudo/README.md#foto-de-apresentação-e-compartilhamento).
+As prévias em aplicativos dependem da publicação e do cache de cada serviço.
+
+As legendas de figuras e tabelas ficam centralizadas pela configuração
+`appearance.captions` de `sciastro.yaml`. Para alterar o padrão ou alinhar apenas
+uma legenda, veja [imagens e créditos](conteudo/README.md#imagens-e-créditos);
+não é necessário acrescentar CSS.
+
+Para mudanças de estrutura, edite `sections` nos YAMLs. Para cores, fontes,
+largura e legendas, use `appearance` em `sciastro.yaml`. O **LNCC Theme**, os componentes
 e os comportamentos de navegação pertencem ao pacote SciAstro. Veja o
 [mapa do repositório](#estrutura-do-repositório).
 
@@ -304,7 +327,7 @@ Não é necessário manter uma pasta `src/` nem um ambiente de TypeScript aqui.
 | --- | --- |
 | `sciastro.yaml` | Identidade, tema, idiomas, menu, rodapé e destino de publicação |
 | `conteudo/` | Textos e composição das páginas; inclui o guia de edição |
-| `styles/people.css` | Fundo dos símbolos institucionais para contraste nos dois temas |
+| `styles/site.css` | Fundo dos símbolos institucionais e alinhamento do rodapé |
 | `public/` | Imagens, currículo e licenças distribuídos com o site |
 | `astro.config.mjs` | Ativa o SciAstro; normalmente não precisa ser editado |
 | `cv/` | Script e configurações para gerar novamente o currículo |
@@ -346,11 +369,18 @@ Para atualizar intencionalmente:
 
    `browser-install` prepara o Chromium para os testes. Pode ser omitido quando
    a versão de navegador exigida pelo Playwright já estiver instalada.
+
+   Se o pnpm bloquear uma release recém-publicada com
+   `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`, aguarde a janela indicada ou, após
+   conferir essa release, acrescente apenas `sciastro@VERSAO` à lista
+   `minimumReleaseAgeExclude` em `pnpm-workspace.yaml`. Mantenha a exceção da
+   versão anterior até concluir a atualização: o pnpm também verifica o lockfile
+   existente. Depois, remova a exceção antiga e rode `pixi run --locked setup`.
 3. Execute `pixi run --locked preview` e confira as páginas em português e
    inglês, os temas claro/escuro e a apresentação em uma tela pequena.
-4. Revise e registre `package.json` e `pnpm-lock.yaml` juntos. Se o pnpm
-   acrescentar uma exceção para uma release recém-publicada em
-   `pnpm-workspace.yaml`, revise e inclua esse arquivo também. Envie um PR para
+4. Revise e registre `package.json` e `pnpm-lock.yaml` juntos. Se alterar uma
+   exceção para uma release recém-publicada em `pnpm-workspace.yaml`, revise e
+   inclua esse arquivo também. Envie um PR para
    `main`; o CI executa os testes antes da publicação.
 
 Não é necessário copiar arquivos `.tgz`, manter uma pasta `vendor/` ou gerar
