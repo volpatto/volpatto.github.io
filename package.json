@@ -15,10 +15,14 @@
     "check": "sciastro check",
     "test": "node --test tests/*.test.mjs",
     "check:content": "sciastro check",
-    "verify": "pnpm check && pnpm build && pnpm test",
-    "format": "prettier --write build tests .github package.json astro.config.mjs playwright.config.mjs",
+    "verify": "pnpm check && pnpm build && pnpm test && pnpm security:build",
+    "format": "prettier --write build scripts tests .github security-policy.yaml package.json astro.config.mjs playwright.config.mjs",
     "test:browser": "playwright test",
-    "verify:all": "pnpm verify && pnpm test:browser"
+    "audit:dependencies": "node scripts/audit-dependencies.mjs",
+    "security:build": "node scripts/inspect-build.mjs",
+    "test:security-browser": "playwright test security.spec.mjs behavior-security.spec.mjs",
+    "security": "pnpm security:build && pnpm audit:dependencies && pnpm test:security-browser",
+    "verify:all": "pnpm verify && pnpm audit:dependencies && pnpm test:browser"
   },
   "dependencies": {
     "astro": "7.3.3",
@@ -26,7 +30,10 @@
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
+    "css-tree": "^3.2.1",
     "htmlparser2": "12.0.0",
-    "prettier": "^3.9.8"
+    "parse-srcset": "^1.0.2",
+    "prettier": "^3.9.8",
+    "yaml": "^2.9.1"
   }
 }

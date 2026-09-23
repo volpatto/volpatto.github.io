@@ -1,6 +1,6 @@
 # Diego Volpatto -- site acadêmico
 
-[![Build, Tests e publicação](https://github.com/volpatto/volpatto.github.io/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/volpatto/volpatto.github.io/actions/workflows/pages.yml)
+[![Build, Tests & Security](https://github.com/volpatto/volpatto.github.io/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/volpatto/volpatto.github.io/actions/workflows/pages.yml)
 [![SciAstro](https://img.shields.io/badge/SciAstro-475569)](https://volpatto.github.io/sciastro/)
 [![Astro](https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=white)](https://astro.build/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
@@ -46,7 +46,7 @@ pixi run --locked dev
 ```
 
 Abra `http://127.0.0.1:4321/`. Edite os arquivos de `conteudo/` e salve para ver
-as alterações. Antes de publicar, execute `pixi run --locked verify`.
+as alterações. Antes de publicar, execute `pixi run --locked verify-all`.
 O resultado pronto para hospedagem fica em `dist/`.
 
 - [Instalar o Pixi e preparar o ambiente](#ambiente-e-uso-local-com-pixi)
@@ -187,13 +187,17 @@ diretamente por `dev` ou `verify`, sem executar `install` e `setup` separadament
 | Comando | Resultado |
 | --- | --- |
 | `pixi run --locked dev` | Prévia com atualização automática ao salvar os arquivos |
-| `pixi run --locked verify` | Valida configuração e conteúdo, gera o site e executa os testes |
+| `pixi run --locked verify` | Valida conteúdo, gera o site, executa Tests estáticos e inspeciona HTML/SVG/CSS |
 | `pixi run --locked build` | Gera o site estático em `dist/` |
 | `pixi run --locked preview` | Gera o site e serve a versão de publicação localmente |
 | `pixi run --locked check-content` | Confere os YAMLs e os arquivos referenciados |
 | `pixi run --locked check` | Valida configuração, conteúdo e arquivos com SciAstro |
 | `pixi run --locked test-browser` | Gera o site e executa Browser Tests; instale Chromium primeiro |
-| `pixi run --locked verify-all` | Validação completa, incluindo Browser Tests |
+| `pixi run --locked verify-all` | Validação completa, incluindo auditoria de dependências e Browser Tests |
+| `pixi run --locked audit-dependencies` | Consulta vulnerabilidades conhecidas das dependências, incluindo as de build |
+| `pixi run --locked security-build` | Gera o site e inspeciona os arquivos conforme a política de segurança |
+| `pixi run --locked test-security-browser` | Gera o site e testa CSP e comportamentos inesperados no Chromium |
+| `pixi run --locked security` | Gera o site e executa as três camadas de checks de segurança |
 | `pixi run --locked test` | Gera o site e executa os testes |
 | `pixi run --locked setup` | Instala somente as bibliotecas do site |
 | `pixi run --locked format` | Formata o código, preservando a formatação dos YAMLs editoriais |
@@ -332,6 +336,8 @@ Não é necessário manter uma pasta `src/` nem um ambiente de TypeScript aqui.
 | `astro.config.mjs` | Ativa o SciAstro; normalmente não precisa ser editado |
 | `build/security.mjs` | Completa e posiciona a política de segurança no HTML gerado |
 | `build/site-verification.mjs` | Inclui a tag do Google Search Console no HTML da página inicial |
+| `security-policy.yaml` | Origens adicionais permitidas e regras da auditoria de dependências |
+| `scripts/` | Checks de dependências e dos arquivos gerados, com relatórios em JSON |
 | `cv/` | Script e configurações para gerar novamente o currículo |
 | `tests/` e `playwright.config.mjs` | Tests do conteúdo publicado e da navegação |
 | `.github/workflows/pages.yml` | Build, Tests e publicação no GitHub Pages |
@@ -474,10 +480,13 @@ de integração contínua, configure-as no ambiente da etapa de build. Este proj
 lê essas opções de `process.env` pela integração SciAstro; colocar os valores apenas
 em um arquivo `.env` não substitui essas instruções.
 
-`verify` instala as dependências, valida o conteúdo, gera o site e
-confere os testes e links internos. Publique somente se o comando terminar
-com sucesso (código de saída zero). Os testes locais não conferem a configuração
-do servidor de destino nem a disponibilidade de links externos.
+`verify` instala as dependências, valida o conteúdo, gera o site e confere os
+testes, links internos e regras de segurança dos arquivos gerados. Para incluir
+a consulta de vulnerabilidades e os testes de navegador, instale Chromium com
+`pixi run --locked browser-install` e execute `pixi run --locked verify-all`.
+Publique somente depois dessa validação completa, com código de saída zero.
+Os testes locais não conferem a configuração do servidor de destino nem a
+disponibilidade de links externos.
 
 ### Conferir o resultado
 
@@ -708,6 +717,83 @@ adicionar CSP não remove essa classificação automaticamente. Se aparecer:
 Não desative a Navegação segura para resolver o aviso. Os testes locais validam
 a proteção do site; não consultam nem garantem a classificação do Google.
 
+### Checks automatizados de segurança
+
+Para executar a validação completa, na raiz do repositório:
+
+```sh
+pixi run --locked browser-install
+pixi run --locked verify-all
+```
+
+Para executar somente as três camadas de segurança, use
+`pixi run --locked security`. As tarefas geram o build antes de inspecioná-lo.
+Nenhuma delas publica o site, aplica correções automáticas às dependências ou
+altera o conteúdo. O CI executa as mesmas verificações em PRs para `main` e antes
+do deployment; uma falha impede o job de publicação. Para impedir também o merge,
+configure **Build and Tests** como check obrigatório nas regras da branch no GitHub.
+
+| Camada | Ferramentas e critérios | Relatório |
+| --- | --- | --- |
+| Dependências | `pnpm audit --json`, incluindo dependências diretas, transitivas e de desenvolvimento/build; bloqueia vulnerabilidades `high` e `critical` sem exceção revisada | `.test-output/security/dependencies.json` |
+| Arquivos gerados | Node.js, `htmlparser2`, CSS Tree e parser de `srcset`; inspeciona todos os HTML, SVG e CSS do build | `.test-output/security/build.json` |
+| Navegador | Playwright/Chromium em desktop e celular; observa requisições, navegações, pop-ups, downloads, workers e WebSockets | `.test-output/report/index.html`, com registros JSON anexados aos testes |
+
+A auditoria de dependências precisa de internet e envia ao registro npm nomes e
+versões dos pacotes para consultar os avisos conhecidos. Falhas de conexão,
+respostas incompletas ou inválidas são **erros da auditoria**, não um resultado
+sem vulnerabilidades. Os scripts de auditoria e inspeção retornam `0` quando as
+regras passam, `1` quando há achados que bloqueiam e `2` quando não conseguem
+concluir a verificação. Avisos de menor gravidade também ficam no relatório.
+Consulte a [documentação do pnpm audit](https://pnpm.io/cli/audit).
+
+A inspeção dos arquivos verifica origens de recursos carregados automaticamente,
+referências em CSS e `srcset`, recursos locais ausentes, SVGs com elementos ativos,
+atributos de eventos, esquemas de URL inseguros, formulários, incorporações e
+redirecionamentos por `meta refresh`. Downloads explícitos são limitados a PDFs
+locais, como o currículo. Links normais para artigos e parceiros são inventariados
+separadamente e não precisam de uma lista de domínios permitidos. A inspeção não
+acessa esses sites nem usa seu status HTTP como diagnóstico de segurança.
+
+As regras editáveis ficam em `security-policy.yaml`. `resources.allowedOrigins`
+começa vazio: recursos do domínio do próprio site já são permitidos. Se um novo
+recurso externo for necessário, revise-o antes de adicionar a **origem HTTPS
+exata**, sem caminho ou curinga. Essa lista não muda a CSP: a política em
+`astro.config.mjs` também precisa ser revisada, e os Browser Tests devem passar.
+Não adicione um domínio só para silenciar um teste que falhou.
+
+Para uma vulnerabilidade, prefira atualizar a dependência afetada e testar o
+site novamente. Uma exceção deve ser rara, temporária e fundamentada. O formato é:
+
+```yaml
+dependencies:
+  failOn: [high, critical]
+  exceptions:
+    - id: GHSA-xxxx-xxxx-xxxx # Substitua pelo identificador real do relatório.
+      reason: "Descreva a análise que justifica a exceção e a correção planejada."
+      expires: "YYYY-MM-DD" # Substitua por uma data real de vencimento em UTC.
+```
+
+Esse exemplo é ilustrativo; a configuração inicial não tem exceções. Exceções
+vencidas ou inválidas fazem o check falhar. Mantenha as exceções apenas nesse
+arquivo, sem filtros `audit.ignore` ou equivalentes no pnpm, para que o relatório
+preserve os avisos encontrados. Não use `--ignore-registry-errors` para aprovar
+uma auditoria que não conseguiu consultar o registro.
+
+Os testes incluem exemplos simulados que devem ser detectados: a própria
+verificação também é testada. No navegador, tentativas externas inesperadas são
+bloqueadas pelo observador dos testes; isso **não adiciona um bloqueador novo ao
+site publicado**. A proteção do visitante continua sendo a CSP. O download
+intencional do currículo é exercitado e permitido.
+
+Esses controles não detectam toda forma de código malicioso: a auditoria cobre
+avisos conhecidos, a inspeção verifica regras estruturais e os testes de navegador
+cobrem o carregamento e as ações exercitadas. Código permitido da própria origem
+e comportamentos não exercitados continuam exigindo revisão. Não há comparação
+automática com a versão publicada nem consulta à classificação do Google nesta
+etapa. Os relatórios ficam disponíveis no artefato **website-tests-and-security**
+do GitHub Actions, inclusive quando um check falha.
+
 ## Atualizar e restaurar uma versão anterior
 
 Para atualizar o site em servidor próprio:
@@ -715,7 +801,7 @@ Para atualizar o site em servidor próprio:
 1. Na cópia de trabalho, revise as alterações locais com `git status`. Com a
    cópia sem alterações pendentes, obtenha a nova versão com `git pull --ff-only`.
 2. Defina `SITE_URL` e `BASE_PATH` para o destino e execute
-   `pixi run --locked verify`. Os mesmos comandos servem para mudanças de texto,
+   `pixi run --locked verify-all`. Os mesmos comandos servem para mudanças de texto,
    imagens e código.
 3. Registre a revisão (`git rev-parse HEAD`) e os dois valores de configuração
    junto ao pacote de publicação. Gere o pacote a partir de uma revisão salva no
@@ -797,7 +883,9 @@ persistência do tema, figuras, logos, PDF e ausência de transbordamento horizo
 Os testes de segurança também verificam a ordem da CSP, a renderização de todas
 as páginas sem bloqueios indevidos e o bloqueio de código e conexões não
 autorizados. As tentativas de teste usam respostas simuladas, sem acessar
-servidores externos. Esses testes fazem parte do mesmo CI antes da publicação.
+servidores externos. Uma suíte adicional observa atividade automática em todas
+as páginas e testa interações de menu, idioma e tema, além do download intencional
+do currículo. Esses testes fazem parte do mesmo CI antes da publicação.
 
 ```sh
 pixi run --locked browser-install
