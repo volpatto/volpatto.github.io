@@ -13,7 +13,7 @@ Site pessoal estático em português e inglês, construído com **[SciAstro](htt
 As páginas são definidas em `sciastro.yaml` e `conteudo/paginas/`. O SciAstro
 fornece os componentes, estilos e interações; este repositório mantém apenas
 a configuração de integração, o conteúdo, os arquivos públicos e os testes do site.
-O JavaScript local se limita às configurações e aos testes. A geração opcional
+O JavaScript local se limita às configurações, à proteção do HTML gerado e aos testes. A geração opcional
 do currículo usa Python, separadamente do build do site.
 
 Os dados bibliográficos ficam em `conteudo/publicacoes.bib`; cada card seleciona
@@ -330,6 +330,7 @@ Não é necessário manter uma pasta `src/` nem um ambiente de TypeScript aqui.
 | `styles/site.css` | Fundo dos símbolos institucionais e alinhamento do rodapé |
 | `public/` | Imagens, currículo e licenças distribuídos com o site |
 | `astro.config.mjs` | Ativa o SciAstro; normalmente não precisa ser editado |
+| `build/security.mjs` | Completa e posiciona a política de segurança no HTML gerado |
 | `cv/` | Script e configurações para gerar novamente o currículo |
 | `tests/` e `playwright.config.mjs` | Tests do conteúdo publicado e da navegação |
 | `.github/workflows/pages.yml` | Build, Tests e publicação no GitHub Pages |
@@ -657,6 +658,49 @@ curl -I https://pesquisa.example.org/pagina-inexistente/
 Os quatro primeiros devem terminar em HTTP 200; o último, em HTTP 404.
 Se a hospedagem estiver em subdiretório, inclua-o em cada URL.
 
+### Política de segurança e avisos do navegador
+
+O build inclui uma **Content Security Policy (CSP)** em todas as páginas, inclusive
+na página 404. A configuração está em `astro.config.mjs`. A política permite
+recursos do próprio site e os scripts inline autorizados por hashes; bloqueia
+scripts de terceiros, atributos HTML de eventos, formulários, frames, objetos,
+workers e conexões em segundo plano. Links normais para artigos, parceiros e
+outros sites continuam funcionando.
+
+`build/security.mjs` completa os hashes dos scripts e estilos inline do SciAstro
+e posiciona a política antes dos recursos da página. Os hashes são calculados
+automaticamente a cada build, sem mudanças no conteúdo ou na aparência. Esse
+ajuste é necessário porque a CSP nativa do Astro não cobre todos os blocos
+inline do layout atual. A proteção usa uma meta no HTML e funciona também no
+GitHub Pages, sem configurar cabeçalhos no servidor. Ela considera a saída do
+build confiável: não é um antivírus nem uma verificação das dependências.
+
+Atributos de estilo continuam permitidos para o posicionamento das figuras.
+Se adicionar analytics, vídeos incorporados ou recursos carregados de outro
+domínio, revise as diretivas correspondentes e os testes; não libere origens
+indiscriminadamente. A política é aplicada ao build de produção. Para conferir
+seu comportamento, execute `pixi run --locked verify-all` ou use a prévia do
+build; `dev` não é uma verificação da CSP de produção.
+
+Um aviso vermelho de “site perigoso” é uma avaliação independente do navegador;
+adicionar CSP não remove essa classificação automaticamente. Se aparecer:
+
+1. Consulte o [relatório público do Safe Browsing](https://transparencyreport.google.com/safe-browsing/search?url=https%3A%2F%2Fvolpatto.github.io%2Fpesquisa%2F).
+2. No [Google Search Console](https://search.google.com/search-console), selecione
+   a propriedade do site e abra **Segurança e ações manuais → Problemas de segurança**.
+   Esse relatório pode mostrar a descrição do problema e exemplos de URLs, mesmo
+   quando o aviso não é reproduzido em outro navegador.
+3. Investigue os exemplos e compare o HTML e os recursos publicados com um build
+   local do commit implantado. Corrija o que o relatório identificar e, após
+   validar, solicite uma revisão pelo próprio relatório. Consulte as
+   [instruções do Google](https://support.google.com/webmasters/answer/9044101?hl=pt-BR).
+4. Se a investigação indicar uma classificação incorreta, use o
+   [formulário oficial de falso positivo](https://safebrowsing.google.com/safebrowsing/report_error/?hl=pt-BR),
+   informando a URL exata e os resultados verificados.
+
+Não desative a Navegação segura para resolver o aviso. Os testes locais validam
+a proteção do site; não consultam nem garantem a classificação do Google.
+
 ## Atualizar e restaurar uma versão anterior
 
 Para atualizar o site em servidor próprio:
@@ -743,6 +787,10 @@ As figuras de pesquisa são artefatos existentes, com referências, alterações
 Além dos Tests das páginas estáticas, há testes em Chromium para os dois idiomas,
 modos claro/escuro e larguras de desktop/celular. Eles verificam navegação,
 persistência do tema, figuras, logos, PDF e ausência de transbordamento horizontal.
+Os testes de segurança também verificam a ordem da CSP, a renderização de todas
+as páginas sem bloqueios indevidos e o bloqueio de código e conexões não
+autorizados. As tentativas de teste usam respostas simuladas, sem acessar
+servidores externos. Esses testes fazem parte do mesmo CI antes da publicação.
 
 ```sh
 pixi run --locked browser-install
