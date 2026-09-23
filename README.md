@@ -331,6 +331,7 @@ Não é necessário manter uma pasta `src/` nem um ambiente de TypeScript aqui.
 | `public/` | Imagens, currículo e licenças distribuídos com o site |
 | `astro.config.mjs` | Ativa o SciAstro; normalmente não precisa ser editado |
 | `build/security.mjs` | Completa e posiciona a política de segurança no HTML gerado |
+| `build/site-verification.mjs` | Inclui a tag do Google Search Console no HTML da página inicial |
 | `cv/` | Script e configurações para gerar novamente o currículo |
 | `tests/` e `playwright.config.mjs` | Tests do conteúdo publicado e da navegação |
 | `.github/workflows/pages.yml` | Build, Tests e publicação no GitHub Pages |
@@ -659,6 +660,12 @@ Os quatro primeiros devem terminar em HTTP 200; o último, em HTTP 404.
 Se a hospedagem estiver em subdiretório, inclua-o em cada URL.
 
 ### Política de segurança e avisos do navegador
+
+O site inclui a tag `google-site-verification` na página inicial gerada. O código
+de verificação fica em `astro.config.mjs`, na chamada `googleSiteVerification`.
+Depois de publicar o build no GitHub Pages, volte ao Search Console e clique em
+**Verificar**. Mantenha a tag após a confirmação, pois o Google pode verificá-la
+novamente. Ela não altera a aparência do site nem instala analytics.
 
 O build inclui uma **Content Security Policy (CSP)** em todas as páginas, inclusive
 na página 404. A configuração está em `astro.config.mjs`. A política permite
