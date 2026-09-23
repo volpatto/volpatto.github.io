@@ -18,12 +18,21 @@ importers:
       '@playwright/test':
         specifier: 1.63.0
         version: 1.63.0
+      css-tree:
+        specifier: ^3.2.1
+        version: 3.2.1
       htmlparser2:
         specifier: 12.0.0
         version: 12.0.0
+      parse-srcset:
+        specifier: ^1.0.2
+        version: 1.0.2
       prettier:
         specifier: ^3.9.8
         version: 3.9.8
+      yaml:
+        specifier: ^2.9.1
+        version: 2.9.1
 
 packages:
 

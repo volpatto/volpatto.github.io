@@ -45,7 +45,7 @@ description = "Gera o site e testa o conteúdo, as páginas e os links"
 [tasks.verify]
 cmd = "pnpm verify"
 depends-on = ["setup"]
-description = "Executa toda a validação antes de publicar"
+description = "Valida conteúdo, build, Tests estáticos e segurança dos arquivos gerados"
 
 [tasks.preview]
 cmd = "pnpm preview"
@@ -80,4 +80,24 @@ description = "Executa Browser Tests no desktop e no celular"
 [tasks.verify-all]
 cmd = "pnpm verify:all"
 depends-on = ["setup"]
-description = "Checks, build, Tests de páginas e Browser Tests"
+description = "Checks, build, Tests, auditoria de dependências e Browser Tests"
+
+[tasks.audit-dependencies]
+cmd = "pnpm audit:dependencies"
+depends-on = ["setup"]
+description = "Consulta vulnerabilidades conhecidas, incluindo dependências de build"
+
+[tasks.security-build]
+cmd = "pnpm security:build"
+depends-on = ["build"]
+description = "Inspeciona HTML, SVG e CSS gerados conforme security-policy.yaml"
+
+[tasks.test-security-browser]
+cmd = "pnpm test:security-browser"
+depends-on = ["build"]
+description = "Executa os Browser Tests de CSP, conexões, navegação e downloads"
+
+[tasks.security]
+cmd = "pnpm security"
+depends-on = ["build"]
+description = "Gera o site e executa as três verificações de segurança"

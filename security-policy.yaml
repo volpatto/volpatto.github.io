@@ -1,0 +1,11 @@
+# Regras para os checks; alterar este arquivo não altera a CSP do navegador.
+resources:
+  # O domínio do próprio site já é permitido. Libere só origens HTTPS revisadas,
+  # sem caminhos nem curingas. Links comuns para artigos/parceiros não entram aqui.
+  allowedOrigins: []
+
+dependencies:
+  # Inclui dependências de desenvolvimento: elas participam do build publicado.
+  failOn: [high, critical]
+  # Exceções exigem id GHSA, reason e expires (YYYY-MM-DD), após análise manual.
+  exceptions: []

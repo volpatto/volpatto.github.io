@@ -1,4 +1,4 @@
-name: Publish website to GitHub Pages
+name: Build, Tests & Security
 
 on:
   push:
@@ -32,11 +32,13 @@ jobs:
         id: pages
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
-      - name: Checks, build and Tests
+      - name: Checks, build, Tests and artifact security inspection
         run: pixi run --locked verify
         env:
           SITE_URL: ${{ steps.pages.outputs.origin || 'https://volpatto.github.io' }}
           BASE_PATH: ${{ steps.pages.outputs.base_path || '/' }}
+      - name: Dependency security audit (including build dependencies)
+        run: pixi run --locked audit-dependencies
       - name: Install Chromium for Browser Tests
         run: pixi run --locked pnpm exec playwright install --with-deps chromium
       - name: Browser Tests
@@ -44,11 +46,11 @@ jobs:
         env:
           SITE_URL: ${{ steps.pages.outputs.origin || 'https://volpatto.github.io' }}
           BASE_PATH: ${{ steps.pages.outputs.base_path || '/' }}
-      - name: Save Browser Tests report
+      - name: Save Tests and security reports
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
-          name: website-browser-tests
+          name: website-tests-and-security
           path: .test-output/
           include-hidden-files: true
           if-no-files-found: ignore
