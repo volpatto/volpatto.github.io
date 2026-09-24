@@ -27,6 +27,13 @@ páginas usam identificadores estáveis, como `page:research`, que resolvem o id
 e o endereço de publicação. O logo do LNCC também fornece a imagem padrão para
 compartilhamento de links; essa configuração é independente das fotos dos alunos.
 
+A apresentação combina o LNCC Theme com superfícies neutras, acentos em violeta
+e um gradiente discreto azul/roxo nos títulos principais. O menu permanece
+lateral no desktop e recolhível no celular. Ícones de sol/lua indicam a ação do
+controle de tema; os movimentos sutis respeitam a preferência por movimento
+reduzido. Essas escolhas ficam em `layout` e `appearance` de `sciastro.yaml`;
+veja [como ajustar a aparência](conteudo/README.md#aparência-e-atualização-do-pacote).
+
 O SciAstro é instalado diretamente do [npm](https://www.npmjs.com/package/sciastro),
 com versão fixa em `package.json` e dependências registradas em `pnpm-lock.yaml`.
 Não é preciso clonar nem compilar o repositório do framework. A

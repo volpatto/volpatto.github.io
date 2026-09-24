@@ -16,8 +16,25 @@ locales:
   - en
 defaultLocale: pt
 theme: lncc
-# Alinhamento padrão das legendas; cada imagem pode usar captionAlign.
+# Menu lateral no desktop e recolhível no celular.
+layout:
+  navigation: sidebar
+# Aparência fornecida pelo SciAstro, sem componentes ou estilos duplicados.
 appearance:
+  palette:
+    base: slate
+    accent: violet
+  icons:
+    style: accent
+    weight: regular
+  motion: subtle
+  # Azul e roxo apenas nos títulos principais; o corpo do texto mantém cor sólida.
+  gradient:
+    style: linear
+    colors: [ocean, violet]
+    targets: [headings]
+    angle: 115
+  # Alinhamento padrão; cada imagem pode usar captionAlign.
   captions:
     figures: center
     tables: center

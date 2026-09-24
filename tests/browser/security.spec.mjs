@@ -118,17 +118,21 @@ test("CSP permits the theme toggle and its saved preference", async ({
   await page.goto(research.path);
   const toggle = page.locator(".theme-toggle");
   await expect(toggle).toBeVisible();
-  await expect(toggle).toHaveAttribute("aria-pressed", "false");
+  await expect(toggle).toHaveAccessibleName("Ativar modo escuro");
+  await expect(toggle).toHaveAttribute("data-theme-state", "light");
   await toggle.click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await expect(toggle).toHaveAccessibleName("Ativar modo claro");
+  await expect(toggle).toHaveAttribute("data-theme-state", "dark");
   expect(await violations(page)).toEqual([]);
 
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(toggle).toHaveAccessibleName("Ativar modo claro");
   await toggle.click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  await expect(toggle).toHaveAttribute("aria-pressed", "false");
+  await expect(toggle).toHaveAccessibleName("Ativar modo escuro");
+  await expect(toggle).toHaveAttribute("data-theme-state", "light");
   expect(await violations(page)).toEqual([]);
 });
 

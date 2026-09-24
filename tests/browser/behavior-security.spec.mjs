@@ -226,8 +226,13 @@ test("theme, menu and language actions stay within expected navigation", async (
 }, info) => {
   const { page } = observed;
   await observed.goto(pageFor("research").path);
-  await page.locator(".theme-toggle").click();
+  await page
+    .getByRole("button", { name: "Ativar modo escuro", exact: true })
+    .click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(page.locator(".theme-toggle")).toHaveAccessibleName(
+    "Ativar modo claro",
+  );
   if (info.project.name === "mobile") {
     await page.locator(".navigation > summary").click();
     await page.keyboard.press("Escape");
@@ -237,6 +242,9 @@ test("theme, menu and language actions stay within expected navigation", async (
     page.getByRole("link", { name: "English", exact: true }).click(),
   );
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(page.locator(".theme-toggle")).toHaveAccessibleName(
+    "Switch to light mode",
+  );
   if (info.project.name === "mobile")
     await page.locator(".navigation > summary").click();
   const software = pageFor("software", "en").path;
