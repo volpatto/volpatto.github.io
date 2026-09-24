@@ -332,6 +332,46 @@ seção `profile` forneça o único título principal.
 
 ## Aparência e atualização do pacote
 
+O visual é configurado em `../sciastro.yaml`, sem editar JavaScript:
+
+```yaml
+theme: lncc
+layout:
+  navigation: sidebar
+appearance:
+  palette:
+    base: slate
+    accent: violet
+  icons:
+    style: accent
+    weight: regular
+  motion: subtle
+  gradient:
+    style: linear
+    colors: [ocean, violet]
+    targets: [headings]
+    angle: 115
+  captions:
+    figures: center
+    tables: center
+```
+
+- `palette.base` escolhe as superfícies e cores de texto; `accent` escolhe a cor
+  dos links e destaques. Cada paleta inclui modos claro e escuro.
+- `icons.style: accent` colore os ícones do menu. Logos institucionais e
+  bandeiras mantêm as cores originais.
+- `gradient` se aplica apenas aos títulos principais. Use `gradient: false`
+  para voltar a títulos de cor sólida. Na impressão, os títulos usam cor sólida.
+- `motion: subtle` ativa movimentos discretos nos controles compatíveis. Use
+  `none` para desativá-los; a preferência de movimento reduzido é respeitada.
+- Omitimos `typography` para preservar a combinação do LNCC Theme: títulos
+  principais serifados e texto e subtítulos em Manrope.
+
+As opções são descritas no [guia de aparência do SciAstro](https://volpatto.github.io/sciastro/guides/appearance/).
+O site continua com as mesmas páginas e conteúdo. Recursos para disciplinas,
+notebooks e gráficos interativos podem ser adotados quando houver material
+apropriado; não são necessários para estas páginas.
+
 O campo `theme: lncc` seleciona a apresentação. `appearance` permite ajustar a
 paleta clara/escura, largura e famílias tipográficas. O [mapa do repositório](../README.md#estrutura-do-repositório)
 explica a separação entre este repositório e o SciAstro. Instruções para atualizar
