@@ -13,7 +13,8 @@ Site pessoal estático em português e inglês, construído com **[SciAstro](htt
 As páginas são definidas em `sciastro.yaml` e `conteudo/paginas/`. O SciAstro
 fornece os componentes, estilos e interações; este repositório mantém apenas
 a configuração de integração, o conteúdo, os arquivos públicos e os testes do site.
-O JavaScript local se limita às configurações, à proteção do HTML gerado e aos testes. A geração opcional
+O JavaScript local se limita às configurações, à proteção do HTML gerado,
+à hospedagem Apache, à automação de publicação e aos testes. A geração opcional
 do currículo usa Python, separadamente do build do site.
 
 Os dados bibliográficos ficam em `conteudo/publicacoes.bib`; cada card seleciona
@@ -36,6 +37,8 @@ veja [como ajustar a aparência](conteudo/README.md#aparência-e-atualização-d
 
 O SciAstro é instalado diretamente do [npm](https://www.npmjs.com/package/sciastro),
 com versão fixa em `package.json` e dependências registradas em `pnpm-lock.yaml`.
+O subdiretório `/~volpatto/` tem suporte nativo desde o
+[SciAstro 1.1.1](https://github.com/volpatto/sciastro/releases/tag/v1.1.1).
 Não é preciso clonar nem compilar o repositório do framework. A
 [documentação do SciAstro](https://volpatto.github.io/sciastro/) descreve os
 componentes, as opções de configuração e a API disponíveis.
@@ -196,6 +199,8 @@ diretamente por `dev` ou `verify`, sem executar `install` e `setup` separadament
 | `pixi run --locked dev` | Prévia com atualização automática ao salvar os arquivos |
 | `pixi run --locked verify` | Valida conteúdo, gera o site, executa Tests estáticos e inspeciona HTML/SVG/CSS |
 | `pixi run --locked build` | Gera o site estático em `dist/` |
+| `pixi run --locked build-lncc` | Valida e gera o site em `dist/` para `https://www.lncc.br/~volpatto/` |
+| `pixi run --locked deploy-lncc` | Executa `build-lncc`, cria um backup e publica automaticamente em `../htdocs/` |
 | `pixi run --locked preview` | Gera o site e serve a versão de publicação localmente |
 | `pixi run --locked check-content` | Confere os YAMLs e os arquivos referenciados |
 | `pixi run --locked check` | Valida configuração, conteúdo e arquivos com SciAstro |
@@ -248,6 +253,7 @@ os comandos equivalentes são `pixi run --locked preview-stop` e
 - `pixi.lock`: versões e arquivos exatos do Node.js, pnpm e bibliotecas do ambiente;
 - `package.json`: dependências e comandos do site;
 - `pnpm-lock.yaml`: versões exatas das dependências do site;
+- `pnpm-workspace.yaml`: política de instalação das dependências;
 - `.pixi/` e `node_modules/`: instalações locais, ignoradas pelo Git.
 
 **Inclua os dois lockfiles nos commits.** Eles permitem reconstruir o ambiente
@@ -342,9 +348,11 @@ Não é necessário manter uma pasta `src/` nem um ambiente de TypeScript aqui.
 | `public/` | Imagens, currículo e licenças distribuídos com o site |
 | `astro.config.mjs` | Ativa o SciAstro; normalmente não precisa ser editado |
 | `build/security.mjs` | Completa e posiciona a política de segurança no HTML gerado |
+| `build/apache.mjs` | Gera `.htaccess` com UTF-8, tipos MIME, índice e erro 404 para o destino do build |
 | `build/site-verification.mjs` | Inclui a tag do Google Search Console no HTML da página inicial |
 | `security-policy.yaml` | Origens adicionais permitidas e regras da auditoria de dependências |
 | `scripts/` | Checks de dependências e dos arquivos gerados, com relatórios em JSON |
+| `scripts/deploy-lncc.mjs` | Confere o destino LNCC, cria um backup e sincroniza `dist/` com `../htdocs/` |
 | `cv/` | Script e configurações para gerar novamente o currículo |
 | `tests/` e `playwright.config.mjs` | Tests do conteúdo publicado e da navegação |
 | `.github/workflows/pages.yml` | Build, Tests e publicação no GitHub Pages |
@@ -370,6 +378,14 @@ O site usa o pacote publicado no npm. A versão instalada aparece no campo
 Instalações e builds usam o lockfile e não adotam novas releases automaticamente.
 Editar textos, imagens ou o currículo não exige atualizar o framework.
 
+O [SciAstro 1.1.1](https://github.com/volpatto/sciastro/releases/tag/v1.1.1)
+aceita nativamente `~` no caminho base, usado pelo LNCC em `/~volpatto/`,
+nas validações de configuração e de downloads. O site usa essa implementação
+sem patches locais. A configuração do Apache e das fontes continua em
+`build/apache.mjs` e `astro.config.mjs`, conforme a hospedagem do LNCC.
+Não edite `node_modules/` manualmente: essas alterações se perderiam na
+próxima instalação.
+
 Para atualizar intencionalmente:
 
 1. Leia as [notas da release](https://github.com/volpatto/sciastro/releases) e
@@ -393,9 +409,9 @@ Para atualizar intencionalmente:
    existente. Depois, remova a exceção antiga e rode `pixi run --locked setup`.
 3. Execute `pixi run --locked preview` e confira as páginas em português e
    inglês, os temas claro/escuro e a apresentação em uma tela pequena.
-4. Revise e registre `package.json` e `pnpm-lock.yaml` juntos. Se alterar uma
-   exceção para uma release recém-publicada em `pnpm-workspace.yaml`, revise e
-   inclua esse arquivo também. Envie um PR para
+4. Execute também `pixi run --locked build-lncc` para conferir o suporte ao
+   subdiretório Apache. Revise e registre `package.json`, `pnpm-lock.yaml` e
+   `pnpm-workspace.yaml` juntos. Envie um PR para
    `main`; o CI executa os testes antes da publicação.
 
 Não é necessário copiar arquivos `.tgz`, manter uma pasta `vendor/` ou gerar
@@ -501,6 +517,7 @@ disponibilidade de links externos.
 
 ```text
 dist/
+  .htaccess                  Configuração Apache: UTF-8, tipos MIME, índice e erro 404
   index.html                 Página inicial em português
   pesquisa/index.html        Exemplo de página interna
   en/index.html              Página inicial em inglês
@@ -552,6 +569,64 @@ Node.js, pnpm, Pixi e Python **não são necessários no servidor que apenas rec
 `dist/`**. Não é preciso manter um processo Astro, serviço de aplicação, container
 ou banco de dados em execução. `dev` e `preview` são ferramentas de conferência
 local; a publicação usa o servidor web.
+
+### Publicar no LNCC em `../htdocs`
+
+Na máquina do LNCC, com `rsync` instalado e este repositório ao lado de
+`htdocs`, execute na raiz do repositório:
+
+```sh
+pixi run --locked deploy-lncc
+```
+
+Essa tarefa executa todo o processo:
+
+1. Executa `build-lncc`: define `SITE_URL=https://www.lncc.br` e
+   `BASE_PATH=/~volpatto/`, valida o conteúdo, gera `dist/` e executa os testes
+   estáticos e a inspeção de segurança.
+2. Confere o diretório de publicação, a URL canônica e a configuração Apache do
+   build, incluindo UTF-8 e a página 404.
+3. Copia o conteúdo atual de `../htdocs/` para um backup irmão com nome único,
+   no formato `../htdocs.backup-DATA-HORA-SUFIXO/`.
+4. Sincroniza o conteúdo completo de `dist/`, incluindo `.htaccess`, para
+   `../htdocs/`, remove arquivos obsoletos e aplica permissões 755 aos diretórios
+   e 644 aos arquivos.
+
+O destino `../htdocs` precisa existir como um diretório real e conter
+exclusivamente o site. Os caminhos são resolvidos a partir do repositório.
+A publicação só começa após o build, as verificações e o backup terminarem sem
+erros. O terminal informa o caminho do backup; se a sincronização falhar, use
+essa cópia para recuperar a versão anterior. Os backups ficam fora da pasta
+pública e **não são removidos automaticamente**; remova os antigos quando não
+precisar mais deles.
+
+O `rsync` usa `--delay-updates` para transferir arquivos temporariamente antes de
+substituí-los e `--delete-delay` para remover arquivos antigos ao final da
+transferência. Isso evita servir arquivos parcialmente escritos, mas a troca do
+site inteiro não é atômica.
+
+Para gerar e validar apenas `dist/`, sem publicar nem criar backup, execute
+`pixi run --locked build-lncc`. Você pode então transferir seu conteúdo
+manualmente, preservando os arquivos ocultos: não use `dist/*`, pois esse padrão
+omite `.htaccess`. Os valores padrão de `sciastro.yaml` continuam atendendo ao
+GitHub Pages.
+
+Abra [a página do LNCC](https://www.lncc.br/~volpatto/), uma página interna e a
+versão em inglês. Confira também os cabeçalhos e a resposta para uma página
+inexistente:
+
+```sh
+curl -I https://www.lncc.br/~volpatto/
+curl -I https://www.lncc.br/~volpatto/pesquisa/
+curl -I https://www.lncc.br/~volpatto/en/research/
+curl -I https://www.lncc.br/~volpatto/pagina-inexistente/
+```
+
+O HTML deve informar `Content-Type: text/html; charset=UTF-8`. As três primeiras
+respostas devem ter status 200; a última deve ter status 404 e exibir a página de
+erro do site. Ao regenerar para o LNCC, use `deploy-lncc` para publicar ou
+`build-lncc` para apenas preparar os arquivos: um build padrão gera caminhos a
+partir da raiz do GitHub Pages.
 
 ### Transferir os arquivos
 
@@ -652,8 +727,28 @@ Assim, `/pesquisadores/diego/pesquisa/` corresponde a
 dos outros sites do mesmo domínio. Antes de recarregar o serviço, valide a
 configuração com `nginx -t`, usando as permissões adequadas à instalação.
 
-Em Apache ou outra hospedagem estática, aplique o mesmo mapeamento de diretórios,
-índice `index.html` e página de erro. Não é necessário proxy para uma porta Node.js.
+### Configuração Apache incluída no build
+
+`build/apache.mjs` gera `.htaccess` automaticamente em `dist/`, usando o
+`BASE_PATH` do build para o caminho da página 404. O arquivo configura
+`index.html` como índice, UTF-8 para os textos e tipos MIME dos recursos estáticos.
+Copie esse arquivo junto com as páginas. Em outras hospedagens, como GitHub Pages
+ou Nginx, ele não é interpretado.
+
+O Apache do LNCC enviava `charset=ISO-8859-1` para HTML em UTF-8. O cabeçalho HTTP
+prevalece sobre a tag de charset no HTML; por isso, acrescentar outra tag não
+corrige a exibição. A diretiva
+[`AddDefaultCharset UTF-8`](https://httpd.apache.org/docs/2.4/mod/core.html#adddefaultcharset)
+e as associações de charset no `.htaccess` corrigem a configuração do diretório.
+O servidor precisa permitir essas diretivas em `.htaccess` por meio de
+[`AllowOverride`](https://httpd.apache.org/docs/2.4/mod/core.html#allowoverride).
+Se o arquivo for ignorado ou causar erro 500, a configuração correspondente
+precisa ser revista pela administração da hospedagem.
+
+Não há regras de reescrita para a página inicial: cada URL possui seu próprio
+HTML. O `ErrorDocument` mantém o status 404 para endereços inexistentes. Não é
+necessário proxy para uma porta Node.js. A prévia do Astro não interpreta
+`.htaccess`; os cabeçalhos e a página de erro precisam ser conferidos no Apache.
 
 ### Conferir após a publicação
 
@@ -699,6 +794,14 @@ GitHub Pages, sem configurar cabeçalhos no servidor. Ela considera a saída do
 build confiável: não é um antivírus nem uma verificação das dependências.
 
 Atributos de estilo continuam permitidos para o posicionamento das figuras.
+O build publica as fontes como arquivos locais separados, com
+`vite.build.assetsInlineLimit: 0`. A CSP HTTP do LNCC permite fontes do próprio
+domínio, mas bloqueia fontes incorporadas em URLs `data:`. As políticas do
+cabeçalho e da meta são
+[aplicadas em conjunto](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy#multiple_content_security_policies):
+a permissão na meta não remove a restrição do cabeçalho. Servir as fontes por
+URLs locais permite manter a política da hospedagem.
+
 Se adicionar analytics, vídeos incorporados ou recursos carregados de outro
 domínio, revise as diretivas correspondentes e os testes; não libere origens
 indiscriminadamente. A política é aplicada ao build de produção. Para conferir
