@@ -772,11 +772,19 @@ Se a hospedagem estiver em subdiretório, inclua-o em cada URL.
 
 ### Política de segurança e avisos do navegador
 
-O site inclui a tag `google-site-verification` na página inicial gerada. O código
-de verificação fica em `astro.config.mjs`, na chamada `googleSiteVerification`.
-Depois de publicar o build no GitHub Pages, volte ao Search Console e clique em
-**Verificar**. Mantenha a tag após a confirmação, pois o Google pode verificá-la
-novamente. Ela não altera a aparência do site nem instala analytics.
+O site inclui a tag `google-site-verification` no `<head>` da página inicial
+gerada. Os códigos ficam em `astro.config.mjs`, na chamada `googleSiteVerification`,
+associados ao endereço público completo. O build seleciona o código do LNCC ou do
+GitHub Pages conforme `SITE_URL` e `BASE_PATH`; outros destinos não recebem tag.
+
+No Search Console, adicione uma propriedade do tipo **Prefixo do URL** com o
+endereço exato `https://www.lncc.br/~volpatto/` e escolha **Tag HTML**. Publique com
+`pixi run --locked deploy-lncc`, volte ao Search Console e clique em **Verificar**.
+O GitHub Pages mantém seu código anterior, publicado pelo workflow correspondente.
+Mantenha a tag após a confirmação, pois o Google verifica sua presença novamente.
+Consulte as [instruções oficiais de verificação por tag HTML](https://support.google.com/webmasters/answer/9008080?hl=pt-BR#html_tag).
+Essa tag não altera a aparência nem instala Google Analytics; a medição de visitas
+exige uma configuração separada.
 
 O build inclui uma **Content Security Policy (CSP)** em todas as páginas, inclusive
 na página 404. A configuração está em `astro.config.mjs`. A política permite

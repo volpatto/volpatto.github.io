@@ -9,7 +9,12 @@ import apacheStaticHosting from "./build/apache.mjs";
 export default defineConfig({
   integrations: [
     sciastro({ styles: ["./styles/site.css"] }),
-    googleSiteVerification("NWsax4H6nLnc1L2Bcu5b0P3w0TKe87eh8_4E8pCszK8"),
+    googleSiteVerification({
+      "https://volpatto.github.io/":
+        "NWsax4H6nLnc1L2Bcu5b0P3w0TKe87eh8_4E8pCszK8",
+      "https://www.lncc.br/~volpatto/":
+        "O1w6IPoTkgAC0qXhWt1Ud93VsxrP_aCv4Ptn3p-qN1o",
+    }),
     secureStaticHTML(),
     apacheStaticHosting(),
   ],
