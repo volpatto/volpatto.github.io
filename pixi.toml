@@ -37,6 +37,17 @@ cmd = "pnpm build"
 depends-on = ["setup"]
 description = "Gera os arquivos estáticos em dist/"
 
+[tasks.build-lncc]
+cmd = "pnpm verify"
+depends-on = ["setup"]
+env = { SITE_URL = "https://www.lncc.br", BASE_PATH = "/~volpatto/" }
+description = "Gera e valida dist/ para https://www.lncc.br/~volpatto/"
+
+[tasks.deploy-lncc]
+cmd = "node scripts/deploy-lncc.mjs"
+depends-on = ["build-lncc"]
+description = "Gera, valida, faz backup e publica o site do LNCC em ../htdocs/"
+
 [tasks.test]
 cmd = "pnpm test"
 depends-on = ["build"]

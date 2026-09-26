@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "astro": "7.3.3",
-    "sciastro": "1.1.0"
+    "sciastro": "1.1.1"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
