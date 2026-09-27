@@ -8,7 +8,7 @@
 [![pnpm](https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
 [![Pixi](https://img.shields.io/badge/Pixi-41B3A3)](https://pixi.sh/)
 
-Site pessoal estático em português e inglês, construído com **[SciAstro](https://volpatto.github.io/sciastro/) e [Astro](https://astro.build/)**, usando o **LNCC Theme** e conteúdo editável em YAML e BibTeX. Apesar de ter sido montado para o GitHub Pages, foi preparado para publicação em outros domínios.
+Site pessoal estático em português e inglês, construído com **[SciAstro](https://volpatto.github.io/sciastro/) e [Astro](https://astro.build/)**, usando o **LNCC Theme** e conteúdo editável em YAML e BibTeX. O endereço principal é **[https://www.lncc.br/~volpatto/](https://www.lncc.br/~volpatto/)**. O GitHub mantém o código e a integração contínua; a publicação no GitHub Pages está desativada no repositório, com um modelo preservado para reativação futura.
 
 As páginas são definidas em `sciastro.yaml` e `conteudo/paginas/`. O SciAstro
 fornece os componentes, estilos e interações; este repositório mantém apenas
@@ -55,7 +55,7 @@ cd volpatto.github.io
 pixi run --locked dev
 ```
 
-Abra `http://127.0.0.1:4321/`. Edite os arquivos de `conteudo/` e salve para ver
+Abra `http://127.0.0.1:4321/~volpatto/`. Edite os arquivos de `conteudo/` e salve para ver
 as alterações. Antes de publicar, execute `pixi run --locked verify-all`.
 O resultado pronto para hospedagem fica em `dist/`.
 
@@ -65,7 +65,7 @@ O resultado pronto para hospedagem fica em `dist/`.
 - [Gerar o site para domínio próprio ou subdiretório](#gerar-o-site-para-publicação)
 - [Publicar em servidor web](#publicar-em-servidor-web)
 - [Atualizar e restaurar uma versão anterior](#atualizar-e-restaurar-uma-versão-anterior)
-- [Publicar no GitHub Pages](#publicar-no-github-pages)
+- [Integração contínua no GitHub](#github-actions-e-github-pages)
 - [Resolver problemas de ambiente e hospedagem](#problemas-frequentes)
 - [Gerar novamente o currículo](#gerar-novamente-o-currículo)
 
@@ -187,7 +187,7 @@ Na raiz do repositório:
 pixi run --locked dev
 ```
 
-Abra `http://127.0.0.1:4321/` ou o endereço informado pelo terminal, caso a porta
+Abra `http://127.0.0.1:4321/~volpatto/` ou o endereço informado pelo terminal, caso a porta
 esteja ocupada. As alterações salvas nos YAMLs aparecem na prévia.
 As tarefas também preparam as dependências automaticamente: é possível começar
 diretamente por `dev` ou `verify`, sem executar `install` e `setup` separadamente.
@@ -355,7 +355,8 @@ Não é necessário manter uma pasta `src/` nem um ambiente de TypeScript aqui.
 | `scripts/deploy-lncc.mjs` | Confere o destino LNCC, cria um backup e sincroniza `dist/` com `../htdocs/` |
 | `cv/` | Script e configurações para gerar novamente o currículo |
 | `tests/` e `playwright.config.mjs` | Tests do conteúdo publicado e da navegação |
-| `.github/workflows/pages.yml` | Build, Tests e publicação no GitHub Pages |
+| `.github/workflows/pages.yml` | CI com build para o LNCC, testes e auditorias; sem publicação |
+| `deployment/github-pages.yml` | Modelo inativo para reativar a publicação manual no GitHub Pages |
 | `package.json`, `pnpm-workspace.yaml` e `pnpm-lock.yaml` | Dependências do site e política de instalação |
 | `pixi.toml` e `pixi.lock` | Ferramentas e tarefas reproduzíveis |
 
@@ -412,54 +413,31 @@ Para atualizar intencionalmente:
 4. Execute também `pixi run --locked build-lncc` para conferir o suporte ao
    subdiretório Apache. Revise e registre `package.json`, `pnpm-lock.yaml` e
    `pnpm-workspace.yaml` juntos. Envie um PR para
-   `main`; o CI executa os testes antes da publicação.
+   `main`; o CI executa os testes, e a publicação no LNCC é feita com
+   `pixi run --locked deploy-lncc`.
 
 Não é necessário copiar arquivos `.tgz`, manter uma pasta `vendor/` ou gerar
 uma release do site no npm. O projeto do site é privado para fins de publicação
 de pacotes (`private: true`); seu resultado é o conteúdo estático de `dist/`.
 Uma release do SciAstro só chega a este site quando sua dependência é atualizada.
 
-## Publicar no GitHub Pages
+## GitHub Actions e GitHub Pages
 
-O destino é o repositório `volpatto/volpatto.github.io`, publicado na raiz de
-`https://volpatto.github.io/`. O workflow [pages.yml](.github/workflows/pages.yml)
-usa o ambiente Pixi, valida o conteúdo com SciAstro, gera o site com Astro e executa os testes
-e publica em pushes para `main`. Pull requests são conferidos sem publicação.
-A badge abaixo do título acompanha esse workflow na branch `main`.
+O workflow [pages.yml](.github/workflows/pages.yml) permanece ativo em pushes para
+`main`, pull requests e execuções manuais. Ele usa Pixi, valida o conteúdo,
+gera o build para `https://www.lncc.br/~volpatto/`, executa testes estáticos e de
+navegador, audita dependências e inspeciona os arquivos gerados. Os relatórios
+continuam disponíveis no artefato **website-tests-and-security**.
 
-1. No [repositório](https://github.com/volpatto/volpatto.github.io), abra
-   **Settings → Pages → Build and deployment → Source** e selecione **GitHub Actions**.
-2. Envie as alterações revisadas para `main`.
-3. Se necessário, abra **Actions → Publish website to GitHub Pages → Run workflow**.
-4. Aguarde a conclusão. O site estará em `https://volpatto.github.io/` após uma
-   publicação bem-sucedida.
+Esse workflow não configura nem publica no Pages, não envia artefatos de
+publicação e não recebe permissões de Pages. Ele também não publica no LNCC:
+essa etapa continua sendo `pixi run --locked deploy-lncc`, na máquina que contém
+`../htdocs/`. A badge abaixo do título acompanha o CI na branch `main`.
+O job **Build and Tests** foi preservado para manter as regras de proteção da branch.
 
-### GitHub Pages executa Jekyll em vez do build do site
-
-Se o log executar `actions/jekyll-build-pages`, o GitHub está usando o build por
-branch com **Jekyll**. Este projeto precisa instalar o SciAstro e gerar o site com
-Astro antes de publicar. Os YAMLs de `conteudo/` não são páginas prontas para
-hospedagem. O SciAstro é baixado do npm durante a instalação das dependências.
-
-A correção é selecionar **GitHub Actions** em Pages, conforme o passo 1, e executar
-o workflow `Publish website to GitHub Pages`. Ele publica o HTML de `dist/`.
-Não selecione a pasta de código-fonte como site estático. Adicionar `.nojekyll`
-ao código-fonte, sozinho, também não compila o projeto.
-
-Essa configuração fica no GitHub e não é alterada por editar o workflow localmente.
-O procedimento segue a [documentação oficial de configuração da fonte de publicação](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
-
-O domínio e o subdiretório usados no deploy vêm do próprio GitHub Pages. A
-configuração local mantém `base: "/"`, com possibilidade de hospedar depois em
-outro domínio ou subdiretório.
-
-### Erro “Resource not accessible by integration” em Configure Pages
-
-O job de build precisa de `pages: read` para consultar a configuração do site.
-Essa permissão está declarada no workflow, junto de `contents: read`.
-As permissões de publicação (`pages: write` e `id-token: write`) ficam no job de
-deploy. Habilitar Pages e escolher **GitHub Actions** continua sendo necessário;
-a permissão de leitura não altera essa configuração.
+O modelo de publicação manual foi preservado em
+[deployment/github-pages.yml](deployment/github-pages.yml), fora de
+`.github/workflows/`. Ele está inativo e disponível para uma eventual reativação.
 
 ## Gerar o site para publicação
 
@@ -471,8 +449,12 @@ endereço público real.
 
 | Variável | Significado | Padrão do projeto |
 | --- | --- | --- |
-| `SITE_URL` | Protocolo e domínio público, sem o subdiretório | `https://volpatto.github.io` |
-| `BASE_PATH` | Caminho público, começando e terminando em `/` | `/` |
+| `SITE_URL` | Protocolo e domínio público, sem o subdiretório | `https://www.lncc.br` |
+| `BASE_PATH` | Caminho público, começando e terminando em `/` | `/~volpatto/` |
+
+Sem variáveis de ambiente, `build`, `verify`, `dev` e `preview` usam esses padrões
+LNCC definidos em `sciastro.yaml`. Para a publicação habitual, use
+`pixi run --locked deploy-lncc`; os exemplos abaixo são para outros destinos.
 
 Para `https://pesquisa.example.org/`, em **Bash/Zsh**:
 
@@ -537,9 +519,9 @@ pixi run --locked preview
 ```
 
 A tarefa gera `dist/` novamente antes de iniciar a prévia. Abra o endereço
-informado no terminal, incluindo `/pesquisadores/diego/` se tiver usado esse
-subdiretório. Confira a navegação nos dois idiomas, tema claro/escuro, imagens e
-download do currículo. Para encerrar, use `pixi run --locked preview-stop`.
+informado no terminal, incluindo `/~volpatto/` no padrão LNCC ou o subdiretório
+que tiver escolhido. Confira a navegação nos dois idiomas, tema claro/escuro,
+imagens e download do currículo. Para encerrar, use `pixi run --locked preview-stop`.
 
 Os caminhos dos arquivos em `dist/` são os mesmos com qualquer `BASE_PATH`.
 O que muda são os URLs gravados no HTML, CSS e scripts. **Não é criada uma pasta
@@ -548,7 +530,7 @@ O que muda são os URLs gravados no HTML, CSS e scripts. **Não é criada uma pa
 
 Ao mudar de domínio ou subdiretório, gere e publique novamente o site inteiro.
 Copiar um build antigo para outro endereço não atualiza seus links e metadados.
-Para voltar aos padrões locais em Bash/Zsh, use `unset SITE_URL BASE_PATH`;
+Para voltar aos padrões LNCC em Bash/Zsh, use `unset SITE_URL BASE_PATH`;
 no PowerShell, abra uma nova sessão. Também é possível mudar os valores padrão
 nos campos `url` e `base` de `sciastro.yaml` para tornar permanente o novo destino.
 
@@ -608,8 +590,9 @@ site inteiro não é atômica.
 Para gerar e validar apenas `dist/`, sem publicar nem criar backup, execute
 `pixi run --locked build-lncc`. Você pode então transferir seu conteúdo
 manualmente, preservando os arquivos ocultos: não use `dist/*`, pois esse padrão
-omite `.htaccess`. Os valores padrão de `sciastro.yaml` continuam atendendo ao
-GitHub Pages.
+omite `.htaccess`. Os valores padrão de `sciastro.yaml` também apontam para o LNCC;
+as tarefas específicas garantem esse destino mesmo se houver variáveis de
+ambiente definidas para outra hospedagem.
 
 Abra [a página do LNCC](https://www.lncc.br/~volpatto/), uma página interna e a
 versão em inglês. Confira também os cabeçalhos e a resposta para uma página
@@ -625,8 +608,7 @@ curl -I https://www.lncc.br/~volpatto/pagina-inexistente/
 O HTML deve informar `Content-Type: text/html; charset=UTF-8`. As três primeiras
 respostas devem ter status 200; a última deve ter status 404 e exibir a página de
 erro do site. Ao regenerar para o LNCC, use `deploy-lncc` para publicar ou
-`build-lncc` para apenas preparar os arquivos: um build padrão gera caminhos a
-partir da raiz do GitHub Pages.
+`build-lncc` para apenas preparar os arquivos.
 
 ### Transferir os arquivos
 
@@ -668,12 +650,12 @@ O servidor deve resolver diretórios para `index.html`. Exemplos:
 
 | URL público | Arquivo dentro da pasta publicada |
 | --- | --- |
-| `/` | `index.html` |
-| `/pesquisa/` | `pesquisa/index.html` |
-| `/en/research/` | `en/research/index.html` |
-| `/files/cv-diego-volpatto-2026.pdf` | `files/cv-diego-volpatto-2026.pdf` |
+| `/~volpatto/` | `index.html` |
+| `/~volpatto/pesquisa/` | `pesquisa/index.html` |
+| `/~volpatto/en/research/` | `en/research/index.html` |
+| `/~volpatto/files/cv-diego-volpatto-2026.pdf` | `files/cv-diego-volpatto-2026.pdf` |
 
-Com `BASE_PATH=/pesquisadores/diego/`, acrescente esse prefixo aos URLs da tabela.
+Com `BASE_PATH=/pesquisadores/diego/`, substitua `/~volpatto/` nos URLs da tabela.
 Por exemplo, `/pesquisadores/diego/pesquisa/` deve resolver para o mesmo arquivo
 `pesquisa/index.html` da versão publicada.
 
@@ -780,7 +762,8 @@ GitHub Pages conforme `SITE_URL` e `BASE_PATH`; outros destinos não recebem tag
 No Search Console, adicione uma propriedade do tipo **Prefixo do URL** com o
 endereço exato `https://www.lncc.br/~volpatto/` e escolha **Tag HTML**. Publique com
 `pixi run --locked deploy-lncc`, volte ao Search Console e clique em **Verificar**.
-O GitHub Pages mantém seu código anterior, publicado pelo workflow correspondente.
+O código anterior do GitHub Pages permanece na configuração para uma eventual
+reativação; somente um build com o endereço GitHub o inclui.
 Mantenha a tag após a confirmação, pois o Google verifica sua presença novamente.
 Consulte as [instruções oficiais de verificação por tag HTML](https://support.google.com/webmasters/answer/9008080?hl=pt-BR#html_tag).
 Essa tag não altera a aparência nem instala Google Analytics; a medição de visitas
@@ -819,7 +802,7 @@ build; `dev` não é uma verificação da CSP de produção.
 Um aviso vermelho de “site perigoso” é uma avaliação independente do navegador;
 adicionar CSP não remove essa classificação automaticamente. Se aparecer:
 
-1. Consulte o [relatório público do Safe Browsing](https://transparencyreport.google.com/safe-browsing/search?url=https%3A%2F%2Fvolpatto.github.io%2Fpesquisa%2F).
+1. Consulte o [relatório público do Safe Browsing](https://transparencyreport.google.com/safe-browsing/search?url=https%3A%2F%2Fwww.lncc.br%2F~volpatto%2Fpesquisa%2F).
 2. No [Google Search Console](https://search.google.com/search-console), selecione
    a propriedade do site e abra **Segurança e ações manuais → Problemas de segurança**.
    Esse relatório pode mostrar a descrição do problema e exemplos de URLs, mesmo
@@ -847,8 +830,9 @@ pixi run --locked verify-all
 Para executar somente as três camadas de segurança, use
 `pixi run --locked security`. As tarefas geram o build antes de inspecioná-lo.
 Nenhuma delas publica o site, aplica correções automáticas às dependências ou
-altera o conteúdo. O CI executa as mesmas verificações em PRs para `main` e antes
-do deployment; uma falha impede o job de publicação. Para impedir também o merge,
+altera o conteúdo. O CI executa as mesmas verificações em PRs e pushes para `main`,
+independentemente de qualquer publicação. No modelo opcional do GitHub Pages,
+uma falha também impede o job de publicação. Para impedir o merge com falhas,
 configure **Build and Tests** como check obrigatório nas regras da branch no GitHub.
 
 | Camada | Ferramentas e critérios | Relatório |
@@ -964,8 +948,8 @@ trocar apenas o destino do link normalmente dispensa essa recarga.
 | `Another astro dev server is already running`, seguido de código 1 | A prévia anterior continua ativa. Abra o endereço informado ou execute `pixi run --locked dev-stop` e depois `pixi run --locked dev`. Não é preciso reinstalar o ambiente. |
 | Build aponta erro em um YAML | Confira o arquivo e campo indicados, a indentação e as traduções `pt`/`en`. Veja o [guia de edição](conteudo/README.md). |
 
-Falhas de Jekyll e de permissão no GitHub Actions estão descritas em
-[Publicar no GitHub Pages](#publicar-no-github-pages).
+A configuração de hospedagem e a preservação do CI estão descritas em
+[GitHub Actions e GitHub Pages](#github-actions-e-github-pages).
 
 ## Conferência de conteúdo
 
@@ -1003,7 +987,7 @@ as páginas sem bloqueios indevidos e o bloqueio de código e conexões não
 autorizados. As tentativas de teste usam respostas simuladas, sem acessar
 servidores externos. Uma suíte adicional observa atividade automática em todas
 as páginas e testa interações de menu, idioma e tema, além do download intencional
-do currículo. Esses testes fazem parte do mesmo CI antes da publicação.
+do currículo. Esses testes fazem parte do CI em PRs e pushes para `main`.
 
 ```sh
 pixi run --locked browser-install
@@ -1012,6 +996,7 @@ pixi run --locked verify-all
 
 No Linux, use `pixi run --locked pnpm exec playwright install --with-deps chromium`
 se as bibliotecas do navegador estiverem ausentes. O CI instala essas dependências
-e roda os Browser Tests antes de publicar. Relatórios, capturas e evidências de
-falhas ficam em `.test-output/`; no CI são preservados como artefato. Os testes
-utilizam uma instância temporária na porta 4370, sem encerrar a prévia na 4321.
+e roda os Browser Tests mesmo com o GitHub Pages desativado. Relatórios, capturas
+e evidências de falhas ficam em `.test-output/`; no CI são preservados como
+artefato. Os testes utilizam uma instância temporária na porta 4370, sem encerrar
+a prévia na 4321.
