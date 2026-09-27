@@ -8,6 +8,13 @@
   align-items: center;
 }
 
+/* Leave room for parent-page labels alongside the submenu's 44px control. */
+@media (min-width: 851px) {
+  .lncc-shell {
+    grid-template-columns: 12.5rem minmax(0, 1fr);
+  }
+}
+
 /* A small photo album using SciAstro's native figures, without cropping. */
 #music-photos .sp-entry {
   display: flex;
