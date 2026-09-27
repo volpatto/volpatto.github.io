@@ -14,10 +14,10 @@
     pt: LNCC · Orientação
     en: LNCC · Supervisor
   topic:
-    pt: Cálculos de equilíbrio termodinâmico em sistemas reativos acelerados por K-NN de Taylor.
-      Tema provisório
+    pt: Cálculos de equilíbrio termodinâmico em sistemas reativos acelerados por K-NN de Taylor
+      (Tema provisório)
     en: Acceleration of thermodynamic equilibrium calculations in reactive transport via taylor
-      K-NN Provisional topic
+      K-NN (Provisional topic)
   startYear: 2025
 - id: breno-vieira-sousa
   name: Breno Vieira Sousa
@@ -28,9 +28,9 @@
     pt: LNCC · Orientação
     en: LNCC · Supervisor
   topic:
-    pt: Formulações estabilizadas de elementos finitos para transporte de CO₂ em carbodutos. Tema
-      provisório
-    en: Stabilized finite element formulations for CO₂ transport in pipelines. Provisional topic
+    pt: Formulações estabilizadas de elementos finitos para transporte de CO₂ em carbodutos (Tema
+      provisório)
+    en: Stabilized finite element formulations for CO₂ transport in pipelines (Provisional topic)
   startYear: 2025
 - id: laira-lopes-silva
   name: Laira Lopes Silva
@@ -41,8 +41,8 @@
     pt: LNCC · Coorientação
     en: LNCC · Co-supervisor
   topic:
-    pt: Modelagem computacional hidrogeomecânica para injeção cíclica de H2. Tema provisório
-    en: Computational hydrogeomechanical modeling for cyclic H2 injection. Provisional topic
+    pt: Modelagem computacional hidrogeomecânica para injeção cíclica de H2 (Tema provisório)
+    en: Computational hydrogeomechanical modeling for cyclic H2 injection (Provisional topic)
   startYear: 2025
 - id: rennan-marques-de-souza-damasceno
   name: Rennan Marques de Souza Damasceno
@@ -53,8 +53,8 @@
     pt: UDESC · Coorientação
     en: UDESC · Co-supervisor
   topic:
-    pt: Análise de dados para validação automatizada de BSW em poços offshore. Tema provisório
-    en: A data analysis pipeline for automated BSW validation in offshore wells. Provisional topic
+    pt: Análise de dados para validação automatizada de BSW em poços offshore (Tema provisório)
+    en: A data analysis pipeline for automated BSW validation in offshore wells (Provisional topic)
   startYear: 2026
   avatarFallback: &udesc
     src: /images/udesc.svg
@@ -73,9 +73,9 @@
     pt: UDESC · Coorientação
     en: UDESC · Co-supervisor
   topic:
-    pt: Modelagem baseada em SINDy de queda de pressão em poços produtores offshore. Tema
-      provisório
-    en: SINDy-based modeling of pressure drop in offshore production wells. Provisional topic
+    pt: Modelagem baseada em SINDy de queda de pressão em poços produtores offshore (Tema
+      provisório)
+    en: SINDy-based modeling of pressure drop in offshore production wells (Provisional topic)
   startYear: 2026
   avatarFallback: *udesc
 - id: marcel-de-araujo
@@ -87,8 +87,8 @@
     pt: UDESC · Coorientação
     en: UDESC · Co-supervisor
   topic:
-    pt: Modelagem híbrida de escoamento monofásico em poços injetores de petróleo. Tema provisório
-    en: Hybrid modeling of single-phase flow in oilfield injection wells. Provisional topic
+    pt: Modelagem híbrida de escoamento monofásico em poços injetores de petróleo (Tema provisório)
+    en: Hybrid modeling of single-phase flow in oilfield injection wells (Provisional topic)
   startYear: 2026
   avatarFallback: *udesc
 - id: mauricio-prado-de-omena-souza
