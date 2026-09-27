@@ -109,10 +109,11 @@ sections:
         mencionados no site. O reúso está sujeito às condições dos respectivos titulares.
 
 
-        **Foto e documentos para download**
+        **Fotografias e documentos para download**
 
 
-        A foto de perfil e o currículo em PDF estão fora da licença geral dos textos editoriais.
+        A foto de perfil, as fotografias de [Aventuras musicais](page:musical-adventures) e o currículo em PDF estão fora da licença geral dos textos editoriais.
+        A fotografia de cabelos longos ao microfone mantém o crédito de Dennis Teixeira.
         Esta declaração de licenciamento não concede permissão adicional para reutilizar esses
         arquivos.
 
@@ -137,10 +138,11 @@ sections:
         mentioned on the site. Reuse is subject to the respective rights holders’ terms.
 
 
-        **Portrait and downloadable documents**
+        **Photographs and downloadable documents**
 
 
-        The profile photograph and the PDF CV are outside the general license for editorial text. No
+        The profile photograph, the photographs in [Musical adventures](page:musical-adventures) and the PDF CV are outside the general license for editorial text.
+        The photograph with long hair at the microphone retains the credit to Dennis Teixeira. No
         additional permission to reuse these files is granted by this licensing notice.
 
 
@@ -286,8 +288,8 @@ sections:
     text:
       pt: >-
         O ícone do Lattes é do [Academicons](https://github.com/jpswalsh/academicons) (James Walsh e
-        Katja Bercic), [OFL 1.1](/licenses/Academicons-OFL.txt). Os ícones de GitHub, ORCID e
-        LinkedIn são do [Font Awesome Free](https://fontawesome.com/) (Fonticons, Inc.), [CC BY
+        Katja Bercic), [OFL 1.1](/licenses/Academicons-OFL.txt). Os ícones de GitHub, ORCID,
+        LinkedIn, Google Scholar e ResearchGate são do [Font Awesome Free](https://fontawesome.com/) (Fonticons, Inc.), [CC BY
         4.0](/licenses/Font-Awesome.txt). Os desenhos são preservados e exibidos na cor do texto do
         tema.
 
@@ -298,8 +300,8 @@ sections:
         interface vêm do Lucide, com os [avisos de licença preservados](/licenses/SciAstro-icons.txt).
       en: >-
         The Lattes icon is from [Academicons](https://github.com/jpswalsh/academicons) (James Walsh
-        and Katja Bercic), [OFL 1.1](/licenses/Academicons-OFL.txt). GitHub, ORCID and LinkedIn
-        icons are from [Font Awesome Free](https://fontawesome.com/) (Fonticons, Inc.), [CC BY
+        and Katja Bercic), [OFL 1.1](/licenses/Academicons-OFL.txt). GitHub, ORCID, LinkedIn,
+        Google Scholar and ResearchGate icons are from [Font Awesome Free](https://fontawesome.com/) (Fonticons, Inc.), [CC BY
         4.0](/licenses/Font-Awesome.txt). Their shapes are preserved and displayed in the theme’s
         text color.
 

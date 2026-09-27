@@ -173,6 +173,89 @@ test("approved PDF downloads must exist inside the deployment base", async (t) =
   has(report, "resource-outside-base");
 });
 
+test("all four genealogy exports are approved at the configured deployment base", async (t) => {
+  const paths = ["pt", "en"].flatMap((locale) =>
+    ["svg", "json"].map(
+      (extension) =>
+        `files/genealogy/academic-genealogy-${locale}.${extension}`,
+    ),
+  );
+  for (const base of ["/", "/site/"]) {
+    await t.test(base, async (t) => {
+      const files = Object.fromEntries(
+        paths.map((path) => [
+          path,
+          path.endsWith(".svg")
+            ? '<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0"/></svg>'
+            : '{"people":[],"edges":[]}',
+        ]),
+      );
+      files["index.html"] = paths
+        .map((path) => `<a download href="${base}${path}">Download</a>`)
+        .join("");
+      const report = await inspect(t, files, { base });
+      assert.equal(report.status, "passed", JSON.stringify(report.issues));
+      assert.deepEqual(
+        report.resources
+          .filter((resource) => resource.kind === "download")
+          .map((resource) => new URL(resource.url).pathname)
+          .sort(),
+        paths.map((path) => base + path).sort(),
+      );
+    });
+  }
+});
+
+test("genealogy approval does not allow other SVG/JSON downloads or external copies", async (t) => {
+  const targets = [
+    "/site/other.svg",
+    "/site/other.json",
+    "/site/files/genealogy/other.svg",
+    "/site/files/genealogy/other.json",
+    "/site/files/genealogy/academic-genealogy-fr.svg",
+    "/site/files/genealogy/academic-genealogy-fr.json",
+    "/site/files/genealogy/academic-genealogy-pt.SVG",
+    "/site/files/genealogy/academic-genealogy-en.json.bak",
+    "/outside/files/genealogy/academic-genealogy-pt.svg",
+    "/files/genealogy/academic-genealogy-en.json",
+    "https://other.invalid/site/files/genealogy/academic-genealogy-pt.svg",
+    "https://other.invalid/site/files/genealogy/academic-genealogy-en.json",
+  ];
+  for (const target of targets) {
+    await t.test(target, async (t) => {
+      const files = {
+        "index.html": `<a download href="${target}">Download</a>`,
+      };
+      if (target.startsWith("/site/"))
+        files[target.slice("/site/".length)] = target.endsWith(".svg")
+          ? "<svg/>"
+          : "{}";
+      const report = await inspect(t, files, { base: "/site/" });
+      has(report, "unexpected-download");
+    });
+  }
+});
+
+test("approved genealogy downloads still require existing files and inspect SVG content", async (t) => {
+  const path = "files/genealogy/academic-genealogy-pt.svg";
+  const files = {
+    "index.html": `<a download href="/site/${path}">Download</a>`,
+  };
+  const missing = await inspect(t, files, { base: "/site/" });
+  has(missing, "missing-resource");
+  const active = await inspect(
+    t,
+    {
+      ...files,
+      [path]:
+        '<svg xmlns="http://www.w3.org/2000/svg"><script>x()</script><image href="https://other.invalid/image.png"/></svg>',
+    },
+    { base: "/site/" },
+  );
+  has(active, "active-element");
+  has(active, "external-resource");
+});
+
 test("allowlist uses normalized exact origins and reports missing/escaping resources", async (t) => {
   const report = await inspect(
     t,

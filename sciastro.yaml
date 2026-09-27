@@ -50,6 +50,9 @@ pageFiles:
   - paginas/grupos.yaml
   - paginas/parcerias.yaml
   - paginas/curriculo.yaml
+  - paginas/curiosidades.yaml
+  - paginas/genealogia.yaml
+  - paginas/aventuras-musicais.yaml
   - paginas/contato.yaml
   - paginas/licenciamento.yaml
 navigation:
@@ -62,6 +65,7 @@ navigation:
   - groups
   - collaborations
   - cv
+  - curiosities
   - contact
 favicon: /favicon.svg
 logo:
@@ -107,6 +111,8 @@ structuredData:
   sameAs:
     - http://lattes.cnpq.br/3999178670179183
     - https://orcid.org/0000-0002-3107-3259
+    - https://scholar.google.com.br/citations?user=fb_CEhQAAAAJ&hl=pt-BR
+    - https://www.researchgate.net/profile/Diego-Volpatto?ev=hdr_xprf
     - https://github.com/volpatto
     - https://www.linkedin.com/in/diego-volpatto-1a286068
 bibliography:

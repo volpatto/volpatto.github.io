@@ -1,0 +1,39 @@
+id: genealogy
+parent: curiosities
+title:
+  pt: Genealogia acadêmica
+  en: Academic genealogy
+paths:
+  pt: curiosidades/genealogia-academica/
+  en: en/curiosities/academic-genealogy/
+description:
+  pt: Uma viagem pelas relações de orientação e mentoria que ligam minha formação à história da ciência.
+  en: A journey through the supervision and mentorship links connecting my training to the history of science.
+icon: lucide:git-branch
+sections:
+  - type: prose
+    text:
+      pt: |
+        Uma árvore genealógica acadêmica acompanha orientadores e seus orientadores. Na minha, encontrei **Stephen Timoshenko** (teoria de vigas e mecânica dos sólidos; **4 relações**) e **Ludwig Prandtl** (teoria da camada limite; **5 relações**). Ao incluir vínculos históricos e uma atribuição discutida em torno de August Föppl, os caminhos chegam a **Carl Friedrich Gauss** (quadratura numérica e mínimos quadrados; **10 relações**) e **Leonhard Euler** (método de Euler para EDOs e equações dos escoamentos invíscidos; **12 relações**).
+
+        Nesse percurso também aparecem **Peter G. L. Dirichlet** (problemas de contorno para EDPs; **9 relações**), **Joseph Fourier** (equação do calor e séries de Fourier; **10 relações**) e **Joseph-Louis Lagrange** (cálculo das variações; **11 relações**) — contribuições muito presentes no estudo de EDPs e na construção de métodos numéricos.
+
+        Cada relação conta um passo; meu orientador está a um passo de mim. As distâncias valem para este recorte: vínculos antigos de estudo e mentoria não equivalem necessariamente a orientações de doutorado. O diagrama detalhado inclui também ramos colaterais, que não são ancestrais diretos.
+      en: |
+        An academic family tree follows advisors and their own advisors. In mine, I found **Stephen Timoshenko** (beam theory and solid mechanics; **4 links**) and **Ludwig Prandtl** (boundary-layer theory; **5 links**). Including historical connections and a disputed attribution involving August Föppl leads to **Carl Friedrich Gauss** (numerical quadrature and least squares; **10 links**) and **Leonhard Euler** (Euler’s method for ODEs and equations for inviscid flow; **12 links**).
+
+        These paths also include **Peter G. L. Dirichlet** (boundary-value problems for PDEs; **9 links**), **Joseph Fourier** (the heat equation and Fourier series; **10 links**) and **Joseph-Louis Lagrange** (calculus of variations; **11 links**) — contributions that remain central to the study of PDEs and the development of numerical methods.
+
+        Each relationship counts as one step; my advisor is one step away from me. Distances apply to this selection: earlier study and mentorship links are not necessarily doctoral supervision. The detailed diagram also includes collateral branches, which are not direct ancestors.
+  - type: custom
+    id: genealogy-tree
+    component: academic-genealogy
+  - type: prose
+    title:
+      pt: E o que isso muda?
+      en: And what difference does it make?
+    text:
+      pt: |
+        Qual a importância disso tudo, para mim ou para quem trabalha comigo? Para mim, nenhuma — mas certamente foi divertido pesquisar e construir essa árvore. Agradeço ao [Mathematics Genealogy Project](https://www.mathgenealogy.org/), à [Plataforma Acácia](https://www.plataforma-acacia.org/), ao [MacTutor](https://mathshistory.st-andrews.ac.uk/), aos arquivos do LNCC, da UFRJ e de Stanford e às demais fontes listadas acima por preservarem essas histórias.
+      en: |
+        What does any of this mean for me, or for someone working with me? To me, nothing — but researching and building this tree was certainly fun. My thanks to the [Mathematics Genealogy Project](https://www.mathgenealogy.org/), [Plataforma Acácia](https://www.plataforma-acacia.org/), [MacTutor](https://mathshistory.st-andrews.ac.uk/), the LNCC, UFRJ and Stanford archives, and the other sources listed above for preserving these stories.

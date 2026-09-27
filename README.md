@@ -11,10 +11,11 @@
 Site pessoal estático em português e inglês, construído com **[SciAstro](https://volpatto.github.io/sciastro/) e [Astro](https://astro.build/)**, usando o **LNCC Theme** e conteúdo editável em YAML e BibTeX. O endereço principal é **[https://www.lncc.br/~volpatto/](https://www.lncc.br/~volpatto/)**. O GitHub mantém o código e a integração contínua; a publicação no GitHub Pages está desativada no repositório, com um modelo preservado para reativação futura.
 
 As páginas são definidas em `sciastro.yaml` e `conteudo/paginas/`. O SciAstro
-fornece os componentes, estilos e interações; este repositório mantém apenas
-a configuração de integração, o conteúdo, os arquivos públicos e os testes do site.
+fornece os componentes, estilos e interações; este repositório mantém
+a configuração, o conteúdo, os arquivos públicos e os testes do site,
+além de uma extensão visual para a genealogia acadêmica.
 O JavaScript local se limita às configurações, à proteção do HTML gerado,
-à hospedagem Apache, à automação de publicação e aos testes. A geração opcional
+à hospedagem Apache, à automação de publicação, à genealogia e aos testes. A geração opcional
 do currículo usa Python, separadamente do build do site.
 
 Os dados bibliográficos ficam em `conteudo/publicacoes.bib`; cada card seleciona
@@ -43,7 +44,7 @@ Não é preciso clonar nem compilar o repositório do framework. A
 [documentação do SciAstro](https://volpatto.github.io/sciastro/) descreve os
 componentes, as opções de configuração e a API disponíveis.
 
-Organizado em dez páginas acadêmicas por idioma: apresentação, pesquisa, publicações, software, ensino, orientações, grupos de pesquisa, parcerias e projetos, currículo e contato. Uma página adicional de licenciamento em cada idioma é acessível pelo rodapé. Inclui experiência profissional, práticas de engenharia de software, resumos de ementas e logos dos grupos e instituições. Os modos claro e escuro respeitam a preferência do sistema na primeira visita; o botão no cabeçalho salva a escolha localmente. As fontes e imagens são servidas pelo próprio site. Não há analytics, formulário, banco de dados nem chamadas ao GitHub durante a navegação.
+As páginas abrangem apresentação, pesquisa, publicações, software, ensino, orientações, grupos de pesquisa, parcerias e projetos, currículo, curiosidades e contato. A genealogia acadêmica é uma subseção de Curiosidades; licenciamento é acessível pelo rodapé. Inclui experiência profissional, práticas de engenharia de software, resumos de ementas e logos dos grupos e instituições. Os modos claro e escuro respeitam a preferência do sistema na primeira visita; o botão no cabeçalho salva a escolha localmente. As fontes e imagens são servidas pelo próprio site. Não há analytics, formulário, banco de dados nem chamadas ao GitHub durante a navegação.
 
 ## Guia rápido
 
@@ -338,13 +339,17 @@ continuam na página de licenciamento e em `THIRD_PARTY_NOTICES.md`.
 
 Este repositório contém o conteúdo e a configuração do site. O SciAstro fornece
 as páginas, os componentes, o LNCC Theme, a navegação e a validação dos YAMLs.
-Não é necessário manter uma pasta `src/` nem um ambiente de TypeScript aqui.
+O único componente local, em `src/components/`, apresenta a genealogia acadêmica.
+As edições de nomes, relações, fontes e traduções continuam em YAML.
 
 | Caminho | Responsabilidade |
 | --- | --- |
 | `sciastro.yaml` | Identidade, tema, idiomas, menu, rodapé e destino de publicação |
 | `conteudo/` | Textos e composição das páginas; inclui o guia de edição |
 | `styles/site.css` | Fundo dos símbolos institucionais e alinhamento do rodapé |
+| `conteudo/genealogia.yaml` | Pessoas, relações e fontes da genealogia; distâncias calculadas automaticamente |
+| `src/components/AcademicGenealogy.astro` e `styles/genealogy.css` | Diagrama resumido, visualizador e lista acessível de relações |
+| `build/genealogy.mjs` | Valida o grafo e gera os diagramas SVG e dados JSON em PT/EN |
 | `public/` | Imagens, currículo e licenças distribuídos com o site |
 | `astro.config.mjs` | Ativa o SciAstro; normalmente não precisa ser editado |
 | `build/security.mjs` | Completa e posiciona a política de segurança no HTML gerado |
@@ -365,6 +370,14 @@ o currículo, as imagens e os idiomas deste site. O compilador TypeScript e os
 testes dos componentes ficam no desenvolvimento do SciAstro. A prévia dos Browser
 Tests usa o servidor oficial do Astro, sem um servidor HTTP próprio no repositório.
 A verificação automática não confirma afirmações científicas nem links externos.
+Os testes da genealogia verificam os caminhos, as distâncias, a distinção entre
+ascendência e ramos colaterais e a correspondência entre dados e downloads.
+
+A seção **Curiosidades**, antes de **Contato**, contém a genealogia acadêmica.
+O [guia de edição](conteudo/README.md#genealogia-acadêmica) explica seus campos
+e ressalvas históricas. Graphviz, por meio de `@viz-js/viz`, gera os SVGs durante
+o build; não é carregado no navegador. Os downloads em
+`public/files/genealogy/` são regenerados do YAML e ignorados pelo Git.
 
 As pastas `dist/`, `.astro/`, `.test-output/` e `.cv-build/` são saídas locais,
 ignoradas pelo Git. Podem ser removidas quando seus processos estiverem parados;

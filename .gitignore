@@ -11,3 +11,6 @@ dist/
 
 .test-output/
 .tmp/
+
+# Gerados a partir de conteudo/genealogia.yaml no início do build.
+public/files/genealogy/

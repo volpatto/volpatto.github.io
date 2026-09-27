@@ -76,6 +76,16 @@ sections:
         icon:
           src: /images/icons/orcid.svg
           monochrome: true
+      - label: Google Scholar
+        url: https://scholar.google.com.br/citations?user=fb_CEhQAAAAJ&hl=pt-BR
+        icon:
+          src: /images/icons/google-scholar.svg
+          monochrome: true
+      - label: ResearchGate
+        url: https://www.researchgate.net/profile/Diego-Volpatto?ev=hdr_xprf
+        icon:
+          src: /images/icons/researchgate.svg
+          monochrome: true
       - label:
           pt: GitHub
           en: GitHub

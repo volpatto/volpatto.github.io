@@ -1,0 +1,13 @@
+# Novas curiosidades podem usar parent: curiosities.
+id: curiosities
+title:
+  pt: Curiosidades
+  en: Curiosities
+paths:
+  pt: curiosidades/
+  en: en/curiosities/
+description:
+  pt: Histórias, interesses e conexões que encontrei pelo caminho.
+  en: Stories, interests and connections I have come across along the way.
+icon: lucide:compass
+layout: listing

@@ -7,6 +7,8 @@ feitas em YAML e BibTeX; não é necessário conhecer JavaScript nem alterar com
 - `paginas/`: um arquivo por página, com os textos em português (`pt`) e inglês (`en`).
 - `publicacoes.bib`: dados bibliográficos compartilhados por publicações e citações.
 - `alunos.yaml`: orientações, fotos e símbolos institucionais.
+- `genealogia.yaml`: pessoas, vínculos e fontes da genealogia acadêmica.
+- `paginas/aventuras-musicais.yaml`: relato, fotos e recomendações de Aventuras musicais; os arquivos das fotos ficam em `../public/images/music/`.
 - `../public/`: imagens, documentos e licenças servidos pelo site.
 
 ## Visualizar e conferir
@@ -329,6 +331,37 @@ card só exibe automaticamente o período quando há `startYear`.
 Uma página com `navigation: false` continua acessível por links, mas fica fora do
 menu; é o caso de licenciamento. Na página inicial, `header: false` permite que a
 seção `profile` forneça o único título principal.
+
+## Genealogia acadêmica
+
+`paginas/curiosidades.yaml` é a página agregadora, posicionada antes de Contato.
+`paginas/genealogia.yaml` contém sua subseção, com `parent: curiosities`, os textos
+em PT/EN e a seção customizada `academic-genealogy`.
+
+Edite os dados em `genealogia.yaml`:
+
+- `people`: identificador, nome e contribuição curta nos dois idiomas;
+- `edges`: `from` é o orientador ou mentor e `to` é o aluno;
+- `kind`: `doctoral` para orientação registrada, `historical` para estudo ou
+  mentoria e `disputed` para atribuições discutidas;
+- `sources`: fontes com URL e notas traduzidas. Cada relação cita seus IDs;
+- `root`: ponto de partida da contagem; `updated`: data da revisão documental.
+
+As distâncias são calculadas pelo menor número de relações **neste recorte**, em
+ambos os sentidos. Já a ascendência segue somente os vínculos dirigidos de mentor
+para aluno. Assim, um ramo colateral pode estar próximo sem ser ancestral.
+Os caminhos através de Klein ou Bruns dependem da atribuição discutida para Föppl;
+preserve essa ressalva e a distinção entre estudo histórico e doutorado.
+
+O build rejeita pessoas desconectadas, ciclos de orientação, IDs repetidos e
+relações sem fontes. Ele gera os SVGs e JSONs de ambos os idiomas em
+`public/files/genealogy/`, depois copiados para `dist/`. Não edite esses arquivos
+gerados. O diagrama resumido seleciona alguns nomes; mudar essa seleção é uma
+edição de apresentação em `src/components/AcademicGenealogy.astro`.
+
+Depois de alterar o YAML, confira as duas traduções e execute
+`pixi run --locked verify-all`. Os testes conferem também o visualizador, os
+downloads, a navegação no celular e o funcionamento sem JavaScript.
 
 ## Aparência e atualização do pacote
 
