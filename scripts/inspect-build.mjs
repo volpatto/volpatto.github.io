@@ -69,6 +69,14 @@ export async function inspectBuild({
   if (!base.startsWith("/") || !base.endsWith("/") || base.includes(".."))
     throw new Error("Invalid deployment base");
   const allowed = new Set([origin, ...policy.resources.allowedOrigins]);
+  const genealogyDownloads = new Set(
+    ["pt", "en"].flatMap((locale) =>
+      ["svg", "json"].map(
+        (extension) =>
+          `${base}files/genealogy/academic-genealogy-${locale}.${extension}`,
+      ),
+    ),
+  );
   const report = {
     status: "passed",
     checkedFiles: 0,
@@ -120,11 +128,16 @@ export async function inspectBuild({
     }
     if (!resource && executableFile.test(decodeURIComponent(url.pathname)))
       issue(file, "executable-link", url.href);
-    if (download && (url.origin !== origin || !/\.pdf$/i.test(url.pathname))) {
+    if (
+      download &&
+      (url.origin !== origin ||
+        (!/\.pdf$/i.test(url.pathname) &&
+          !genealogyDownloads.has(url.pathname)))
+    ) {
       issue(
         file,
         "unexpected-download",
-        "Only explicit local PDF downloads are approved",
+        "Only local PDFs and the four approved genealogy exports may be downloaded",
       );
     }
     if (download && url.origin === origin) {

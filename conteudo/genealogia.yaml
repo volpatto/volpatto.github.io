@@ -1,0 +1,545 @@
+# Relação dirigida: from (orientador/mentor) → to (aluno).
+# Distâncias são calculadas automaticamente. Este é um recorte, não todo o MGP.
+root: volpatto
+updated: "2026-09-27"
+scope:
+  pt: "Recorte de orientação, estudo e mentoria, incluindo ramos colaterais. Distâncias mínimas apenas neste grafo, não em toda a rede acadêmica."
+  en: "A selection of supervision, study and mentorship links, including collateral branches. Shortest distances within this graph only, not the entire academic network."
+people:
+  - id: volpatto
+    name: "Diego Tavares Volpatto"
+    shortName: "Diego Volpatto"
+    contribution:
+      pt: "Métodos numéricos e termodinâmica computacional."
+      en: "Numerical methods and computational thermodynamics."
+  - id: loula
+    name: "Abimael Fernando Duarte Loula"
+    shortName: "Abimael Loula"
+    contribution:
+      pt: "Métodos de elementos finitos."
+      en: "Finite element methods."
+  - id: bevilacqua
+    name: "Luiz Bevilacqua"
+    contribution:
+      pt: "Mecânica dos meios contínuos e métodos variacionais."
+      en: "Continuum mechanics and variational methods."
+  - id: lee
+    name: "Erastus H. Lee"
+    contribution:
+      pt: "Plasticidade e viscoelasticidade."
+      en: "Plasticity and viscoelasticity."
+  - id: timoshenko
+    name: "Stephen Timoshenko"
+    contribution:
+      pt: "Teoria de vigas e mecânica dos sólidos."
+      en: "Beam theory and solid mechanics."
+  - id: prandtl
+    name: "Ludwig Prandtl"
+    contribution:
+      pt: "Teoria da camada limite e mecânica dos fluidos."
+      en: "Boundary-layer theory and fluid mechanics."
+  - id: foppl
+    name: "August Föppl"
+    contribution:
+      pt: "Mecânica técnica e elasticidade."
+      en: "Applied mechanics and elasticity."
+  - id: klein
+    name: "Felix Klein"
+    contribution:
+      pt: "Geometria e Programa de Erlangen."
+      en: "Geometry and the Erlangen program."
+  - id: bruns
+    name: "Heinrich Bruns"
+    contribution:
+      pt: "Astronomia matemática e geodesia."
+      en: "Mathematical astronomy and geodesy."
+  - id: wiedemann
+    name: "Gustav Heinrich Wiedemann"
+    contribution:
+      pt: "Física experimental e condução térmica e elétrica."
+      en: "Experimental physics and thermal and electrical conduction."
+  - id: plucker
+    name: "Julius Plücker"
+    contribution:
+      pt: "Geometria analítica e geometria de linhas."
+      en: "Analytic geometry and line geometry."
+  - id: gerling
+    name: "Christian Ludwig Gerling"
+    contribution:
+      pt: "Astronomia e geodesia."
+      en: "Astronomy and geodesy."
+  - id: gauss
+    name: "Carl Friedrich Gauss"
+    contribution:
+      pt: "Quadratura numérica e método dos mínimos quadrados."
+      en: "Numerical quadrature and the method of least squares."
+  - id: riemann
+    name: "Bernhard Riemann"
+    contribution:
+      pt: "Geometria riemanniana e análise."
+      en: "Riemannian geometry and analysis."
+  - id: lipschitz
+    name: "Rudolf Lipschitz"
+    contribution:
+      pt: "Análise e equações diferenciais."
+      en: "Analysis and differential equations."
+  - id: dirichlet
+    name: "Peter Gustav Lejeune Dirichlet"
+    shortName: "Peter G. L. Dirichlet"
+    contribution:
+      pt: "Problemas de contorno e teoria do potencial."
+      en: "Boundary-value problems and potential theory."
+  - id: fourier
+    name: "Joseph Fourier"
+    contribution:
+      pt: "Condução de calor e séries de Fourier."
+      en: "Heat conduction and Fourier series."
+  - id: lagrange
+    name: "Joseph-Louis Lagrange"
+    contribution:
+      pt: "Mecânica analítica e cálculo das variações."
+      en: "Analytical mechanics and calculus of variations."
+  - id: euler
+    name: "Leonhard Euler"
+    contribution:
+      pt: "Método de Euler para EDOs e equações dos escoamentos invíscidos."
+      en: "Euler’s method for ODEs and equations for inviscid flow."
+  - id: weierstrass
+    name: "Karl Weierstrass"
+    contribution:
+      pt: "Fundamentos rigorosos da análise."
+      en: "Rigorous foundations of analysis."
+  - id: kummer
+    name: "Ernst Eduard Kummer"
+    contribution:
+      pt: "Teoria algébrica dos números."
+      en: "Algebraic number theory."
+  - id: schwarz
+    name: "Hermann Amandus Schwarz"
+    contribution:
+      pt: "Análise complexa e métodos de decomposição de domínio."
+      en: "Complex analysis and domain decomposition methods."
+  - id: fejer
+    name: "Lipót Fejér"
+    contribution:
+      pt: "Análise harmônica e séries de Fourier."
+      en: "Harmonic analysis and Fourier series."
+  - id: neumann
+    name: "John von Neumann"
+    contribution:
+      pt: "Matemática aplicada e fundamentos da computação."
+      en: "Applied mathematics and foundations of computing."
+  - id: erdos
+    name: "Paul Erdős"
+    contribution:
+      pt: "Combinatória e teoria dos números."
+      en: "Combinatorics and number theory."
+  - id: cantor
+    name: "Georg Cantor"
+    contribution:
+      pt: "Teoria dos conjuntos e números transfinitos."
+      en: "Set theory and transfinite numbers."
+  - id: hausdorff
+    name: "Felix Hausdorff"
+    contribution:
+      pt: "Topologia e teoria dos conjuntos."
+      en: "Topology and set theory."
+  - id: lindemann
+    name: "Ferdinand von Lindemann"
+    contribution:
+      pt: "Demonstração da transcendência de π."
+      en: "Proof of the transcendence of π."
+  - id: hilbert
+    name: "David Hilbert"
+    contribution:
+      pt: "Fundamentos da matemática e análise funcional."
+      en: "Foundations of mathematics and functional analysis."
+  - id: minkowski
+    name: "Hermann Minkowski"
+    contribution:
+      pt: "Geometria dos números e formulação do espaço-tempo."
+      en: "Geometry of numbers and the spacetime formulation."
+  - id: sommerfeld
+    name: "Arnold Sommerfeld"
+    contribution:
+      pt: "Física atômica e teoria quântica."
+      en: "Atomic physics and quantum theory."
+  - id: heisenberg
+    name: "Werner Heisenberg"
+    contribution:
+      pt: "Mecânica quântica e princípio da incerteza."
+      en: "Quantum mechanics and the uncertainty principle."
+  - id: pauli
+    name: "Wolfgang Pauli"
+    contribution:
+      pt: "Princípio de exclusão na mecânica quântica."
+      en: "The exclusion principle in quantum mechanics."
+  - id: herzfeld
+    name: "Karl Ferdinand Herzfeld"
+    contribution:
+      pt: "Teoria cinética e física molecular."
+      en: "Kinetic theory and molecular physics."
+  - id: wheeler
+    name: "John Archibald Wheeler"
+    contribution:
+      pt: "Física nuclear e relatividade geral."
+      en: "Nuclear physics and general relativity."
+  - id: feynman
+    name: "Richard Feynman"
+    contribution:
+      pt: "Eletrodinâmica quântica e integrais de caminho."
+      en: "Quantum electrodynamics and path integrals."
+
+# Föppl: MGP atribui Bruns/Klein; Deutsche Biographie não confirma.
+# Não converter relações historical/disputed em orientação formal.
+edges:
+  - from: loula
+    to: volpatto
+    kind: doctoral
+    sources: [lncc]
+  - from: bevilacqua
+    to: loula
+    kind: doctoral
+    sources: [loula-thesis]
+  - from: lee
+    to: bevilacqua
+    kind: doctoral
+    sources: [bevilacqua-cv, acacia]
+  - from: timoshenko
+    to: lee
+    kind: doctoral
+    sources: [stanford, lee-memorial]
+  - from: prandtl
+    to: timoshenko
+    kind: historical
+    sources: [timoshenko]
+  - from: foppl
+    to: prandtl
+    kind: historical
+    sources: [foppl-tum, prandtl-mactutor]
+  - from: klein
+    to: foppl
+    kind: disputed
+    sources: [foppl-mgp, foppl-biography]
+  - from: bruns
+    to: foppl
+    kind: disputed
+    sources: [foppl-mgp, foppl-biography]
+  - from: wiedemann
+    to: foppl
+    kind: historical
+    sources: [foppl-biography]
+  - from: plucker
+    to: klein
+    kind: doctoral
+    sources: [klein]
+  - from: lipschitz
+    to: klein
+    kind: doctoral
+    sources: [klein]
+  - from: gerling
+    to: plucker
+    kind: doctoral
+    sources: [plucker]
+  - from: gauss
+    to: gerling
+    kind: doctoral
+    sources: [gerling]
+  - from: gauss
+    to: riemann
+    kind: doctoral
+    sources: [riemann]
+  - from: dirichlet
+    to: lipschitz
+    kind: doctoral
+    sources: [lipschitz]
+  - from: fourier
+    to: dirichlet
+    kind: historical
+    sources: [dirichlet]
+  - from: lagrange
+    to: fourier
+    kind: historical
+    sources: [fourier]
+  - from: euler
+    to: lagrange
+    kind: historical
+    sources: [euler-lagrange]
+  - from: weierstrass
+    to: bruns
+    kind: doctoral
+    sources: [bruns]
+  - from: kummer
+    to: bruns
+    kind: doctoral
+    sources: [bruns]
+  - from: bruns
+    to: hausdorff
+    kind: doctoral
+    sources: [bruns]
+  - from: weierstrass
+    to: cantor
+    kind: doctoral
+    sources: [weierstrass]
+  - from: weierstrass
+    to: schwarz
+    kind: doctoral
+    sources: [schwarz]
+  - from: kummer
+    to: schwarz
+    kind: doctoral
+    sources: [schwarz]
+  - from: schwarz
+    to: fejer
+    kind: doctoral
+    sources: [schwarz]
+  - from: fejer
+    to: neumann
+    kind: doctoral
+    sources: [fejer]
+  - from: fejer
+    to: erdos
+    kind: doctoral
+    sources: [fejer]
+  - from: klein
+    to: lindemann
+    kind: doctoral
+    sources: [klein]
+  - from: lindemann
+    to: hilbert
+    kind: doctoral
+    sources: [lindemann]
+  - from: lindemann
+    to: minkowski
+    kind: doctoral
+    sources: [lindemann]
+  - from: lindemann
+    to: sommerfeld
+    kind: doctoral
+    sources: [lindemann]
+  - from: sommerfeld
+    to: heisenberg
+    kind: doctoral
+    sources: [sommerfeld]
+  - from: sommerfeld
+    to: pauli
+    kind: doctoral
+    sources: [sommerfeld]
+  - from: sommerfeld
+    to: herzfeld
+    kind: historical
+    sources: [herzfeld]
+  - from: herzfeld
+    to: wheeler
+    kind: doctoral
+    sources: [herzfeld]
+  - from: wheeler
+    to: feynman
+    kind: doctoral
+    sources: [feynman]
+
+sources:
+  - id: lncc
+    title: "LNCC · Relatório de gestão de 2023"
+    url: "https://www.gov.br/lncc/pt-br/acesso-a-informacao/auditorias/relatorio_tcg_2023.pdf"
+    note:
+      pt: "Registro do doutorado de Volpatto e da orientação de Loula."
+      en: "Record of Volpatto’s doctorate and Loula’s supervision."
+  - id: loula-thesis
+    title: "UFRJ · Tese de Abimael Loula (1979)"
+    url: "https://pantheon.ufrj.br/bitstream/11422/3579/1/152180.pdf"
+    note:
+      pt: "Os agradecimentos identificam Luiz Bevilacqua como orientador."
+      en: "The acknowledgments identify Luiz Bevilacqua as advisor."
+  - id: bevilacqua-cv
+    title: "Luiz Bevilacqua · Registro curricular"
+    url: "https://www.escavador.com/sobre/3616201/luiz-bevilacqua"
+    note:
+      pt: "Reprodução curricular que informa a orientação de Erastus H. Lee; não é o registro original da tese de Stanford."
+      en: "Curriculum reproduction recording Erastus H. Lee as advisor; this is not the original Stanford dissertation record."
+  - id: acacia
+    title: "Plataforma Acácia · Erastus H. Lee"
+    url: "https://www.plataforma-acacia.org/descendants/erastus-h-lee/"
+    note:
+      pt: "Fonte complementar para a descendência acadêmica brasileira."
+      en: "Supplementary source for the Brazilian academic lineage."
+  - id: stanford
+    title: "Stanford · History of Aeronautics and Astronautics"
+    url: "https://web.stanford.edu/~cantwell/History_of_AA_at_Stanford_and_AA_Vision_2008/History_of_Aeronautics%20and%20Astronautics%20at%20Stanford%20-%2050th%20Anniversary%202008.pdf"
+    note:
+      pt: "Identifica Lee entre os doutorandos de Timoshenko."
+      en: "Identifies Lee among Timoshenko’s doctoral students."
+  - id: lee-memorial
+    title: "National Academy of Engineering · Erastus H. Lee"
+    url: "https://www.nationalacademies.org/read/12473/chapter/30"
+    note:
+      pt: "Memorial biográfico sobre a formação e o trabalho de Lee."
+      en: "Biographical memorial on Lee’s education and work."
+  - id: timoshenko
+    title: "Stanford · Timoshenko’s formative years"
+    url: "https://timoshenko.stanford.edu/formative"
+    note:
+      pt: "Estadia de Timoshenko com Prandtl em Göttingen; estudo, não orientação de doutorado."
+      en: "Timoshenko’s stay with Prandtl in Göttingen; study, not doctoral supervision."
+  - id: foppl-tum
+    title: "TUM · August Föppl"
+    url: "https://www.mae.ed.tum.de/en/lww/history/foeppl-august/"
+    note:
+      pt: "Relação de trabalho e mentoria entre Föppl e Prandtl."
+      en: "Working and mentoring relationship between Föppl and Prandtl."
+  - id: prandtl-mactutor
+    title: "MacTutor · Ludwig Prandtl"
+    url: "https://mathshistory.st-andrews.ac.uk/Biographies/Prandtl/"
+    note:
+      pt: "Distingue o apoio de Föppl da avaliação da tese; descreve a ausência de orientação formal."
+      en: "Distinguishes Föppl’s support from the thesis examination and describes the lack of formal supervision."
+  - id: foppl-mgp
+    title: "Mathematics Genealogy Project · August Föppl"
+    url: "https://www.mathgenealogy.org/id.php?id=71565"
+    note:
+      pt: "Atribui a orientação a Bruns e Klein. Mantida como atribuição discutida, em vez de certeza histórica."
+      en: "Attributes supervision to Bruns and Klein. Retained as a disputed attribution rather than historical certainty."
+  - id: foppl-biography
+    title: "Deutsche Biographie · August Föppl"
+    url: "https://www.deutsche-biographie.de/gnd11663510X.html"
+    note:
+      pt: "Descreve estudos com Wiedemann e doutorado por trabalhos anteriores; não confirma a dupla orientação indicada pelo MGP."
+      en: "Describes study with Wiedemann and a doctorate based on previous work; does not confirm the joint supervision listed by MGP."
+  - id: klein
+    title: "Mathematics Genealogy Project · Felix Klein"
+    url: "https://www.mathgenealogy.org/id.php?id=7401"
+    note:
+      pt: "Plücker e Lipschitz como orientadores; Lindemann como aluno."
+      en: "Plücker and Lipschitz as advisors; Lindemann as a student."
+  - id: plucker
+    title: "Mathematics Genealogy Project · Julius Plücker"
+    url: "https://www.mathgenealogy.org/id.php?id=7402"
+    note:
+      pt: "Relação entre Gerling e Plücker."
+      en: "The Gerling–Plücker relationship."
+  - id: gerling
+    title: "Mathematics Genealogy Project · Christian Ludwig Gerling"
+    url: "https://www.mathgenealogy.org/id.php?id=29642"
+    note:
+      pt: "Relação entre Gauss e Gerling."
+      en: "The Gauss–Gerling relationship."
+  - id: riemann
+    title: "Mathematics Genealogy Project · Bernhard Riemann"
+    url: "https://www.mathgenealogy.org/id.php?id=18232"
+    note:
+      pt: "Orientação de Gauss; Riemann aparece neste recorte como ramo colateral."
+      en: "Gauss’s supervision; Riemann appears as a collateral branch in this selection."
+  - id: lipschitz
+    title: "Mathematics Genealogy Project · Rudolf Lipschitz"
+    url: "https://www.genealogy.math.ndsu.nodak.edu/id.php?id=19964"
+    note:
+      pt: "Relação entre Dirichlet e Lipschitz."
+      en: "The Dirichlet–Lipschitz relationship."
+  - id: dirichlet
+    title: "Mathematics Genealogy Project · Dirichlet"
+    url: "https://www.genealogy.math.ndsu.nodak.edu/id.php?id=17946"
+    note:
+      pt: "Lista Fourier e um doutorado honorário; o vínculo é tratado aqui como histórico."
+      en: "Lists Fourier and an honorary doctorate; the link is treated here as historical."
+  - id: fourier
+    title: "Mathematics Genealogy Project · Joseph Fourier"
+    url: "https://www.mathgenealogy.org/id.php?id=17981"
+    note:
+      pt: "Vínculo com Lagrange interpretado como formação histórica, não como doutorado moderno."
+      en: "The link to Lagrange is interpreted as historical training, not a modern doctorate."
+  - id: euler-lagrange
+    title: "TU Wien · Notes on academic genealogy"
+    url: "https://dmg.tuwien.ac.at/goldstern/www/really.html"
+    note:
+      pt: "Ressalvas sobre genealogia histórica; Euler–Lagrange representa correspondência e influência intelectual, não orientação formal."
+      en: "Caveats about historical genealogy; Euler–Lagrange denotes correspondence and intellectual influence, not formal supervision."
+  - id: bruns
+    title: "Mathematics Genealogy Project · Heinrich Bruns"
+    url: "https://www.mathgenealogy.org/id.php?id=9712"
+    note:
+      pt: "Weierstrass e Kummer como orientadores; Hausdorff como aluno."
+      en: "Weierstrass and Kummer as advisors; Hausdorff as a student."
+  - id: weierstrass
+    title: "Mathematics Genealogy Project · Karl Weierstrass"
+    url: "https://www.mathgenealogy.org/id.php?id=7486"
+    note:
+      pt: "Relações de orientação com Cantor e Schwarz."
+      en: "Supervision of Cantor and Schwarz."
+  - id: schwarz
+    title: "Mathematics Genealogy Project · Hermann Amandus Schwarz"
+    url: "https://www.mathgenealogy.org/id.php?id=7487"
+    note:
+      pt: "Weierstrass e Kummer como orientadores; Fejér como aluno."
+      en: "Weierstrass and Kummer as advisors; Fejér as a student."
+  - id: fejer
+    title: "Mathematics Genealogy Project · Lipót Fejér"
+    url: "https://www.genealogy.math.ndsu.nodak.edu/id.php?id=7488"
+    note:
+      pt: "Relações de orientação com von Neumann e Erdős."
+      en: "Supervision of von Neumann and Erdős."
+  - id: lindemann
+    title: "Mathematics Genealogy Project · Ferdinand von Lindemann"
+    url: "https://www.genealogy.math.ndsu.nodak.edu/id.php?id=7404"
+    note:
+      pt: "Relações com Hilbert, Minkowski e Sommerfeld; são ramos colaterais neste recorte."
+      en: "Links to Hilbert, Minkowski and Sommerfeld; these are collateral branches in this selection."
+  - id: sommerfeld
+    title: "Mathematics Genealogy Project · Arnold Sommerfeld"
+    url: "https://www.mathgenealogy.org/id.php?id=31357"
+    note:
+      pt: "Orientação de Heisenberg e Pauli. A relação com Herzfeld é qualificada separadamente pelo memorial biográfico."
+      en: "Supervision of Heisenberg and Pauli. The relationship with Herzfeld is qualified separately by the biographical memoir."
+  - id: herzfeld
+    title: "National Academy of Sciences · Karl Ferdinand Herzfeld"
+    url: "https://www.nationalacademies.org/read/10269/chapter/10"
+    note:
+      pt: "Herzfeld obteve o doutorado com Hasenöhrl, não Sommerfeld; estudou com Sommerfeld mais tarde e orientou Wheeler."
+      en: "Herzfeld earned his doctorate with Hasenöhrl, not Sommerfeld; he studied with Sommerfeld later and supervised Wheeler."
+  - id: feynman
+    title: "MacTutor · Richard Feynman"
+    url: "https://mathshistory.st-andrews.ac.uk/Biographies/Feynman/"
+    note:
+      pt: "Orientação de Wheeler; Feynman é uma conexão colateral, não ancestral de Volpatto."
+      en: "Wheeler’s supervision; Feynman is a collateral connection, not an ancestor of Volpatto."
+  - id: gauss-quadrature
+    title: "NIST DLMF · Gauss quadrature"
+    url: https://dlmf.nist.gov/3.5#v
+    note:
+      pt: "Referência para o destaque de Gauss em quadratura numérica."
+      en: "Reference for the Gauss highlight on numerical quadrature."
+  - id: gauss-least-squares
+    title: "MacTutor · Gaussian elimination and least squares"
+    url: https://mathshistory.st-andrews.ac.uk/Miller/mathsym/matrices/
+    note:
+      pt: "Contexto histórico sobre o trabalho de Gauss em mínimos quadrados; não implica autoria exclusiva do método."
+      en: "Historical context on Gauss’s work on least squares; this does not imply sole authorship of the method."
+  - id: euler-ode
+    title: "Jiří Lebl · Notes on Diffy Qs"
+    url: https://www.jirka.org/diffyqs/diffyqs.pdf
+    note:
+      pt: "Seção 1.7: integração numérica de EDOs pelo método de Euler."
+      en: "Section 1.7: numerical integration of ODEs using Euler’s method."
+  - id: euler-fluids
+    title: "Euler Archive · Principes généraux du mouvement des fluides"
+    url: https://scholarlycommons.pacific.edu/euler-works/226/
+    note:
+      pt: "Artigo original de Euler sobre as equações do movimento dos fluidos."
+      en: "Euler’s original paper on the equations of fluid motion."
+  - id: dirichlet-biography
+    title: "MacTutor · Lejeune Dirichlet"
+    url: https://mathshistory.st-andrews.ac.uk/Biographies/Dirichlet/
+    note:
+      pt: "Trabalho sobre funções harmônicas, problemas de contorno e teoria do potencial."
+      en: "Work on harmonic functions, boundary-value problems and potential theory."
+  - id: fourier-biography
+    title: "MacTutor · Joseph Fourier"
+    url: https://mathshistory.st-andrews.ac.uk/Biographies/Fourier/
+    note:
+      pt: "Equação da difusão de calor e sua solução por séries trigonométricas."
+      en: "The heat diffusion equation and its solution using trigonometric series."
+  - id: lagrange-biography
+    title: "MacTutor · Joseph-Louis Lagrange"
+    url: https://mathshistory.st-andrews.ac.uk/Biographies/Lagrange/
+    note:
+      pt: "Contribuições ao cálculo das variações e à mecânica analítica."
+      en: "Contributions to calculus of variations and analytical mechanics."

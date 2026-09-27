@@ -182,13 +182,13 @@ test("language switch, saved theme and navigation preserve the selected page", a
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   if (info.project.name === "mobile")
-    await page.locator(".navigation summary").click();
+    await page.locator(".navigation > summary").click();
   await expect(page.locator('.navigation a[aria-current="page"]')).toHaveText(
     "Software",
   );
   if (info.project.name === "mobile") {
     await page.keyboard.press("Escape");
-    await expect(page.locator(".navigation summary")).toBeFocused();
+    await expect(page.locator(".navigation > summary")).toBeFocused();
   }
 });
 

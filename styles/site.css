@@ -7,3 +7,52 @@
 .site-footer {
   align-items: center;
 }
+
+/* A small photo album using SciAstro's native figures, without cropping. */
+#music-photos .sp-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0;
+  border: 0;
+}
+
+#music-photos .sp-entry-copy {
+  order: -1;
+}
+
+#music-photos .sp-entry-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+#music-photos .sp-figure {
+  max-width: none;
+}
+
+#music-photos .sp-figure:last-child {
+  grid-column: 1 / -1;
+}
+
+#music-photos .sp-figure-media {
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: transparent;
+}
+
+#music-photos .sp-figure img {
+  max-height: none;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+@media (max-width: 540px) {
+  #music-photos .sp-entry-images {
+    grid-template-columns: 1fr;
+  }
+}

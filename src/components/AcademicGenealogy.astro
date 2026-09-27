@@ -1,0 +1,339 @@
+---
+import type { BuiltPage, BuiltSection, BuiltSite } from 'sciastro';
+import { loadGenealogy } from '../../build/genealogy.mjs';
+
+interface Props {
+  section: BuiltSection;
+  site: BuiltSite;
+  page: BuiltPage;
+}
+interface Person {
+  id: string;
+  name: string;
+  shortName?: string;
+  contribution: { pt: string; en: string };
+  distance: number | null;
+  ancestor: boolean;
+}
+interface Edge {
+  from: string;
+  to: string;
+  kind: 'doctoral' | 'historical' | 'disputed';
+  sources: string[];
+}
+interface Source {
+  id: string;
+  title: string;
+  url: string;
+  note: { pt: string; en: string };
+}
+const { section, site, page } = Astro.props;
+const locale = page.locale === 'en' ? 'en' : 'pt';
+const data = await loadGenealogy() as { people: Person[]; edges: Edge[]; sources: Source[] };
+const people = new Map(data.people.map((person) => [person.id, person]));
+const sources = new Map(data.sources.map((source, index) => [source.id, { ...source, number: index + 1 }]));
+const base = site.config.base.replace(/\/?$/, '/');
+const asset = `${base}files/genealogy/academic-genealogy-${locale}`;
+const prefix = section.id || 'academic-genealogy';
+const copy = {
+  pt: {
+    overview: 'Uma linha de formação',
+    direction: 'Dos antecedentes à formação recente. As setas seguem do mentor ao estudante.',
+    distance: 'Relações até Volpatto',
+    distanceLong: 'relações até Volpatto neste grafo',
+    distanceOne: 'relação até Volpatto neste grafo',
+    origin: 'Referência da contagem',
+    doctoral: 'Orientação de doutorado',
+    historical: 'Relação histórica',
+    disputed: 'Relação contestada',
+    direct: 'Uma relação',
+    relations: 'relações',
+    via: 'via',
+    conditional: '* A distância depende da ligação contestada que passa por Föppl. A contagem considera apenas as relações deste grafo.',
+    caption: 'Os ramos de Euler e Gauss convergem em Klein. Esta é uma seleção: os demais ramos, incluindo Bruns, estão no diagrama completo.',
+    full: 'Diagrama completo',
+    fullDetail: 'Todos os ramos e relações',
+    open: 'Abrir diagrama completo',
+    download: 'Baixar SVG',
+    data: 'Dados em JSON',
+    viewerLabel: 'Diagrama completo de genealogia acadêmica',
+    viewerHelp: 'Use a rolagem para percorrer o diagrama. Com o foco na figura, as teclas de direção também permitem navegar.',
+    imageAlt: 'Grafo completo das relações acadêmicas, do mentor ao estudante. Os nomes, tipos de relação e fontes estão disponíveis na lista textual abaixo.',
+    zoom: 'Escala do diagrama',
+    zoomIn: 'Ampliar diagrama',
+    zoomOut: 'Reduzir diagrama',
+    fit: 'Ajustar à largura',
+    evidence: 'Relações e fontes',
+    evidenceDetail: 'Leitura textual e documentação',
+    edgesTitle: 'Relações representadas',
+    sourcesTitle: 'Fontes consultadas',
+    source: 'Fonte',
+    edgeDirection: 'mentor → estudante',
+    relationFrom: 'mentor',
+    relationTo: 'estudante',
+  },
+  en: {
+    overview: 'A line of academic training',
+    direction: 'From earlier scholars to recent training. Arrows point from mentor to student.',
+    distance: 'Links to Volpatto',
+    distanceLong: 'links to Volpatto in this graph',
+    distanceOne: 'link to Volpatto in this graph',
+    origin: 'Starting point for the count',
+    doctoral: 'Doctoral supervision',
+    historical: 'Historical relationship',
+    disputed: 'Disputed relationship',
+    direct: 'One link',
+    relations: 'links',
+    via: 'via',
+    conditional: '* The distance depends on the disputed link through Föppl. The count considers only relationships in this graph.',
+    caption: 'The Euler and Gauss branches converge at Klein. This is a selection: the other branches, including Bruns, appear in the full diagram.',
+    full: 'Full diagram',
+    fullDetail: 'All branches and relationships',
+    open: 'Open full diagram',
+    download: 'Download SVG',
+    data: 'JSON data',
+    viewerLabel: 'Full academic genealogy diagram',
+    viewerHelp: 'Scroll to explore the diagram. With the figure focused, the arrow keys also let you navigate.',
+    imageAlt: 'Complete graph of academic relationships, from mentor to student. Names, relationship types and sources are available in the text list below.',
+    zoom: 'Diagram scale',
+    zoomIn: 'Zoom in',
+    zoomOut: 'Zoom out',
+    fit: 'Fit to width',
+    evidence: 'Relationships and sources',
+    evidenceDetail: 'Text version and documentation',
+    edgesTitle: 'Relationships shown',
+    sourcesTitle: 'Sources consulted',
+    source: 'Source',
+    edgeDirection: 'mentor → student',
+    relationFrom: 'mentor',
+    relationTo: 'student',
+  },
+}[locale];
+
+// Resolve every displayed connection from the graph, including compressed paths.
+// The breadth-first search is local to the supplied graph, not a historical claim
+// about a globally shortest academic lineage.
+function pathBetween(from: string, to: string): Edge[] | undefined {
+  const queue: { id: string; path: Edge[] }[] = [{ id: from, path: [] }];
+  const seen = new Set([from]);
+  for (let index = 0; index < queue.length; index++) {
+    const item = queue[index];
+    if (item.id === to) return item.path;
+    for (const edge of data.edges.filter((edge) => edge.from === item.id)) {
+      if (seen.has(edge.to)) continue;
+      seen.add(edge.to);
+      queue.push({ id: edge.to, path: [...item.path, edge] });
+    }
+  }
+  return undefined;
+}
+const selectedIds = ['klein', 'foppl', 'prandtl', 'timoshenko', 'lee', 'bevilacqua', 'loula', 'volpatto'];
+const highlighted = new Set(['euler', 'gauss', 'prandtl', 'timoshenko']);
+const selected = selectedIds.map((id) => {
+  const person = people.get(id);
+  if (!person) throw new Error(`Missing genealogy overview person: ${id}`);
+  return person;
+});
+const branches = ['euler', 'gauss'].map((id) => {
+  const person = people.get(id);
+  const path = pathBetween(id, 'klein');
+  if (!person || !path?.length) throw new Error(`Missing genealogy branch from ${id} to klein`);
+  return {
+    person, path,
+    kinds: [...new Set(path.map((edge) => edge.kind))],
+    intermediate: path.slice(0, -1).map((edge) => people.get(edge.to)?.shortName || people.get(edge.to)?.name).filter(Boolean),
+    conditional: pathBetween(id, 'volpatto')?.some((edge) => edge.kind === 'disputed') ?? false,
+  };
+});
+const rows = selected.map((person, index) => {
+  const next = selected[index + 1];
+  const path = next ? pathBetween(person.id, next.id) : undefined;
+  if (next && !path?.length) throw new Error(`No genealogy path from ${person.id} to ${next.id}`);
+  const conditional = pathBetween(person.id, 'volpatto')?.some((edge) => edge.kind === 'disputed') ?? false;
+  const kinds = [...new Set(path?.map((edge) => edge.kind) ?? [])];
+  const intermediate = path?.slice(0, -1).map((edge) => people.get(edge.to)?.shortName || people.get(edge.to)?.name).filter(Boolean) ?? [];
+  return { person, next, path, conditional, kinds, intermediate };
+});
+---
+
+<section id={section.id} class="sp-section genealogy" aria-labelledby={`${prefix}-heading`}>
+  <header class="genealogy-heading">
+    <h2 id={`${prefix}-heading`}>{section.title || copy.overview}</h2>
+    {section.html && <div class="prose" set:html={section.html} />}
+    <p class="genealogy-direction">{copy.direction}</p>
+  </header>
+
+  <figure class="genealogy-overview" aria-describedby={`${prefix}-caption ${prefix}-conditional`}>
+    <div class="genealogy-column-labels" aria-hidden="true">
+      <span>{copy.distance}</span>
+      <span>{copy.edgeDirection}</span>
+    </div>
+    <div class="genealogy-branches">
+      {branches.map(({ person, path, kinds, intermediate, conditional }) => (
+        <div class="genealogy-branch">
+          <p class="genealogy-branch-distance"><span>{person.distance}{conditional && <sup>*</sup>}</span> {copy.distance}</p>
+          <h3>{person.name}</h3>
+          <p class="genealogy-branch-contribution">{person.contribution[locale]}</p>
+          <div class="genealogy-branch-connection">
+            <span class="genealogy-branch-track" aria-hidden="true">
+              {path.map((edge) => <span class={`genealogy-segment genealogy-${edge.kind}`} />)}
+              <span class="genealogy-arrow">↓</span>
+            </span>
+            <p><span class="genealogy-path-count">{path.length} {copy.relations}</span><br />{copy.via} {intermediate.join(' → ')}</p>
+            <span class="genealogy-path-kinds">{kinds.map((kind) => copy[kind]).join(' · ')}</span>
+          </div>
+        </div>
+      ))}
+      <span class="genealogy-confluence" aria-hidden="true" />
+    </div>
+    <ol class="genealogy-lineage" aria-label={copy.overview}>
+      {rows.map(({ person, path, conditional, kinds, intermediate }) => (
+        <li class:list={['genealogy-person', kinds.length === 1 && `genealogy-relation-${kinds[0]}`, highlighted.has(person.id) && 'genealogy-person-featured', person.id === 'volpatto' && 'genealogy-person-origin']}>
+          <div class="genealogy-person-row">
+            <span class="genealogy-distance" aria-label={`${person.distance} ${person.distance === 1 ? copy.distanceOne : copy.distanceLong}${conditional ? ' *' : ''}`}>
+              {person.distance}{conditional && <sup aria-hidden="true">*</sup>}
+            </span>
+            <span class="genealogy-node" aria-hidden="true" />
+            <div class="genealogy-person-copy">
+              <h3>{person.name}</h3>
+              <p>{person.id === 'volpatto' ? copy.origin : person.contribution[locale]}</p>
+            </div>
+          </div>
+          {path && (
+            <div class:list={['genealogy-connection', path.length > 1 && 'genealogy-connection-compressed']}>
+              <span class="genealogy-connection-track" aria-hidden="true">
+                {path.map((edge) => <span class={`genealogy-segment genealogy-${edge.kind}`} />)}
+                <span class="genealogy-arrow">↓</span>
+              </span>
+              <div class="genealogy-connection-copy">
+                {path.length > 1 ? (
+                  <p><span class="genealogy-path-count">{path.length} {copy.relations}</span> {copy.via} {intermediate.join(' → ')}</p>
+                ) : (
+                  <p>{copy[kinds[0]]}</p>
+                )}
+                {path.length > 1 && <span class="genealogy-path-kinds">{kinds.map((kind) => copy[kind]).join(' · ')}</span>}
+              </div>
+            </div>
+          )}
+        </li>
+      ))}
+    </ol>
+    <figcaption id={`${prefix}-caption`}>{copy.caption}</figcaption>
+  </figure>
+
+  <ul class="genealogy-legend" aria-label={locale === 'pt' ? 'Legenda das relações' : 'Relationship legend'}>
+    {(['doctoral', 'historical', 'disputed'] as const).map((kind) => (
+      <li><span class={`genealogy-legend-line genealogy-${kind}`} aria-hidden="true" />{copy[kind]}</li>
+    ))}
+  </ul>
+  <p class="genealogy-conditional" id={`${prefix}-conditional`}>{copy.conditional}</p>
+
+  <div class="genealogy-downloads">
+    <a href={`${asset}.svg`}>{copy.open}<span aria-hidden="true"> ↗</span></a>
+    <a href={`${asset}.svg`} download>{copy.download}<span aria-hidden="true"> ↓</span></a>
+    <a href={`${asset}.json`} download>{copy.data}<span aria-hidden="true"> ↓</span></a>
+  </div>
+
+  <details class="genealogy-disclosure" data-genealogy-diagram>
+    <summary>
+      <span><strong>{copy.full}</strong><span class="genealogy-summary-detail">{copy.fullDetail}</span></span>
+      <span class="genealogy-disclosure-mark" aria-hidden="true">+</span>
+    </summary>
+    <genealogy-viewer>
+      <div class="genealogy-viewer-toolbar" role="group" aria-label={copy.zoom} hidden>
+        <button type="button" data-zoom="out" aria-label={copy.zoomOut}>−</button>
+        <output aria-live="polite" aria-atomic="true">100%</output>
+        <button type="button" data-zoom="in" aria-label={copy.zoomIn}>+</button>
+        <button type="button" data-zoom="fit">{copy.fit}</button>
+      </div>
+      <p class="genealogy-viewer-help" id={`${prefix}-viewer-help`}>{copy.viewerHelp}</p>
+      <div class="genealogy-viewport" tabindex="0" role="region" aria-label={copy.viewerLabel} aria-describedby={`${prefix}-viewer-help`}>
+        <img class="genealogy-full-image" src={`${asset}.svg`} alt={copy.imageAlt} loading="lazy" decoding="async" />
+      </div>
+    </genealogy-viewer>
+  </details>
+
+  <details class="genealogy-disclosure" data-genealogy-evidence>
+    <summary>
+      <span><strong>{copy.evidence}</strong><span class="genealogy-summary-detail">{copy.evidenceDetail}</span></span>
+      <span class="genealogy-disclosure-mark" aria-hidden="true">+</span>
+    </summary>
+    <div class="genealogy-evidence">
+      <h3>{copy.edgesTitle}</h3>
+      <p class="genealogy-evidence-direction">{copy.edgeDirection}</p>
+      <ul class="genealogy-edge-list">
+        {data.edges.map((edge) => (
+          <li>
+            <p class="genealogy-edge-names"><span><span class="genealogy-sr-only">{copy.relationFrom}: </span>{people.get(edge.from)?.name}</span><span aria-hidden="true"> → </span><span class="genealogy-sr-only">{copy.relationTo}: </span><span>{people.get(edge.to)?.name}</span></p>
+            <div class="genealogy-edge-meta">
+              <span class="genealogy-edge-kind"><span class={`genealogy-legend-line genealogy-${edge.kind}`} aria-hidden="true" />{copy[edge.kind]}</span>
+              <span class="genealogy-source-links">
+                {edge.sources.map((id) => {
+                  const source = sources.get(id);
+                  return source && <a href={`#${prefix}-source-${id}`} aria-label={`${copy.source} ${source.number}: ${source.title}`}>[{source.number}]</a>;
+                })}
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <h3 class="genealogy-sources-heading">{copy.sourcesTitle}</h3>
+      <ol class="genealogy-source-list">
+        {data.sources.map((source) => (
+          <li id={`${prefix}-source-${source.id}`}>
+            <a href={source.url}>{source.title}<span aria-hidden="true"> ↗</span></a>
+            {source.note?.[locale] && <p>{source.note[locale]}</p>}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </details>
+</section>
+
+<script>
+  class GenealogyViewer extends HTMLElement {
+    connectedCallback() {
+      if (this.dataset.ready) return;
+      const viewport = this.querySelector<HTMLElement>('.genealogy-viewport');
+      const image = this.querySelector<HTMLImageElement>('img');
+      const toolbar = this.querySelector<HTMLElement>('.genealogy-viewer-toolbar');
+      const output = this.querySelector<HTMLOutputElement>('output');
+      const zoomOut = this.querySelector<HTMLButtonElement>('[data-zoom="out"]');
+      const zoomIn = this.querySelector<HTMLButtonElement>('[data-zoom="in"]');
+      if (!viewport || !image || !toolbar || !output || !zoomOut || !zoomIn) return;
+      this.dataset.ready = 'true';
+      let scale: number | undefined;
+      const currentScale = () => scale ?? (viewport.clientWidth > 0 ? image.clientWidth / viewport.clientWidth : 1);
+      const refresh = () => {
+        const current = currentScale();
+        output.textContent = `${Math.round(current * 100)}%`;
+        zoomOut.disabled = current <= 0.5;
+        zoomIn.disabled = current >= 5;
+      };
+      toolbar.hidden = false;
+      this.querySelectorAll<HTMLButtonElement>('[data-zoom]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const previous = currentScale();
+          const centerX = (viewport.scrollLeft + viewport.clientWidth / 2) / (image.clientWidth || 1);
+          const centerY = (viewport.scrollTop + viewport.clientHeight / 2) / (image.clientHeight || 1);
+          scale = button.dataset.zoom === 'fit' ? 1 : Math.max(0.5, Math.min(5, previous + (button.dataset.zoom === 'in' ? 0.25 : -0.25)));
+          image.style.minWidth = '0';
+          image.style.width = `${scale * 100}%`;
+          if (button.dataset.zoom === 'fit') {
+            viewport.scrollLeft = 0;
+            viewport.scrollTop = 0;
+          } else {
+            viewport.scrollLeft = centerX * image.clientWidth - viewport.clientWidth / 2;
+            viewport.scrollTop = centerY * image.clientHeight - viewport.clientHeight / 2;
+          }
+          refresh();
+        });
+      });
+      this.closest('details')?.addEventListener('toggle', refresh);
+      image.addEventListener('load', refresh);
+      new ResizeObserver(refresh).observe(viewport);
+      refresh();
+    }
+  }
+  if (!customElements.get('genealogy-viewer')) customElements.define('genealogy-viewer', GenealogyViewer);
+</script>

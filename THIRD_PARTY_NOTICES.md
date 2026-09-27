@@ -25,10 +25,20 @@ These assets identify the author, institutions, research groups, software and co
 | `public/images/equinor.svg` | [Official Equinor logo](https://cdn.eds.equinor.com/logo/equinor-logo-horizontal.svg#red); unchanged SVG, with the provided red variant selected by the fragment identifier. Link destination: [Equinor Brasil](https://www.equinor.com.br/). |
 | `public/images/prio.svg` | [Official PRIO logo](https://prio3.com.br/wp-content/uploads/2025/01/logo_azul_novo.svg), unchanged. |
 
+## Musical adventures photographs
+
+The three photographs in `public/images/music/` were supplied by Diego Volpatto for
+the “Musical adventures” page and are copied without changes. `diego-baixo-vocal.jpg`
+retains the visible **Dennis Teixeira** credit; the page repeats it in the caption.
+The supplied files for `diego-baixo-palco.jpg` and `diego-no-palco.jpg` have no
+identified photographer credit. No date, venue or band is inferred from the images.
+These photographs are excluded from the site's general CC BY and MIT grants;
+inclusion does not grant additional reuse rights.
+
 ## Interface icons and language flags
 
 - **Lattes:** `public/images/icons/lattes.svg`, from [Academicons](https://github.com/jpswalsh/academicons/blob/master/svg/lattes.svg) by James Walsh and Katja Bercic. The SVG's own metadata identifies the SIL Open Font License. The [original OFL 1.1 license and attribution](public/licenses/Academicons-OFL.txt) were extracted from the upstream Academicons font's license record. The source SVG is retained unchanged; the SVG is displayed through a CSS mask with the theme's text color and decorative accessibility attributes. No icon font is loaded.
-- **GitHub, ORCID and LinkedIn:** `public/images/icons/github.svg`, `orcid.svg` and `linkedin-in.svg`, from [Font Awesome Free](https://github.com/FortAwesome/Font-Awesome/tree/7.x/svgs/brands) by Fonticons, Inc., under CC BY 4.0. [Upstream license and notices](public/licenses/Font-Awesome.txt). Original SVG files and their notices are retained unchanged. SciAstro displays these files as CSS masks in the theme's text color, marked decorative alongside visible text. These icons retain their own CC BY grant, separately from the website's editorial text.
+- **GitHub, ORCID, LinkedIn, Google Scholar and ResearchGate:** `public/images/icons/github.svg`, `orcid.svg`, `linkedin-in.svg`, `google-scholar.svg` and `researchgate.svg`, from [Font Awesome Free](https://github.com/FortAwesome/Font-Awesome/tree/7.x/svgs/brands) by Fonticons, Inc., under CC BY 4.0. [Upstream license and notices](public/licenses/Font-Awesome.txt). Original SVG files and their notices are retained unchanged. SciAstro displays these files as CSS masks in the theme's text color, marked decorative alongside visible text. These icons retain their own CC BY grant, separately from the website's editorial text.
 - **Brazil and United Kingdom flags:** `public/images/flags/br.svg` and `gb.svg`, from [flag-icons](https://github.com/lipis/flag-icons/tree/main/flags/4x3) by Panayiotis Lipiridis and contributors. [Original MIT license](public/licenses/Flag-icons-MIT.txt). Unchanged 4:3 SVGs, displayed beside PT and EN; the English selector uses the United Kingdom’s Union Jack. Language names remain available to assistive technology.
 - **General interface icons:** Lucide icons rendered by SciAstro. The [upstream notices](public/licenses/SciAstro-icons.txt) cover ISC and the MIT-licensed Feather-derived shapes. The file also retains the Circle Flags notices distributed by the package; this site uses its original flag-icons files for PT/EN.
 
@@ -73,6 +83,25 @@ The SciML description also draws on the ODML study by Kyas et al. (2022), the [G
 `public/files/cv-diego-volpatto-2026.pdf` is generated from the author's Lattes export, internally updated 23 August 2026. It is excluded from this site's general editorial-text grant. No additional license for the document as a whole is granted by this notice. The underlying XML/ZIP and LinkedIn PDF are not distributed with the website.
 
 The original source export and third-party publication/thesis titles are not relicensed by converting them to a new layout. Factual information is not made subject to new restrictions by these notices.
+
+## Academic genealogy
+
+The diagrams and accompanying editorial explanations are original presentations
+under the website's CC BY 4.0 content license. The selected factual relationships,
+source URLs and research notes are maintained in `conteudo/genealogia.yaml` and
+included in the downloadable JSON. No source website, biography, institutional
+logo or portrait is reproduced in these diagrams. The cited databases and
+documents retain their own rights; citation does not relicense their contents.
+
+The dataset distinguishes recorded doctoral supervision, historical study or
+mentorship, and disputed attributions. In particular, the paths through Klein
+and Bruns depend on the MGP attribution for Föppl, which is not confirmed by the
+Deutsche Biographie account. The diagrams do not claim an uninterrupted sequence
+of formal doctorates, and collateral connections are not presented as ancestors.
+
+Graphviz is used through the build-only `@viz-js/viz` dependency to lay out the
+standalone SVGs. Its software and dependency licenses remain separate from the
+original diagram content. No Graphviz runtime is delivered to site visitors.
 
 ## Fonts
 

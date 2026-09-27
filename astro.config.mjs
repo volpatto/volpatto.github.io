@@ -3,12 +3,21 @@ import sciastro from "sciastro";
 import secureStaticHTML from "./build/security.mjs";
 import googleSiteVerification from "./build/site-verification.mjs";
 import apacheStaticHosting from "./build/apache.mjs";
+import academicGenealogyAssets from "./build/genealogy.mjs";
 
 // Content, theme, languages and deployment defaults are in sciastro.yaml.
 // SITE_URL and BASE_PATH override the deployment destination at build time.
 export default defineConfig({
   integrations: [
-    sciastro({ styles: ["./styles/site.css"] }),
+    academicGenealogyAssets(),
+    sciastro({
+      styles: ["./styles/site.css", "./styles/genealogy.css"],
+      components: {
+        sections: {
+          "academic-genealogy": "./src/components/AcademicGenealogy.astro",
+        },
+      },
+    }),
     googleSiteVerification({
       "https://volpatto.github.io/":
         "NWsax4H6nLnc1L2Bcu5b0P3w0TKe87eh8_4E8pCszK8",

@@ -1,0 +1,77 @@
+id: musical-adventures
+parent: curiosities
+title:
+  pt: Aventuras musicais
+  en: Musical adventures
+paths:
+  pt: curiosidades/aventuras-musicais/
+  en: en/curiosities/musical-adventures/
+description:
+  pt: Memórias dos tempos de banda em Natal, fotos de palco e algumas recomendações musicais.
+  en: Memories of playing in bands in Natal, stage photos and a few music recommendations.
+icon: lucide:music
+sections:
+  - type: prose
+    text:
+      pt: |
+        Esse sim é um fato divertido! Da adolescência ao início da vida adulta, fui relativamente atuante na cena musical de Natal/RN. Fui baixista em bandas de jazz, pop-rock, rock e metal e cheguei a gravar um álbum profissionalmente, além de alguns EPs e demos.
+
+        Eram bons tempos!
+      en: |
+        Now that’s a fun fact! From my teenage years through early adulthood, I was fairly active in the music scene in Natal, Rio Grande do Norte, Brazil. I played bass in jazz, pop-rock, rock and metal bands, and even recorded an album professionally, as well as a few EPs and demos.
+
+        Those were good times!
+  # Galeria com figuras nativas do SciAstro; preserve as dimensões e os créditos.
+  - type: list
+    id: music-photos
+    items:
+      - title:
+          pt: Registros de palco
+          en: On stage
+        images:
+          - src: /images/music/diego-baixo-vocal.jpg
+            alt:
+              pt: Diego Volpatto tocando contrabaixo e cantando ao microfone, com cabelos longos e camisa branca.
+              en: Diego Volpatto playing bass and singing into a microphone, with long hair and a white shirt.
+            width: 531
+            height: 800
+            caption:
+              pt: Foto de Dennis Teixeira.
+              en: Photo by Dennis Teixeira.
+            enlarge: true
+          - src: /images/music/diego-baixo-palco.jpg
+            alt:
+              pt: Diego Volpatto tocando contrabaixo no palco, sob iluminação verde.
+              en: Diego Volpatto playing bass on stage under green lighting.
+            width: 639
+            height: 960
+            enlarge: true
+          - src: /images/music/diego-no-palco.jpg
+            alt:
+              pt: Diego Volpatto sorrindo durante uma apresentação, com o público ao fundo.
+              en: Diego Volpatto smiling during a performance, with the audience in the background.
+            width: 960
+            height: 639
+            enlarge: true
+  - type: prose
+    title:
+      pt: Para ouvir
+      en: For your listening list
+    text:
+      pt: |
+        Algumas recomendações musicais: Rush, Pain of Salvation, Madonna, Siam Shade, Dream Theater, Angra, Azymuth, Calcinha Preta, Limão com Mel, Mastruz com Leite e Banda Grafith.
+      en: |
+        A few of my music recommendations: Rush, Pain of Salvation, Madonna, Siam Shade, Dream Theater, Angra, Azymuth, Calcinha Preta, Limão com Mel, Mastruz com Leite and Banda Grafith.
+  - type: prose
+    title:
+      pt: A cena independente de Natal
+      en: Natal’s independent music scene
+    text:
+      pt: |
+        Entre as bandas independentes e autorais de Natal em atividade, recomendo **Kataphero**, **Bloody Dragon** e **Swards**.
+
+        **Apoie a cena local independente.**
+      en: |
+        Among Natal’s active independent bands writing and performing their own music, I recommend **Kataphero**, **Bloody Dragon** and **Swards**.
+
+        **Support your local independent music scene.**
