@@ -1,26 +1,27 @@
-name: Build, Tests & Security
+# Inactive template: GitHub only loads workflows from .github/workflows/.
+name: Publish to GitHub Pages (manual)
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: website-ci-${{ github.ref }}
+  group: github-pages
   cancel-in-progress: false
 
 jobs:
   build:
-    name: Build and Tests
+    if: github.ref == 'refs/heads/main'
+    name: Build and Tests for GitHub Pages
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
     env:
-      SITE_URL: https://www.lncc.br
-      BASE_PATH: /~volpatto/
+      SITE_URL: https://volpatto.github.io
+      BASE_PATH: /
     steps:
       - uses: actions/checkout@v4
       - uses: prefix-dev/setup-pixi@v0.10.2
@@ -28,6 +29,8 @@ jobs:
           pixi-version: v0.72.2
           locked: true
           cache: true
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
       - name: Checks, build, Tests and artifact security inspection
         run: pixi run --locked verify
       - name: Dependency security audit (including build dependencies)
@@ -40,8 +43,24 @@ jobs:
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
-          name: website-tests-and-security
+          name: github-pages-tests-and-security
           path: .test-output/
           include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 14
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

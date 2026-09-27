@@ -9,8 +9,8 @@ description:
   en: Diego Volpatto, researcher at LNCC and faculty member in Computational Modeling. Numerical
     methods, thermodynamics and scientific machine learning.
 affiliation: LNCC / MCTI
-url: https://volpatto.github.io
-base: /
+url: https://www.lncc.br
+base: /~volpatto/
 locales:
   - pt
   - en
@@ -98,7 +98,7 @@ structuredData:
   "@context": https://schema.org
   "@type": Person
   name: Diego Tavares Volpatto
-  url: https://volpatto.github.io
+  url: https://www.lncc.br/~volpatto/
   jobTitle: Researcher
   worksFor:
     "@type": Organization

@@ -1,4 +1,12 @@
 import { defineConfig } from "@playwright/test";
+import { resolve } from "node:path";
+import { loadSite } from "sciastro";
+
+const site = await loadSite(resolve("sciastro.yaml"), {
+  url: process.env.SITE_URL,
+  base: process.env.BASE_PATH,
+});
+
 export default defineConfig({
   testDir: "./tests/browser",
   testMatch: "**/*.spec.mjs",
@@ -27,7 +35,7 @@ export default defineConfig({
     // Foreground server owned by Playwright, independent of the author's preview.
     command:
       "pnpm exec astro preview --host 127.0.0.1 --port 4370 --ignore-lock",
-    url: "http://127.0.0.1:4370" + (process.env.BASE_PATH || "/"),
+    url: "http://127.0.0.1:4370" + site.config.base,
     reuseExistingServer: false,
   },
 });
