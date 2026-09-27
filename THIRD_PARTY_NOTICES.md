@@ -13,6 +13,8 @@ These assets identify the author, institutions, research groups, software and co
 | `public/favicon.svg` | Incorporates the same LNCC image and geometric-symbol view window; retains the logo's separate rights. |
 | `public/images/thermophase.png` | ThermoPhase logo supplied by Diego Volpatto. [Group](https://github.com/ThermoPhase-FCSRG). |
 | `public/images/ipes.jpg` | [IPES logo](https://ipes.lncc.br/images/logo_ipes.jpg), linked from the group's website. |
+| `public/images/iia-lncc.png` | [IIA-LNCC logo](https://instituto.ia.lncc.br/img/logo-instituto-ia.png), copied unchanged from the [institute's official website](https://instituto.ia.lncc.br/) on 2026-09-27. |
+| `public/images/comopore.png` | [CoMoPore logo](https://comopore.lncc.br/assets/images/content/new_logo.png), copied unchanged from the [group's official website](https://comopore.lncc.br/) on 2026-09-27. |
 | `public/images/alfa.webp` | [ALFA logo](https://www.alfa.cepetro.unicamp.br/wp-content/uploads/sites/80/2025/10/logo-alfa.webp), from CEPETRO/Unicamp. |
 | `public/images/lef-original.png` | LEF logo supplied by Diego Volpatto. [Laboratory](https://erenova.feq.unicamp.br/lef-laboratorio-de-equilibrio-de-fases/). Displayed through a view window that omits white margins. |
 | `public/images/unicamp.svg` | [Unicamp logo](https://www.alfa.cepetro.unicamp.br/wp-content/themes/bx-unicamp-multisite/assets/img/logo-unicamp.svg), hosted on the ALFA site. |

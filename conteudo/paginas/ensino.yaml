@@ -34,6 +34,12 @@ sections:
           en: "Finite element implementation: meshes, basis functions, quadrature, system assembly and
             boundary conditions. The syllabus includes implementation verification, convergence
             rates and applications with FEniCS, Firedrake and NGSolve."
+        links:
+          - label:
+              pt: Site da disciplina
+              en: Course website
+            url: https://lncc-ga033.github.io/
+            icon: lucide:globe
       - title:
           pt: Solução Numérica de Equações Diferenciais
           en: Numerical Solution of Differential Equations
