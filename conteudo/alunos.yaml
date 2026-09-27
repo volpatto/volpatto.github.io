@@ -1,4 +1,4 @@
-# Cadastro dos alunos. Dados migrados do Lattes (agosto de 2026), sem atualização de situação.
+# Cadastro dos alunos. Base inicial: Lattes (agosto de 2026), com atualizações editoriais.
 # Guia de edição, fotos e símbolos: README.md.
 # Sem photo, usa avatarFallback da pessoa ou o símbolo do LNCC em sciastro.yaml.
 # &udesc define um símbolo reutilizável; *udesc o reutiliza nos demais alunos.
@@ -40,6 +40,9 @@
   affiliation:
     pt: LNCC · Coorientação
     en: LNCC · Co-supervisor
+  topic:
+    pt: Modelagem computacional hidrogeomecânica para injeção cíclica de H2. Tema provisório
+    en: Computational hydrogeomechanical modeling for cyclic H2 injection. Provisional topic
   startYear: 2025
 - id: rennan-marques-de-souza-damasceno
   name: Rennan Marques de Souza Damasceno
@@ -100,7 +103,7 @@
     pt: "Flash Point Modeling with Neural Networks: From a Data-Driven Approach to PINNs."
     en: "Flash Point Modeling with Neural Networks: From a Data-Driven Approach to PINNs."
   endYear: 2025
-  avatarFallback:
+  avatarFallback: &unicamp
     src: /images/unicamp.svg
     alt:
       pt: Símbolo da Unicamp
@@ -121,14 +124,27 @@
     en: Analysis of the impact of impurities in CO2-rich mixtures in CCS/CCUS applications.
   endYear: 2024
   avatarFallback: *udesc
+- id: gabriel-xavier-fernandes
+  name: Gabriel Xavier Fernandes
+  role: student
+  status: alumni
+  level: undergraduate
+  affiliation:
+    pt: UNICAMP · 2026 · Coorientação
+    en: UNICAMP · 2026 · Co-supervisor
+  topic:
+    pt: Redes neurais para estimativas de densidade do hidrogênio puro
+    en: Neural networks for estimating the density of pure hydrogen
+  endYear: 2026
+  avatarFallback: *unicamp
 - id: maria-fernanda-marmilli-de-alvarenga-campos-franzin
   name: Maria Fernanda Marmilli de Alvarenga Campos Franzin
   role: student
   status: alumni
   level: undergraduate
   affiliation:
-    pt: UDESC · 2024 · Orientação
-    en: UDESC · 2024 · Supervisor
+    pt: UDESC · 2024 · Coorientação
+    en: UDESC · 2024 · Co-supervisor
   endYear: 2024
   avatarFallback: *udesc
 - id: leonardo-augusto-lemos
@@ -137,8 +153,8 @@
   status: alumni
   level: undergraduate
   affiliation:
-    pt: UDESC · 2024 · Orientação
-    en: UDESC · 2024 · Supervisor
+    pt: UDESC · 2024 · Coorientação
+    en: UDESC · 2024 · Co-supervisor
   endYear: 2024
   avatarFallback: *udesc
 - id: giovanna-girotto
@@ -147,8 +163,8 @@
   status: alumni
   level: undergraduate
   affiliation:
-    pt: UDESC · 2024 · Orientação
-    en: UDESC · 2024 · Supervisor
+    pt: UDESC · 2024 · Coorientação
+    en: UDESC · 2024 · Co-supervisor
   endYear: 2024
   avatarFallback: *udesc
 - id: bernardo-skovronski-woitas
@@ -157,7 +173,7 @@
   status: alumni
   level: undergraduate
   affiliation:
-    pt: UDESC · 2024 · Orientação
-    en: UDESC · 2024 · Supervisor
+    pt: UDESC · 2024 · Coorientação
+    en: UDESC · 2024 · Co-supervisor
   endYear: 2024
   avatarFallback: *udesc

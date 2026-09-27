@@ -77,14 +77,17 @@ sections:
 
 
         As aplicações incluem propriedades PVT de fluidos de petróleo, misturas com CO₂ e pontos de
-        fulgor de biocombustíveis.
+        fulgor de biocombustíveis. No contexto da transição energética, a modelagem termodinâmica
+        também se aplica à captura, utilização e armazenamento de carbono (CCUS) e ao armazenamento
+        subterrâneo de hidrogênio (UHS).
       en: >-
         Phase equilibria and thermophysical properties, using equations of state,
         activity-coefficient models and fitting to experimental data.
 
 
         Applications include PVT properties of petroleum fluids, CO₂ mixtures and biofuel flash
-        points.
+        points. In the context of the energy transition, thermodynamic modeling also applies to
+        carbon capture, utilization and storage (CCUS) and underground hydrogen storage (UHS).
     image:
       src: /images/research/gibbsflashnn-calibration.png
       alt:

@@ -9,8 +9,8 @@ paths:
   pt: grupos/
   en: en/groups/
 description:
-  pt: Participação de Diego Volpatto nos grupos de pesquisa ThermoPhase e IPES.
-  en: Diego Volpatto’s participation in the ThermoPhase and IPES research groups.
+  pt: Participação de Diego Volpatto no ThermoPhase, no IPES e no Instituto de Inteligência Artificial do LNCC.
+  en: Diego Volpatto’s participation in ThermoPhase, IPES and LNCC’s Institute for Artificial Intelligence.
 icon: lucide:network
 sections:
   - type: cards
@@ -26,8 +26,9 @@ sections:
           pt: >-
             O ThermoPhase é um grupo de pesquisa multi-institucional, com atuação tanto no LNCC
             quanto na UDESC. Estuda modelagem termodinâmica e simulação numérica de fluidos
-            complexos, conectando dados, aprendizado de máquina e aplicações em engenharia de
-            energia.
+            complexos, conectando dados e aprendizado de máquina. As aplicações incluem captura,
+            utilização e armazenamento de carbono (CCUS) e armazenamento subterrâneo de hidrogênio
+            (UHS), no contexto da transição energética.
 
 
             As atividades incluem orientação de alunos e desenvolvimento de ferramentas como
@@ -36,7 +37,8 @@ sections:
           en: >-
             ThermoPhase is a multi-institutional research group based at both LNCC and UDESC. It
             studies thermodynamic modeling and numerical simulation of complex fluids, connecting
-            data, machine learning and applications in energy engineering.
+            data and machine learning. Applications include carbon capture, utilization and storage
+            (CCUS) and underground hydrogen storage (UHS), in the context of the energy transition.
 
 
             Activities include student supervision and development of tools such as torch-flash and
@@ -77,7 +79,7 @@ sections:
           en: The IPES group at LNCC develops and analyzes numerical methods for multiscale problems,
             combining finite elements, parallel computing and scientific software. Research topics
             include hybrid mixed multiscale methods and flow simulation in heterogeneous media.
-            Furthermore, IPES i nvestigates the combination of machine learning (e.g., Neural
+            Furthermore, IPES investigates the combination of machine learning (e.g., Neural
             Operators) with classical numerical methods, aiming to propose new hybrid methods.
         images:
           - src: /images/ipes.jpg
@@ -91,4 +93,30 @@ sections:
               pt: Site do grupo
               en: Group website
             url: https://ipes.lncc.br/
+            icon: lucide:globe
+      - id: iia
+        title:
+          pt: IIA - Instituto de Inteligência Artificial
+          en: IIA - Institute for Artificial Intelligence
+        eyebrow: LNCC
+        subtitle:
+          pt: Membro
+          en: Member
+        text:
+          pt: Sou membro do Instituto de Inteligência Artificial (IIA) do LNCC, com atuação em atividades
+            de pesquisa em aprendizado de máquina científico (SciML).
+          en: I am a member of LNCC’s Institute for Artificial Intelligence (IIA), where I conduct research
+            in scientific machine learning (SciML).
+        images:
+          - src: /images/iia-lncc.png
+            alt:
+              pt: Logo do Instituto de Inteligência Artificial do LNCC
+              en: Logo of LNCC’s Institute for Artificial Intelligence
+            width: 400
+            height: 150
+        links:
+          - label:
+              pt: Site do instituto
+              en: Institute website
+            url: https://instituto.ia.lncc.br/
             icon: lucide:globe

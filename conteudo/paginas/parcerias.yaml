@@ -15,9 +15,9 @@ icon: lucide:handshake
 sections:
   - type: prose
     text:
-      pt: Colaboro com grupos da UNICAMP e da UDESC em modelagem computacional, termodinâmica e aplicações
+      pt: Colaboro com grupos do LNCC e da UNICAMP em modelagem computacional, termodinâmica e aplicações
         no setor de energia.
-      en: I collaborate with research groups at UNICAMP and UDESC on computational modeling,
+      en: I collaborate with research groups at LNCC and UNICAMP on computational modeling,
         thermodynamics and applications in the energy sector.
   - type: cards
     layout: rows
@@ -128,50 +128,39 @@ sections:
               pt: http://dgp.cnpq.br/dgp/espelhogrupo/233040
               en: http://dgp.cnpq.br/dgp/espelhogrupo/233040
             icon: lucide:arrow-up-right
-      - id: udesc
-        title:
-          pt: ThermoPhase
-          en: ThermoPhase
-        eyebrow: LNCC / UDESC
+      - id: comopore
+        title: CoMoPore
+        eyebrow: LNCC
+        subtitle: Computational Modelling of Porous Materials
         text:
           pt: >-
-            O ThermoPhase é um grupo de pesquisa multi-institucional, com atuação tanto no LNCC
-            quanto na UDESC. Sou um de seus líderes e atuo como colaborador externo na UDESC desde
-            2023. O grupo reúne pesquisa em termodinâmica de fluidos e modelagem computacional,
-            formação de alunos e desenvolvimento de software científico aberto.
+            O CoMoPore, no LNCC, desenvolve modelagem computacional de meios porosos, com foco em
+            fenômenos multiescala e na representação de complexidades geológicas, como fraturas e
+            cavidades (vugs).
 
 
-            Os temas incluem propriedades de misturas ricas em CO₂ para CCS/CCUS e modelos híbridos
-            para poços produtores e injetores, aproximando modelos físicos, dados operacionais e
-            aprendizado de máquina.
+            Minha colaboração com o grupo começou em 2025 e inclui participação em projeto de
+            pesquisa e orientação conjunta de alunos de pós-graduação.
           en: >-
-            ThermoPhase is a multi-institutional research group based at both LNCC and UDESC. I am
-            one of its co-leaders and have been an external collaborator at UDESC since 2023. The
-            group brings together research in fluid thermodynamics and computational modeling,
-            student supervision and open-source scientific software development.
+            CoMoPore at LNCC develops computational models of porous media, focusing on multiscale
+            phenomena and the representation of geological complexities such as fractures and vugs.
 
 
-            Topics include properties of CO₂-rich mixtures for CCS/CCUS and hybrid models for
-            production and injection wells, connecting physical models, operational data and machine
-            learning.
+            My collaboration with the group began in 2025 and includes participation in a research
+            project and joint supervision of graduate students.
         images:
-          - src: /images/thermophase.png
+          - src: /images/comopore.png
             alt:
-              pt: ThermoPhase — Fluid and Complex Systems Research Group
-              en: ThermoPhase — Fluid and Complex Systems Research Group
-            width: 1220
-            height: 628
+              pt: Logo do CoMoPore — Computational Modelling of Porous Materials
+              en: CoMoPore logo — Computational Modelling of Porous Materials
+            width: 273
+            height: 70
         links:
           - label:
-              pt: Grupos de pesquisa
-              en: Research groups
-            url: page:groups
-            icon: lucide:arrow-up-right
-          - label:
-              pt: Orientações
-              en: Student supervision
-            url: page:people
-            icon: lucide:arrow-up-right
+              pt: Site do grupo
+              en: Group website
+            url: https://comopore.lncc.br/
+            icon: lucide:globe
   - type: cards
     id: projects-title
     title:
