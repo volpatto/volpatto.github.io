@@ -2,6 +2,8 @@
 .genealogy {
   --genealogy-axis: 87px;
   --genealogy-gutter: 42px;
+  --genealogy-node-center: 17px;
+  --genealogy-lead: 26px;
   color: var(--ink);
 }
 .genealogy-heading {
@@ -49,9 +51,9 @@
   content: "";
   position: absolute;
   bottom: 0;
-  left: calc(var(--genealogy-axis) + var(--genealogy-gutter) / 2);
-  right: 25%;
-  border-bottom: 1.5px solid var(--accent);
+  left: calc(var(--genealogy-axis) + var(--genealogy-gutter) / 2 - 1px);
+  right: calc(25% - 1px);
+  border-bottom: 2px solid var(--accent);
 }
 .genealogy-branch {
   display: flex;
@@ -63,10 +65,10 @@
 .genealogy-branch::after {
   content: "";
   position: absolute;
-  left: 50%;
+  left: calc(50% - 1px);
   bottom: 0;
   height: 25px;
-  border-left: 1.5px solid var(--accent);
+  border-left: 2px solid var(--accent);
 }
 .genealogy-branch-distance {
   color: var(--muted);
@@ -116,33 +118,42 @@
 }
 .genealogy-confluence {
   position: absolute;
-  left: calc(var(--genealogy-axis) + var(--genealogy-gutter) / 2);
-  height: 40px;
-  bottom: -40px;
-  border-left: 1.5px solid var(--accent);
+  left: calc(var(--genealogy-axis) + var(--genealogy-gutter) / 2 - 1px);
+  top: 100%;
+  height: calc(var(--genealogy-lead) + var(--genealogy-node-center));
+  width: 2px;
+  background: var(--accent);
 }
 .genealogy-lineage {
   list-style: none;
-  padding: 26px 0 0;
+  padding: var(--genealogy-lead) 0 0;
   margin: 0;
 }
 .genealogy-person {
+  --genealogy-node-size: 7px;
   position: relative;
 }
+/* Explicit tracks keep a consistent thickness across browsers. The shared
+   center keeps every connection attached when a name wraps. */
 .genealogy-person:not(:last-child)::before {
   content: "";
   position: absolute;
-  left: calc(var(--genealogy-axis) + var(--genealogy-gutter) / 2);
-  top: 17px;
-  bottom: -17px;
-  border-left: 1.5px solid var(--accent);
+  left: calc(var(--genealogy-axis) + var(--genealogy-gutter) / 2 - 1px);
+  top: var(--genealogy-node-center);
+  bottom: calc(-1 * var(--genealogy-node-center));
+  width: 2px;
+  background: var(--accent);
 }
 .genealogy-person.genealogy-relation-historical::before {
-  border-left-style: dashed;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--accent) 0 6px,
+    transparent 6px 10px
+  );
 }
 .genealogy-person.genealogy-relation-disputed::before {
-  border-left-style: dotted;
-  border-left-width: 2px;
+  background: radial-gradient(circle, var(--accent) 1px, transparent 1.1px)
+    center top / 2px 6px repeat-y;
 }
 .genealogy-person-row {
   display: grid;
@@ -172,14 +183,14 @@
 .genealogy-node {
   position: relative;
   z-index: 1;
-  width: 7px;
-  height: 7px;
+  width: var(--genealogy-node-size);
+  height: var(--genealogy-node-size);
   border: 1.5px solid var(--accent);
   background: var(--paper);
   border-radius: 50%;
   justify-self: center;
   align-self: start;
-  margin-top: 14px;
+  margin-top: calc(var(--genealogy-node-center) - var(--genealogy-node-size) / 2);
 }
 .genealogy-person-copy {
   min-width: 0;
@@ -209,12 +220,10 @@
   color: var(--accent);
 }
 .genealogy-person-featured .genealogy-node {
-  position: relative;
-  z-index: 1;
-  width: 11px;
-  height: 11px;
-  margin-top: 13px;
   background: var(--accent);
+}
+.genealogy-person-featured {
+  --genealogy-node-size: 11px;
 }
 .genealogy-person-featured .genealogy-person-copy p {
   font-size: 0.81rem;
@@ -251,7 +260,7 @@
   min-height: 6px;
   flex: 1;
   width: 0;
-  border-left: 1.5px solid currentColor;
+  border-left: 2px solid currentColor;
 }
 .genealogy-segment.genealogy-historical {
   border-left-style: dashed;
@@ -261,7 +270,6 @@
   border-left-width: 2px;
 }
 .genealogy-arrow {
-  background: var(--paper);
   position: absolute;
   bottom: -3px;
   font-family: system-ui, sans-serif;
@@ -314,7 +322,7 @@
   display: inline-block;
   flex: 0 0 24px;
   width: 24px;
-  border-top: 1.5px solid var(--accent);
+  border-top: 2px solid var(--accent);
 }
 .genealogy-legend-line.genealogy-historical {
   border-top-style: dashed;
@@ -548,8 +556,8 @@ genealogy-viewer {
 }
 @media (max-width: 600px) {
   .genealogy {
-    --genealogy-axis: 45px;
-    --genealogy-gutter: 30px;
+    --genealogy-axis: 32px;
+    --genealogy-gutter: 28px;
   }
   .genealogy-branch {
     padding-inline: 8px;
@@ -567,30 +575,34 @@ genealogy-viewer {
     margin-bottom: 24px;
   }
   .genealogy-column-labels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 16px;
     font-size: 0.75rem;
   }
-  .genealogy-column-labels > :last-child,
+  .genealogy-column-labels > :first-child {
+    text-align: left;
+  }
+  .genealogy-column-labels > :last-child {
+    padding-left: 0;
+  }
   .genealogy-person-copy,
   .genealogy-connection-copy {
-    padding-left: 10px;
+    padding-left: 8px;
   }
   .genealogy .genealogy-person-featured h3 {
-    font-size: 1.65rem;
+    font-size: 1.4rem;
   }
   .genealogy-person-featured .genealogy-distance {
-    font-size: 1.85rem;
-  }
-  .genealogy-person-featured .genealogy-node {
-    position: relative;
-    z-index: 1;
-    margin-top: 10px;
+    font-size: 1.6rem;
   }
   .genealogy-person-copy p,
   .genealogy-person-featured .genealogy-person-copy p {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
   }
   .genealogy-connection-copy {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
   }
   .genealogy-overview figcaption {
     margin-left: 0;
